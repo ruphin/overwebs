@@ -1,0 +1,14 @@
+{
+  "name": "overwebs",
+  "version": "1.0",
+  "authors": [
+    "Goffert van Gool <ruphin@ruphin.net>"
+  ],
+  "private": true,
+  "dependencies": {
+    "polymer": "polymer/polymer#^1.4.0",
+    "app-route": "polymerelements/app-route#^0.9.1",
+    "iron-pages": "polymerelements/iron-pages#^1.0.0"
+  },
+  "devDependencies": {}
+}

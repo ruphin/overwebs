@@ -1,0 +1,66 @@
+@font-face {
+    font-family: noodle;
+    src: url(/fonts/BigNoodleTooOblique.ttf);
+}
+
+@font-face {
+    font-family: futura;
+    src: url(/fonts/Futura.ttf);
+}
+
+:host {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 6.5625vw;
+  height: 14.84375vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.2,1.2);
+    box-shadow: 0 0 0 0.1953vw #FFFFFF;
+  transition: transform 0.15s ease-out;
+  }
+}
+
+.stats {
+  background: radial-gradient(ellipse farthest-corner at 50% 30%, #D3D2D7, #AAACBB);
+  height: 6.5625vw;
+  width: 6.5625vw;
+  text-align: center;
+  overflow: hidden;
+
+  #name {
+    //height: 2.734375vw;
+    transform: translate(-0.234375vw, 0);
+    line-height: 2.734375vw;
+    color: #253650;
+    font-size: 2.0833vw;
+    font-family: noodle;
+    text-transform: uppercase;
+  }
+
+  .unlocked {
+    color: #253650;
+    font-size: 2.1875vw;
+    font-family: futura;
+  }
+  .unlockable {
+    color: #1E77B9;
+    font-size: 1.04166vw;
+    font-family: futura;
+    vertical-align: -10%;
+  }
+}
+
+
+.progress {
+  margin-bottom: 0.52083vw;
+  display: flex;
+  height: 0.3125vw;
+  background: rgba(176, 195, 212, 0.9);
+
+  #completion {
+    height: inherit;
+  }
+}

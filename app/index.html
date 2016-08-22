@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <title>OVERWEBS</title>
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+
+  <link rel="import" href="/elements/overwebs-app/overwebs-app.html" async>
+
+  <style>
+
+    body {
+      margin: 0;
+      height: 100vh;
+      cursor: url(/images/overwatch.cur), auto;
+    }
+
+    /* styling for render while resources are loading */
+/*    overwebs-app[unresolved] {
+      display: none;
+    }*/
+
+  </style>
+
+</head>
+<body>
+
+  <!-- build:remove -->
+  <span id="browser-sync-binding"></span>
+  <!-- endbuild -->
+
+  <overwebs-app unresolved></overwebs-app>
+
+  <script>
+    window.performance && performance.mark && performance.mark('index.html');
+
+    Polymer = {lazyRegister: false, dom: 'shady'};
+
+    (function() {
+      if ('registerElement' in document
+          && 'import' in document.createElement('link')
+          && 'content' in document.createElement('template')) {
+        // platform is good!
+      } else {
+        // polyfill the platform!
+        var e = document.createElement('script');
+        e.src = '/vendor/webcomponentsjs/webcomponents-lite.min.js';
+        document.body.appendChild(e);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+  background: url(/images/menubg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header {
+  display: block;
+  height: 12.3875vw;
+  margin-bottom: -0.2vw;
+  width: 50vw;
+  #text {
+    font-family: noodle;
+    font-size: 10.625vw;
+  }
+}
+
+.hero-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 6.875vw;
+  width: 86.25vw;
+}
+
+overwebs-gallery-hero {
+  margin-left: 0.3125vw;
+  margin-right: 0.3125vw;
+  margin-bottom: 0.625vw;
+}

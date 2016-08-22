@@ -1,0 +1,23 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../../vendor/app-route/app-location.html">
+<link rel="import" href="../../vendor/app-route/app-route.html">
+<!-- Eager load the home page -->
+<link rel="import" href="../overwebs-hero-gallery/overwebs-hero-gallery.html">
+<link rel="import" href="overwebs-app-style.html">
+
+<dom-module id="overwebs-app">
+
+  <template>
+    <style include="overwebs-app-style"></style>
+
+    <app-location route="{{route}}"></app-location>
+
+
+    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
+      <!-- home view -->
+      <overwebs-hero-gallery name="home"></overwebs-hero-gallery>
+    </iron-pages>
+
+  </template>
+  <script type="text/javascript" src="overwebs-app.js"></script>
+</dom-module>

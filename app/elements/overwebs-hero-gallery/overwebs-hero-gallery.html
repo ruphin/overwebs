@@ -1,0 +1,37 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-gallery-hero/overwebs-gallery-hero.html">
+<link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
+<link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="overwebs-hero-gallery-style.html">
+
+<dom-module id="overwebs-hero-gallery">
+  <template>
+    <style include="overwebs-hero-gallery-style"></style>
+    <svg class="header" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fillgradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#ffffff" offset="0" stop-opacity=".9"/>
+          <stop stop-color="#ffffff" offset="1" stop-opacity="0.2"/>
+        </linearGradient>
+        <linearGradient id="outlinegradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#4C5C76" offset="0" stop-opacity="0.6"/>
+          <stop stop-color="#4C5C76" offset="1" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+      <g>
+        <text id="text" x="4.225vw" y="12.25vw" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">HERO GALLERY</text>
+      </g>
+    </svg>
+    <overwebs-hero-data heroes="{{heroData}}"></overwebs-hero-data>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
+    <div class="hero-gallery">
+      <template is="dom-repeat" items="[[heroes]]">
+        <overwebs-gallery-hero hero="[[item]]" player-unlocks="[[unlocks]]"></overwebs-gallery-hero>
+      </template>
+    </div>
+    <overwebs-back-button></overwebs-back-button>
+  </template>
+  <script type="text/javascript" src="overwebs-hero-gallery.js"></script>
+</dom-module>

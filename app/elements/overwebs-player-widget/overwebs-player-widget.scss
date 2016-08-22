@@ -1,0 +1,57 @@
+@font-face {
+  font-family: futura;
+  src: url(/fonts/Futura.ttf);
+}
+
+@font-face {
+    font-family: helvetica;
+    src: url(/fonts/Helvetica.ttf);
+}
+
+:host {
+  display: flex;
+  position: absolute;
+  top: 2.29166666667vw;
+  right: 2.60416666667vw;
+  height: 3.95833333333vw;
+  background: #27354F;
+}
+
+#status {
+  height: 3.95833333333vw;
+  width: 0.36458333333vw;
+  background: #7DFF00;
+}
+
+#avatar {
+  height: 3.95833333333vw;
+  width: 3.95833333333vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  color: white;
+  height: 3.95833333333vw;
+  width: 16.875vw;
+}
+
+.name {
+  margin-left: 0.703125vw;
+  font-size: 0.9375vw;
+  margin-top: 0.15625vw;
+  letter-spacing: 0.025vw;
+  font-family: helvetica;
+  text-transform: uppercase;
+}
+
+#level {
+  margin-left: 0.703125vw;
+  font-size: 0.72916666666vw;
+  font-family: futura;
+  text-transform: uppercase;
+  color: black;
+  text-shadow: -1px 0 #BB8F86, 0 1px #BB8F86, 1px 0 #BB8F86, 0 -1px #BB8F86;
+}
