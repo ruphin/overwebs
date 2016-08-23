@@ -4,9 +4,12 @@
   overflow: auto;
   width: 100vw;
   height: 100vh;
-  background: url(/images/menubg.jpg);
+}
+
+:host[background] {
   background-size: cover;
   background-repeat: no-repeat;
+  background-image: url(/images/menubg.jpg);
 }
 
 .header {

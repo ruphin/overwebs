@@ -14,7 +14,7 @@ Polymer({
   },
 
   observers: [
-    '_routePageChanged(routeData.page)'
+    '_routePageChanged(routeData.view)'
   ],
 
   listeners: {
@@ -27,55 +27,39 @@ Polymer({
     this.removeAttribute('unresolved');
   },
 
-  _routePageChanged: function(page) {
-    this.page = page || 'home';
-    // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
-    // with `behavior: 'silent'` to disable header scroll effects during the scroll.
-    Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
-    // Close the drawer - in case the *route* change came from a link in the drawer.
-    this.drawerOpened = false;
+  _routePageChanged: function(view) {
+    this.page = view || 'home';
   },
 
-  _pageChanged: function(page, oldPage) {
-    if (page != null) {
+  _pageChanged: function(newRoute, oldRoute) {
+    console.log(newRoute, oldRoute)
+    if (newRoute != null) {
       // home route is eagerly loaded
-      if (page == 'home') {
-        this._pageLoaded(Boolean(oldPage));
+      if (newRoute == 'home') {
+        this._pageLoaded(newRoute, oldRoute);
       // other routes are lazy loaded
       } else {
         this.importHref(
-          this.resolveUrl('overwebs-' + page + '.html'),
+          this.resolveUrl('../overwebs-' + newRoute + '/overwebs-' + newRoute + '.html'),
           function() {
-            this._pageLoaded(Boolean(oldPage));
+            this._pageLoaded(newRoute, oldRoute);
           }, null, true);
       }
     }
   },
 
-  _pageLoaded: function(shouldResetLayout) {
-    this._ensureLazyLoaded();
-    if (shouldResetLayout) {
-      // The size of the header depends on the page (e.g. on some pages the tabs
-      // do not appear), so reset the header's layout only when switching pages.
-      this.async(function() {
-        this.$.header.resetLayout();
-      }, 1);
-    }
-  },
-
-  _ensureLazyLoaded: function() {
-    // load lazy resources after render and set `loadComplete` when done.
-    if (!this.loadComplete) {
-      Polymer.RenderStatus.afterNextRender(this, function() {
-        this.importHref(this.resolveUrl('lazy-resources.html'), function() {
-          // Register service worker if supported.
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-          }
-          this._notifyNetworkStatus();
-          this.loadComplete = true;
-        });
-      });
+  _pageLoaded: function(newRoute, oldRoute) {
+    let newPage = Array.prototype.find.call(this.$.pages.children, (function(page) {return page && page.getAttribute("route") === newRoute;}));
+    if (newPage) {
+      let oldPage = Array.prototype.find.call(this.$.pages.children, (function(page) {return page && page.getAttribute("route") === oldRoute;}));
+      console.log(oldPage)
+      console.log(newPage)
+      if (oldPage) {
+        oldPage.classList.remove("visible")
+      }
+      newPage.classList.add("visible")
+      console.log(oldPage)
+      console.log(newPage)
     }
   },
 

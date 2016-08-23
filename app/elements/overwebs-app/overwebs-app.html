@@ -2,7 +2,7 @@
 <link rel="import" href="../../vendor/app-route/app-location.html">
 <link rel="import" href="../../vendor/app-route/app-route.html">
 <!-- Eager load the home page -->
-<link rel="import" href="../overwebs-hero-gallery/overwebs-hero-gallery.html">
+<link rel="import" href="../overwebs-main-menu/overwebs-main-menu.html">
 <link rel="import" href="overwebs-app-style.html">
 
 <dom-module id="overwebs-app">
@@ -12,11 +12,16 @@
 
     <app-location route="{{route}}"></app-location>
 
+    <app-route
+      route="{{route}}"
+      pattern="/:view"
+      data="{{routeData}}"
+      tail="{{subroute}}"></app-route>
 
-    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
-      <!-- home view -->
-      <overwebs-hero-gallery name="home"></overwebs-hero-gallery>
-    </iron-pages>
+    <div id="pages">
+      <overwebs-main-menu background route="home"></overwebs-main-menu>
+      <overwebs-hero-gallery background route="hero-gallery"></overwebs-hero-gallery>
+    </div>
 
   </template>
   <script type="text/javascript" src="overwebs-app.js"></script>

@@ -1,5 +1,5 @@
 Polymer({
-  is: 'overwebs-hero-gallery',
+  is: 'overwebs-main-menu',
   properties: {
     visible: {
       type: Boolean

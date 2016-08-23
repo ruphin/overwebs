@@ -1,0 +1,27 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
+<link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="overwebs-main-menu-style.html">
+
+<dom-module id="overwebs-main-menu">
+  <template>
+    <style include="overwebs-main-menu-style"></style>
+    <overwebs-hero-data heroes="{{heroData}}"></overwebs-hero-data>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
+    <div class="main-menu">
+      <a href="/" content="Play">Play</a>
+      <a href="/training" content="Training">Training</a>
+      <a href="/hero-gallery" content="Hero Gallery">Hero Gallery</a>
+      <a href="/loot" content="Loot Box">Loot Box</a>
+    </div>
+    <div class="sub-menu">
+      <div><a href="/social" content="Social">Social</a></div>
+      <div><a href="/career" content="Career Profile">Career Profile</a></div>
+      <div><a href="/options" content="Options">Options</a></div>
+      <div><a href="/exit" content="Exit Game">Exit Game</a></div>
+    </div>
+  </template>
+  <script type="text/javascript" src="overwebs-main-menu.js"></script>
+</dom-module>

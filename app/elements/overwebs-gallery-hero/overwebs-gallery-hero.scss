@@ -15,11 +15,11 @@
   height: 14.84375vw;
   background-size: contain;
   background-repeat: no-repeat;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.15s ease-in-out;
   &:hover {
     transform: scale(1.2,1.2);
     box-shadow: 0 0 0 0.1953vw #FFFFFF;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.08s ease-out;
   }
 }
 
