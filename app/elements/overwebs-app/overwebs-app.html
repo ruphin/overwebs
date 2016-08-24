@@ -1,6 +1,5 @@
 <link rel="import" href="../../vendor/polymer/polymer.html">
 <link rel="import" href="../../vendor/app-route/app-location.html">
-<link rel="import" href="../../vendor/app-route/app-route.html">
 <!-- Eager load the home page -->
 <link rel="import" href="../overwebs-main-menu/overwebs-main-menu.html">
 <link rel="import" href="overwebs-app-style.html">
@@ -12,15 +11,10 @@
 
     <app-location route="{{route}}"></app-location>
 
-    <app-route
-      route="{{route}}"
-      pattern="/:view"
-      data="{{routeData}}"
-      tail="{{subroute}}"></app-route>
-
     <div id="pages">
-      <overwebs-main-menu background route="home"></overwebs-main-menu>
+      <overwebs-main-menu background route=""></overwebs-main-menu>
       <overwebs-hero-gallery background route="hero-gallery"></overwebs-hero-gallery>
+      <div background route="training"></div>
     </div>
 
   </template>

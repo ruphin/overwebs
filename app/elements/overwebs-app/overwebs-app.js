@@ -6,16 +6,17 @@ Polymer({
   is: 'overwebs-app',
 
   properties: {
-    page: {
-      type: String,
+    route: {
+      type: Object,
       reflectToAttribute: true,
-      observer: '_pageChanged'
+      observer: '_routeChanged'
+    },
+
+    routes: {
+      type: Object,
+      value: {}
     }
   },
-
-  observers: [
-    '_routePageChanged(routeData.view)'
-  ],
 
   listeners: {
     'dom-change': '_domChange'
@@ -27,40 +28,62 @@ Polymer({
     this.removeAttribute('unresolved');
   },
 
-  _routePageChanged: function(view) {
-    this.page = view || 'home';
+  ready: function() {
+    Array.prototype.map.call(this.$.pages.children, (page) => {
+      this.routes[page.getAttribute("route")] = page;
+    });
   },
 
-  _pageChanged: function(newRoute, oldRoute) {
-    console.log(newRoute, oldRoute)
-    if (newRoute != null) {
-      // home route is eagerly loaded
-      if (newRoute == 'home') {
-        this._pageLoaded(newRoute, oldRoute);
-      // other routes are lazy loaded
-      } else {
-        this.importHref(
-          this.resolveUrl('../overwebs-' + newRoute + '/overwebs-' + newRoute + '.html'),
-          function() {
-            this._pageLoaded(newRoute, oldRoute);
-          }, null, true);
+  _routeChanged: function(newRoute, oldRoute) {
+    // Remove initial '/' in the route path
+    oldRoute = oldRoute && oldRoute.path.slice(1)
+    newRoute = newRoute && newRoute.path.slice(1)
+
+    if (newRoute === "exit-game") {
+      this._showExitBanner();
+      return;
+    }
+
+    if (oldRoute === "exit-game") {
+      this._hideExitBanner();
+      return;
+    }
+
+    // Hide the old page
+    if (this.routes[oldRoute]) {
+      this.routes[oldRoute].classList.remove("visible")
+    }
+
+    // Show the new page
+    if (this.routes[newRoute]) {
+      this.routes[newRoute].classList.add("visible")
+    } else {
+      // Go back if the new page does not exist (and the old page does)
+      if (this.routes[oldRoute]) {
+        console.warn("Requested page does not exist");
+        window.history.back();
+        return;
       }
+    }
+
+    // Lazy load any new pages we are visiting that haven't been loaded yet
+    if (newRoute != '') {
+      newPage = this.resolveUrl('../overwebs-' + newRoute + '/overwebs-' + newRoute + '.html')
+      this.importHref(newPage, null, function() {
+        console.warn("Cannot load new page");
+        window.history.back();
+      }, true);
     }
   },
 
-  _pageLoaded: function(newRoute, oldRoute) {
-    let newPage = Array.prototype.find.call(this.$.pages.children, (function(page) {return page && page.getAttribute("route") === newRoute;}));
-    if (newPage) {
-      let oldPage = Array.prototype.find.call(this.$.pages.children, (function(page) {return page && page.getAttribute("route") === oldRoute;}));
-      console.log(oldPage)
-      console.log(newPage)
-      if (oldPage) {
-        oldPage.classList.remove("visible")
-      }
-      newPage.classList.add("visible")
-      console.log(oldPage)
-      console.log(newPage)
-    }
+  _showExitBanner: function() {
+    this.style.opacity = 0.5
+    console.log("Really Quit?")
+  },
+
+  _hideExitBanner: function() {
+    this.style.opacity = 1
+    console.log("Phew!!")
   },
 
   // This is for performance logging only.

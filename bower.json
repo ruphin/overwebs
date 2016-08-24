@@ -7,8 +7,7 @@
   "private": true,
   "dependencies": {
     "polymer": "polymer/polymer#^1.4.0",
-    "app-route": "polymerelements/app-route#^0.9.1",
-    "iron-pages": "polymerelements/iron-pages#^1.0.0"
+    "app-route": "PolymerElements/app-route#^0.9.2"
   },
   "devDependencies": {}
 }

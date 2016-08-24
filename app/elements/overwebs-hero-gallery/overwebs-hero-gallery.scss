@@ -1,3 +1,8 @@
+@font-face {
+    font-family: hero-gallery-noodle;
+    src: url(/fonts/BigNoodleTooOblique.ttf);
+}
+
 :host {
   display: block;
   position: relative;
@@ -18,7 +23,7 @@
   margin-bottom: -0.2vw;
   width: 50vw;
   #text {
-    font-family: noodle;
+    font-family: hero-gallery-noodle;
     font-size: 10.625vw;
   }
 }
