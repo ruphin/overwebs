@@ -143,12 +143,12 @@ Polymer({
           unlockable: 60,
           color: '#F8DA1A'
         },
-        sombra: {
-          id: 'sombra',
-          name: 'Sombra',
-          unlockable: 60,
-          color: '#FFFFFF'
-        },
+        // sombra: {
+        //   id: 'sombra',
+        //   name: 'Sombra',
+        //   unlockable: 60,
+        //   color: '#FFFFFF'
+        // },
       }
     }
   }

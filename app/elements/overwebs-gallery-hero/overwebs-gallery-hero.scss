@@ -24,7 +24,7 @@
 }
 
 .stats {
-  background: radial-gradient(ellipse farthest-corner at 50% 30%, #D3D2D7, #AAACBB);
+  background: radial-gradient(ellipse farthest-corner at 50% -20%, #DADCE5, #D2D1D6 50%, #ADABBB);
   height: 6.5625vw;
   width: 6.5625vw;
   text-align: center;
@@ -34,19 +34,19 @@
     //height: 2.734375vw;
     transform: translate(-0.234375vw, 0);
     line-height: 2.734375vw;
-    color: #253650;
+    color: #28354F;
     font-size: 2.0833vw;
     font-family: gallery-hero-noodle;
     text-transform: uppercase;
   }
 
   .unlocked {
-    color: #253650;
+    color: #28354F;
     font-size: 2.1875vw;
     font-family: gallery-hero-futura;
   }
   .unlockable {
-    color: #1E77B9;
+    color: #1C75BC;
     font-size: 1.04166vw;
     font-family: gallery-hero-futura;
     vertical-align: -10%;

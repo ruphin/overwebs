@@ -29,10 +29,11 @@ a {
 .main-menu {
   display: flex;
   flex-direction: column;
-  margin-left: 2.5175vw;
-  margin-top: 13.42vw;
+  margin-top: 15.85vw;
+  // margin-top: 13.42vw;
   width: 30vw;
   a {
+    padding-left: 2.5175vw;
     margin-top: 0.3675vw;
     position: relative;
     z-index: 0;
@@ -42,27 +43,29 @@ a {
     font-size: 3.9375vw;
     &::before {
       position: absolute;
-      left: 0;
       content: attr(content);
       position: absolute;
       z-index: -1;
-      -webkit-text-stroke: 0.2175vw rgba(0,0,0,.1);
+      -webkit-text-stroke: 0.1775vw rgba(0,0,0,.15);
+    }
+    &:hover {
+      padding-left: 5.2025vw;
+      transform: scale(1.1);
     }
   }
 }
 
 .sub-menu {
-  margin-left: 2.5825vw;
-  margin-top: 0.3875vw;
+  margin-top: -0.05vw;
   width: 30vw;
   div {
-    margin-top: 0.5475vw;
+    margin-top: 0.5125vw;
   }
   a {
-    letter-spacing: 0.0390625vw;
+    padding-left: 2.5825vw;
     position: relative;
     z-index: 0;
-    color: rgba(217,242,255,1);
+    color: rgba(255,255,255,0.95);
     font-family: main-menu-futura;
     font-size: 1.455vw;
     text-transform: uppercase;
@@ -70,11 +73,14 @@ a {
       color: rgba(0,0,0,0);
       position: absolute;
       white-space:nowrap;
-      left: 0;
       content: attr(content);
       position: absolute;
       z-index: -1;
-      -webkit-text-stroke: 0.1175vw rgba(145,147,185,.7);
+      -webkit-text-stroke: 0.1175vw rgba(154,166,195,.8);
+    }
+    &:hover {
+      padding-left: 3.2275vw;
+      transform: scale(1.1);
     }
   }
 }
