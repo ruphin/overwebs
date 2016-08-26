@@ -32,8 +32,19 @@ Polymer({
     Array.prototype.map.call(this.$.pages.children, (page) => {
       this.routes[page.getAttribute("route")] = page;
     });
+
+    this.$.background.ontimeupdate = () => {
+      if (this.$.background.currentTime >= 50){
+        var blah = this.$.background.currentTime; 
+        this.$.background.currentTime = 6;
+        console.log(blah);
+      }
+    }
   },
 
+// NOTE: This is broken in non-chrome browsers
+// For some reason _routeChanged for the initial visit is called before 'ready' has
+// populated the route map.
   _routeChanged: function(newRoute, oldRoute) {
     // Remove initial '/' in the route path
     oldRoute = oldRoute && oldRoute.path.slice(1)

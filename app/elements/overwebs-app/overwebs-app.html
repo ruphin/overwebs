@@ -11,8 +11,13 @@
 
     <app-location route="{{route}}"></app-location>
 
+    <video id="background" playsinline autoplay>
+      <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+    <source src="/images/main-menu.mp4" type="video/mp4">
+    </video>
+
     <div id="pages">
-      <overwebs-main-menu background route=""></overwebs-main-menu>
+      <overwebs-main-menu route=""></overwebs-main-menu>
       <overwebs-hero-gallery background route="hero-gallery"></overwebs-hero-gallery>
       <div background route="training"></div>
     </div>
