@@ -1,0 +1,85 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="overwebs-play-style.html">
+
+<dom-module id="overwebs-play">
+  <template>
+    <style include="overwebs-play-style"></style>
+    <svg class="header" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fillgradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#ffffff" offset="0" stop-opacity=".9"/>
+          <stop stop-color="#ffffff" offset="1" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="outlinegradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#4C5C76" offset="0" stop-opacity="0.6"/>
+          <stop stop-color="#4C5C76" offset="1" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+      <g>
+        <text id="text" x="4.225vw" y="14.85vw" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">PLAY</text>
+      </g>
+    </svg>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
+    <div class="modes">
+      <div class="thingy quick">
+        <div class="popup">
+          <div class="container">
+            <span class="help">
+              Jump into a game against other players of your skill level.
+            </span>
+          </div>
+        </div>
+        <div class="label">
+          <span class="Text">Quick Play</span>
+        </div>
+      </div>
+      <div class="thingy vs-ai">
+        <div class="popup">
+          <div class="container">
+            <span class="help">
+              Hone your skills against a team of AI-controlled heroes.
+            </span>
+          </div>
+        </div>
+        <div class="label">
+          <span class="Text">Play vs. AI</span>
+        </div>
+      </div>
+      <div class="thingy competetive">
+        <div class="popup">
+          <div class="container">
+            <span class="help">
+              Compete against other players and work your way up the ranks.
+            </span>
+          </div>
+        </div>
+        <div class="label">
+          <span class="Text">Competetive Play</span>
+        </div>
+      </div>
+      <div class="thingy custom">
+        <div class="popup">
+          <div class="container">
+            <span class="help">
+              Change the rules and play a game with your friends or AI.
+            </span>
+          </div>
+        </div>
+        <div class="label">
+          <span class="Text">Custom Game</span>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Play vs. AI" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget> -->
+
+    <overwebs-back-button></overwebs-back-button>
+  </template>
+  <script type="text/javascript" src="overwebs-play.js"></script>
+</dom-module>

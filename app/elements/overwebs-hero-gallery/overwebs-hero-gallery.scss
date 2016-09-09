@@ -11,12 +11,6 @@
   height: 100vh;
 }
 
-:host[background] {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(/images/menubg.jpg);
-}
-
 .header {
   display: block;
   height: 12.3875vw;

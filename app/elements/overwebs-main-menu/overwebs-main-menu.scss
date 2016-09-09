@@ -16,12 +16,6 @@
   height: 100vh;
 }
 
-:host[background] {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(/images/main-menu.jpg);
-}
-
 a {
   text-decoration: none;
 }
@@ -56,12 +50,13 @@ a {
 }
 
 .sub-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin-top: -0.05vw;
   width: 30vw;
-  div {
-    margin-top: 0.5125vw;
-  }
   a {
+    margin-top: 0.5125vw;
     padding-left: 2.5825vw;
     position: relative;
     z-index: 0;

@@ -111,6 +111,7 @@ gulp.task('js', function() {
 // Copy all files at the root level (app)
 gulp.task('base', function() {
   var app = gulp.src(basepath('*'), { dot: true  })
+    .pipe($.useref())
     .pipe(gulp.dest(dist()));
 
   // Copy over only the bower_components we need
@@ -127,17 +128,17 @@ gulp.task('base', function() {
 
 // Copy web fonts to dist
 gulp.task('fonts', function() {
-  return gulp.src(['frontend/fonts/**'])
+  return gulp.src(basepath('fonts/**'))
     .pipe(gulp.dest(dist('fonts')))
     .pipe($.size({
       title: 'fonts'
     }));
 });
 
-gulp.task('elements', function() {
-  return gulp.src(basepath('elements/**/*.html'))
-    .pipe($.changed(tmp('elements')))
-    .pipe(gulp.dest(tmp('elements')))
+gulp.task('elements', ['elementScss'], function() {
+  return gulp.src([basepath('elements/**/*'), '!' + basepath('elements/**/*.scss'), tmp('elements/**/*-style.html')])
+    .pipe($.changed(dist('elements')))
+    .pipe(gulp.dest(dist('elements')))
     .pipe($.size({title: 'Copy Elements'}));
 });
 
@@ -148,8 +149,8 @@ gulp.task('polymer', function() {
 });
 
 // Vulcanize granular configuration
-gulp.task('vulcanize', ['polymer', 'elements', 'elementScss'], function() {
-  return gulp.src(tmp('elements/elements.html'))
+gulp.task('vulcanize', ['polymer', 'elements'], function() {
+  return gulp.src(dist('elements/elements.html'))
     .pipe($.vulcanize({
       stripComments: true,
       inlineCss: true,
@@ -262,7 +263,7 @@ gulp.task('serve:dist', ['default'], function() {
 gulp.task('default', ['clean'], function(cb) {
   // Uncomment 'cache-config' if you are going to use service workers.
   runSequence(
-    ['base', 'fonts', 'images', 'styles', 'js', 'vulcanize'],
+    ['base', 'fonts', 'images', 'elements'],
     // 'cache-config',
     cb);
 });

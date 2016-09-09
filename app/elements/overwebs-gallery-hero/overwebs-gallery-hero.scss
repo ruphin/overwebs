@@ -9,13 +9,12 @@
 }
 
 :host {
-  display: flex;
-  flex-direction: column-reverse;
   width: 6.5625vw;
   height: 14.84375vw;
-  background-size: contain;
-  background-repeat: no-repeat;
   transition: transform 0.15s ease-in-out;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse farthest-corner at 50% 50%, #DADCE5, #D2D1D6 50%, #ADABBB);
   &:hover {
     transform: scale(1.2,1.2);
     box-shadow: 0 0 0 0.1953vw #FFFFFF;
@@ -23,36 +22,99 @@
   }
 }
 
-.stats {
-  background: radial-gradient(ellipse farthest-corner at 50% -20%, #DADCE5, #D2D1D6 50%, #ADABBB);
-  height: 6.5625vw;
-  width: 6.5625vw;
-  text-align: center;
-  overflow: hidden;
-
-  #name {
-    //height: 2.734375vw;
-    transform: translate(-0.234375vw, 0);
-    line-height: 2.734375vw;
-    color: #28354F;
-    font-size: 2.0833vw;
-    font-family: gallery-hero-noodle;
-    text-transform: uppercase;
+#avatar {
+  height: 8.28125vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  &.ana {
+    background-image: url('images/ana.jpg')
   }
-
-  .unlocked {
-    color: #28354F;
-    font-size: 2.1875vw;
-    font-family: gallery-hero-futura;
+  &.bastion {
+    background-image: url('images/bastion.jpg')
   }
-  .unlockable {
-    color: #1C75BC;
-    font-size: 1.04166vw;
-    font-family: gallery-hero-futura;
-    vertical-align: -10%;
+  &.dva {
+    background-image: url('images/dva.jpg')
+  }
+  &.genji {
+    background-image: url('images/genji.jpg')
+  }
+  &.hanzo {
+    background-image: url('images/hanzo.jpg')
+  }
+  &.junkrat {
+    background-image: url('images/junkrat.jpg')
+  }
+  &.lucio {
+    background-image: url('images/lucio.jpg')
+  }
+  &.mccree {
+    background-image: url('images/mccree.jpg')
+  }
+  &.mei {
+    background-image: url('images/mei.jpg')
+  }
+  &.mercy {
+    background-image: url('images/mercy.jpg')
+  }
+  &.pharah {
+    background-image: url('images/pharah.jpg')
+  }
+  &.reaper {
+    background-image: url('images/reaper.jpg')
+  }
+  &.reinhardt {
+    background-image: url('images/reinhardt.jpg')
+  }
+  &.roadhog {
+    background-image: url('images/roadhog.jpg')
+  }
+  &.soldier76 {
+    background-image: url('images/soldier76.jpg')
+  }
+  &.symmetra {
+    background-image: url('images/symmetra.jpg')
+  }
+  &.torbjorn {
+    background-image: url('images/torbjorn.jpg')
+  }
+  &.tracer {
+    background-image: url('images/tracer.jpg')
+  }
+  &.widowmaker {
+    background-image: url('images/widowmaker.jpg')
+  }
+  &.winston {
+    background-image: url('images/winston.jpg')
+  }
+  &.zarya {
+    background-image: url('images/zarya.jpg')
+  }
+  &.zenyatta {
+    background-image: url('images/zenyatta.jpg')
   }
 }
 
+#name {
+  //height: 2.734375vw;
+  transform: translate(-0.234375vw, 0);
+  line-height: 2.734375vw;
+  color: #28354F;
+  font-size: 2.0833vw;
+  font-family: gallery-hero-noodle;
+  text-transform: uppercase;
+}
+
+.unlocked {
+  color: #28354F;
+  font-size: 2.1875vw;
+  font-family: gallery-hero-futura;
+}
+.unlockable {
+  color: #1C75BC;
+  font-size: 1.04166vw;
+  font-family: gallery-hero-futura;
+  vertical-align: -10%;
+}
 
 .progress {
   margin-bottom: 0.52083vw;
