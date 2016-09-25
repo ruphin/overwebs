@@ -8,14 +8,6 @@
     src: url(/fonts/Futura.ttf);
 }
 
-:host {
-  display: block;
-  position: relative;
-  overflow: auto;
-  width: 100vw;
-  height: 100vh;
-}
-
 a {
   text-decoration: none;
 }
@@ -26,7 +18,7 @@ a {
   margin-top: 15.85vw;
   // margin-top: 13.42vw;
   width: 30vw;
-  a {
+  ::content a {
     padding-left: 2.5175vw;
     margin-top: 0.3675vw;
     position: relative;
@@ -40,13 +32,23 @@ a {
       content: attr(content);
       position: absolute;
       z-index: -1;
+      color: rgba(255,255,255,0);
       -webkit-text-stroke: 0.1775vw rgba(0,0,0,.15);
     }
-    &:hover {
+    &:not(.disabled):hover {
       padding-left: 5.2025vw;
       transform: scale(1.1);
     }
+    &.disabled {
+      color: rgba(255,255,255,0.6);
+    }
   }
+}
+
+.searching-spinner {
+  margin-left: calc(40 / 25.6 * 1vw);
+  height: calc(80 / 25.6 * 1vw);
+  width: calc(80 / 25.6 * 1vw);
 }
 
 .sub-menu {
@@ -55,7 +57,7 @@ a {
   align-items: flex-start;
   margin-top: -0.05vw;
   width: 30vw;
-  a {
+  ::content a {
     margin-top: 0.5125vw;
     padding-left: 2.5825vw;
     position: relative;
@@ -78,18 +80,4 @@ a {
       transform: scale(1.1);
     }
   }
-}
-
-.hero-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-left: 6.875vw;
-  width: 86.25vw;
-}
-
-overwebs-gallery-hero {
-  margin-left: 0.3125vw;
-  margin-right: 0.3125vw;
-  margin-bottom: 0.625vw;
 }

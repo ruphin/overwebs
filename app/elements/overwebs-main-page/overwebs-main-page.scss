@@ -1,0 +1,91 @@
+@font-face {
+    font-family: main-page-noodle;
+    src: url(/fonts/BigNoodleTooOblique.ttf);
+}
+
+@font-face {
+    font-family: main-page-futura;
+    src: url(/fonts/Futura.ttf);
+}
+
+:host {
+  display: block;
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15.85vw;
+  // margin-top: 13.42vw;
+  width: 30vw;
+  a {
+    padding-left: 2.5175vw;
+    margin-top: 0.3675vw;
+    position: relative;
+    z-index: 0;
+    color: white;
+    font-family: main-page-noodle;
+    line-height: 1;
+    font-size: 3.9375vw;
+    &::before {
+      position: absolute;
+      content: attr(content);
+      position: absolute;
+      z-index: -1;
+      color: rgba(255,255,255,0);
+      -webkit-text-stroke: 0.1775vw rgba(0,0,0,.15);
+    }
+    &:not(.disabled):hover {
+      padding-left: 5.2025vw;
+      transform: scale(1.1);
+    }
+    &.disabled {
+      color: rgba(255,255,255,0.6);
+    }
+  }
+}
+
+.searching-spinner {
+  margin-left: calc(40 / 25.6 * 1vw);
+  height: calc(80 / 25.6 * 1vw);
+  width: calc(80 / 25.6 * 1vw);
+}
+
+.sub-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: -0.05vw;
+  width: 30vw;
+  a {
+    margin-top: 0.5125vw;
+    padding-left: 2.5825vw;
+    position: relative;
+    z-index: 0;
+    color: rgba(255,255,255,0.95);
+    font-family: main-page-futura;
+    font-size: 1.455vw;
+    text-transform: uppercase;
+    &::before {
+      color: rgba(0,0,0,0);
+      position: absolute;
+      white-space:nowrap;
+      content: attr(content);
+      position: absolute;
+      z-index: -1;
+      -webkit-text-stroke: 0.1175vw rgba(154,166,195,.8);
+    }
+    &:hover {
+      padding-left: 3.2275vw;
+      transform: scale(1.1);
+    }
+  }
+}

@@ -2,25 +2,17 @@
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
 <link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
 <link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="../overwebs-loading-spinner/overwebs-loading-spinner.html">
 <link rel="import" href="overwebs-main-menu-style.html">
 
 <dom-module id="overwebs-main-menu">
   <template>
     <style include="overwebs-main-menu-style"></style>
-    <overwebs-hero-data heroes="{{heroData}}"></overwebs-hero-data>
-    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
-    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <div class="main-menu">
-      <a href="/play" content="Play">Play</a>
-      <a href="/training" content="Training">Training</a>
-      <a href="/hero-gallery" content="Hero Gallery">Hero Gallery</a>
-      <a href="/loot" content="Loot Box">Loot Box</a>
+      <content select=".main"></content>
     </div>
     <div class="sub-menu">
-      <a href="/social" content="Social">Social</a>
-      <a href="/career" content="Career Profile">Career Profile</a>
-      <a href="/options" content="Options">Options</a>
-      <a href="/exit-game" content="Exit Game">Exit Game</a>
+      <content select=".sub"></content>
     </div>
   </template>
   <script type="text/javascript" src="overwebs-main-menu.js"></script>

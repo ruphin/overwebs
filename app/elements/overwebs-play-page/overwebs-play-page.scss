@@ -1,0 +1,99 @@
+@font-face {
+    font-family: play-page-noodle;
+    src: url(/fonts/BigNoodleTooOblique.ttf);
+}
+
+@font-face {
+    font-family: play-page-futura;
+    src: url(/fonts/Futura.ttf);
+}
+
+
+:host {
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.header {
+  display: block;
+  height: 15.625vw;
+  margin-bottom: -1vw;
+  width: 50vw;
+  #text {
+    font-family: play-page-noodle;
+    font-size: 10.625vw;
+  }
+}
+
+.modes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  > * {
+    margin-right: 1.9225vw;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: stretch;
+  .button {
+    margin-top: 0.46875vw;
+    height: 2.265625vw;
+    line-height: 2.265625vw;
+    font-family: play-page-noodle;
+    font-size: 1.65vw;
+    background-color: rgba(255, 208, 94, 0.95);
+    text-decoration: none;
+    color: rgba(82, 72, 59, 0.98);
+    text-align: center;
+    border-radius: 0.15625vw;
+
+    &:not(.info) {
+      flex-grow: 1;
+    }
+
+    &.info {
+      height: 2.265625vw;
+      width: 2.265625vw;
+      margin-right: 0.14vw;
+      background-color: rgba(117, 187, 232, 0.95);
+      color: white;
+      font-family: play-page-futura;
+      font-size: 1.40625vw;
+      &:hover {
+        background-color: rgba(127, 197, 242, 0.95);
+      }
+    }
+    &:hover {
+      background-color: rgba(255,226,87, 0.95);
+      animation-duration: 1.2s;
+      animation-name: borderglow;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+@keyframes borderglow {
+  0% {
+    box-shadow: 0 0 0 0.14vw #FFFFFF, inset 0 0 0 0.04vw #FFFFFF;
+  }
+
+  40% {
+    box-shadow: 0 0 0.04vw 0.12vw #FFFFFF, inset 0 0 0 0.02vw #FFFFFF;
+  }
+
+  60% {
+    box-shadow: 0 0 0.04vw 0.12vw #FFFFFF, inset 0 0 0 0.02vw #FFFFFF;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0.14vw #FFFFFF, inset 0 0 0 0.04vw #FFFFFF;
+  }
+}
+

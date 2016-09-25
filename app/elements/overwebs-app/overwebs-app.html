@@ -2,7 +2,7 @@
 <link rel="import" href="../../vendor/app-route/app-location.html">
 <link rel="import" href="../overwebs-background/overwebs-background.html">
 <!-- Eager load the home page -->
-<link rel="import" href="../overwebs-main-menu/overwebs-main-menu.html">
+<link rel="import" href="../overwebs-main-page/overwebs-main-page.html">
 <link rel="import" href="overwebs-app-style.html">
 
 <dom-module id="overwebs-app">
@@ -15,9 +15,12 @@
     <overwebs-background id="background"></overwebs-background>
 
     <div id="pages">
-      <overwebs-main-menu route=""></overwebs-main-menu>
-      <overwebs-hero-gallery route="hero-gallery"></overwebs-hero-gallery>
-      <overwebs-play route="play"></overwebs-play>
+      <overwebs-main-page route=""></overwebs-main-page>
+      <overwebs-gallery-page route="hero-gallery"></overwebs-gallery-page>
+      <overwebs-play-page route="play"></overwebs-play-page>
+      <overwebs-training-page route="training"></overwebs-training-page>
+
+<!--       <overwebs-loading-spinner yellow route="loot"></overwebs-loading-spinner> -->
     </div>
 
   </template>

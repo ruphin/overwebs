@@ -1,0 +1,35 @@
+@font-face {
+    font-family: training-page-noodle;
+    src: url(/fonts/BigNoodleTooOblique.ttf);
+}
+
+:host {
+  display: block;
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+}
+
+.header {
+  display: block;
+  height: 15.625vw;
+  margin-bottom: -1vw;
+  width: 50vw;
+  #text {
+    font-family: training-page-noodle;
+    font-size: 10.625vw;
+  }
+}
+
+.modes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  > * {
+    margin-right: 1.9225vw;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,203 @@
+@font-face {
+    font-family: play-tile-noodle;
+    src: url(/fonts/BigNoodleTooOblique.ttf);
+}
+
+@font-face {
+    font-family: play-tile-futura;
+    src: url(/fonts/Futura.ttf);
+}
+
+:host {
+  position: relative;
+  height: calc(645/25.6*1vw); //25.15625vw;
+  width: calc(400/25.6*1vw); //15.575vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+
+  &[custom-game] {
+    background-image: url(images/custom.jpg);
+    .label {
+      background: linear-gradient(to bottom, rgba(215,237,255,0.92), rgba(215,237,255,1));
+    }
+  }
+
+  &[quick-play] {
+    background-image: url(images/quick_play.jpg);
+    .label {
+      background: rgba(238, 245, 255, 0.92);
+    }
+  }
+
+  &[practice] {
+    background-image: url(images/practice.jpg);
+    .label {
+      background: rgba(238, 245, 255, 0.92);
+    }
+  }
+
+  &[vs-ai] {
+    background-image: url(images/vs_ai.jpg);
+    .label {
+      background: rgba(255, 245, 245, 0.92);
+    }
+  }
+
+  &[competetive-play], &:hover[competetive-play] {
+    background-color: #AA514A;
+    background-image: url(images/competetive.jpg);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    .label {
+      background: radial-gradient(ellipse farthest-corner at 45% 30%, #FFFBFA, #FFEAE7 80%, #FFDED9);
+    }
+  }
+
+  &[brawl] {
+    background-image: url(images/brawl.jpg);
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 6.640625vw;
+      top: -5.859375vw;
+      left: 0.703125vw;
+      right: 0.703125vw;
+      background-image: url(images/brawl_ribbon.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      pointer-events: none;
+    }
+    // This is really evil
+    // Eventually this will need something to dynamically scale the text
+    // Or some way to control this from outside
+    // Ideally these tiles are configurable by json entirely
+    .label {
+      ::content .title {
+        font-size: 1.5vw;
+      }
+    }
+  }
+  transition: transform 0.1s;
+
+  &:hover {
+    box-shadow: 0 0 0 0.1953vw #FFFFFF;
+    transform: scale(1.2);
+    .popup {
+      height: 3.59375vw;
+      .container {
+        ::content .hover-text {
+          color: rgba(208,208,220,1);
+          transition: color 0.15s ease-in 0.1s;
+        }
+      }
+    }
+    .label {
+      background: white;
+    }
+    .corner::before, .corner::after {
+      background-color: white;
+    }
+  }
+}
+
+.label {
+  height: 4.6875vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(245,245,245,0.92);
+
+  ::content .title {
+    margin-left: -0.525vw;
+    color: #28354F;
+    font-family: play-tile-noodle;
+    font-size: 2.7vw;
+  }
+}
+
+.popup {
+  position: relative;
+  height: 0;
+  background: #3C424D;
+  overflow: hidden;
+  transition: height 0.15s;
+  .container {
+    padding: 0 0.8vw 0 0.8vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3.59375vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    ::content .hover-text {
+      font-family: Helvetica;
+      font-size: 0.9098vw;
+        transition: color 0.05s ease-in 0s;
+      color: rgba(208,208,220,0)
+    }
+  }
+}
+
+.corner {
+  position: absolute;
+  pointer-events: none;
+  height: calc(40/1.2/25.6*1vw);
+  width: calc(40/1.2/25.6*1vw);
+  &.top {
+    top: calc(-48/1.2/25.6*1vw);
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      height: calc(2/25.6*1vw);
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  &.left {
+    left: calc(-48/1.2/25.6*1vw);
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: calc(2/25.6*1vw);
+      top: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  &.bottom {
+    bottom: calc(-48/1.2/25.6*1vw);
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      height: calc(2/25.6*1vw);
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  &.right {
+    right: calc(-48/1.2/25.6*1vw);
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: calc(2/25.6*1vw);
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}

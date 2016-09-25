@@ -1,0 +1,70 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="../overwebs-play-tile/overwebs-play-tile.html">
+<link rel="import" href="../overwebs-back-button/overwebs-back-button.html">
+<link rel="import" href="overwebs-play-page-style.html">
+
+<dom-module id="overwebs-play-page">
+  <template>
+    <style include="overwebs-play-page-style"></style>
+    <svg class="header" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fillgradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#ffffff" offset="0" stop-opacity=".9"/>
+          <stop stop-color="#ffffff" offset="1" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="outlinegradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#4C5C76" offset="0" stop-opacity="0.6"/>
+          <stop stop-color="#4C5C76" offset="1" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+      <g>
+        <text id="text" x="4.225vw" y="14.85vw" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">PLAY</text>
+      </g>
+    </svg>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
+    <div class="modes">
+      <overwebs-play-tile quick-play>
+        <span class="title">Quick Play</span>
+        <span class="hover-text">Jump into a game against other players of your skill level.</span>
+      </overwebs-play-tile>
+      <overwebs-play-tile vs-ai>
+        <span class="title">Play vs. AI</span>
+        <span class="hover-text">Hone your skills against a team of AI-controlled heroes.</span>
+      </overwebs-play-tile>
+      <div>
+        <overwebs-play-tile competetive-play>
+          <span class="title">Competitive Play</span>
+          <span class="hover-text">Compete against other players and work your way up the ranks.</span>
+        </overwebs-play-tile>
+        <div class="buttons">
+          <a href="#competetive-info" class="info button">i</a>
+          <a href="#season-details" class="button">Season 2</a>
+        </div>
+      </div>
+      <overwebs-play-tile custom-game>
+        <span class="title">Custom Game</span>
+        <span class="hover-text">Jump into a game against other players of your skill level.</span>
+      </overwebs-play-tile>
+      <div>
+        <overwebs-play-tile brawl>
+          <span class="title">Have fun storming the castle</span>
+          <span class="hover-text">This is a hover text that is not important and will go away.</span>
+        </overwebs-play-tile>
+        <div class="buttons">
+          <a href="#season-details" class="button">Brawl details</a>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Play vs. AI" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
+    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget> -->
+
+    <overwebs-back-button></overwebs-back-button>
+  </template>
+  <script type="text/javascript" src="overwebs-play-page.js"></script>
+</dom-module>
