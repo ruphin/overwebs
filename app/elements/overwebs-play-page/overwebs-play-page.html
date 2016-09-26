@@ -1,7 +1,7 @@
 <link rel="import" href="../../vendor/polymer/polymer.html">
 <link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
 <link rel="import" href="../overwebs-play-tile/overwebs-play-tile.html">
-<link rel="import" href="../overwebs-back-button/overwebs-back-button.html">
+<link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
 <link rel="import" href="overwebs-play-page-style.html">
 
 <dom-module id="overwebs-play-page">
@@ -57,14 +57,7 @@
         </div>
       </div>
     </div>
-    <!-- 
-    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
-    <overwebs-play-widget title="Play vs. AI" background="todo.jpg"></overwebs-play-widget>
-    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
-    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget>
-    <overwebs-play-widget title="Quick Play" background="todo.jpg"></overwebs-play-widget> -->
-
-    <overwebs-back-button></overwebs-back-button>
+    <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
   </template>
   <script type="text/javascript" src="overwebs-play-page.js"></script>
 </dom-module>

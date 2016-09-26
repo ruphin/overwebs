@@ -1,0 +1,47 @@
+@font-face {
+    font-family: global-button-futura;
+    src: url(/fonts/Futura.ttf);
+}
+
+:host {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  bottom: calc(44/25.6*1vw);
+  right: 2.96875vw;
+  padding: calc(7/25.6*1vw);
+  height: calc(60/25.6*1vw);
+  font-family: global-button-futura;
+  text-transform: uppercase;
+  border-radius: calc(5/25.6*1vw);
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  .action {
+    font-size: calc(20/25.6*1vw);
+    padding: 0 0.46875vw;
+    display: inline-block;
+    box-shadow: 0 0 0 calc(2.6/25.6*1vw) rgba(220,220,220,0.8);
+    border-radius: 0.1171875vw;
+    color: rgba(255,255,255, 0.95);
+    background: rgba(80, 80, 80, 0.5);
+    line-height: 2.365;
+  }
+  .label {
+    margin-left: 0.546875vw;
+    margin-right: 0.546875vw;
+    font-size: 1.06875vw;
+    color: rgba(220, 220, 220, 0.8);
+  }
+  &:hover {
+      box-shadow: 0 0 0 calc(2.6/25.6*1vw) rgba(220,220,220,0.8);
+    .action {
+      color: #313743;
+      background: #EAECF4;
+      box-shadow: 0 0 0 calc(2.6/25.6*1vw) white;
+    }
+    .label {
+      color: white;
+    }
+  }
+}

@@ -23,18 +23,25 @@ Polymer({
   properties: {
     key: {
       type: String,
+      observer: '_register'
     },
     out: {
       type: String
     }
   },
 
-  ready: function () {
-    if (this.key) {
-      if (!registeredElements[this.key]) {
-        registeredElements[this.key] = []
+  _register: function (newKey, oldKey) {
+    if (oldKey && registeredElements[oldKey]) {
+      let i = registeredElements[oldKey].indexOf(this)
+      if (i != -1) {
+        registeredElements[oldKey].splice(i, 1);
       }
-      registeredElements[this.key].push(this);
+    }
+    if (newKey) {
+      if (!registeredElements[newKey]) {
+        registeredElements[newKey] = []
+      }
+      registeredElements[newKey].push(this);
     }
   }
 });

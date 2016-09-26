@@ -3,7 +3,7 @@
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
 <link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
 <link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
-<link rel="import" href="../overwebs-back-button/overwebs-back-button.html">
+<link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
 <link rel="import" href="overwebs-gallery-page-style.html">
 
 <dom-module id="overwebs-gallery-page">
@@ -32,7 +32,7 @@
         <overwebs-gallery-hero hero="[[item]]" player-unlocks="[[unlocks]]"></overwebs-gallery-hero>
       </template>
     </div>
-    <overwebs-back-button></overwebs-back-button>
+    <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
   </template>
   <script type="text/javascript" src="overwebs-gallery-page.js"></script>
 </dom-module>

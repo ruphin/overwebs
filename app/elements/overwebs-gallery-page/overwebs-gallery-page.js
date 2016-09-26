@@ -26,5 +26,12 @@ Polymer({
 
   _unlocks: function(playerData) {
     return playerData.unlocks
+  },
+
+  ready: function() {
+    this.$.backButton.onclick = (event) => {
+      event.stopPropagation();
+      history.back();
+    }
   }
 });
