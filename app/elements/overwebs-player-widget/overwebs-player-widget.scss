@@ -11,47 +11,58 @@
 :host {
   display: flex;
   position: absolute;
-  top: 2.29166666667vw;
-  right: 2.60416666667vw;
-  height: 3.95833333333vw;
+  top: calc(58 / 25.6 * 1vw);
+  right: calc(58 / 25.6 * 1vw);
+  height: calc(80 / 25.6 * 1vw);
   background: #27354F;
 }
 
 #status {
-  height: 3.95833333333vw;
-  width: 0.36458333333vw;
+  height: 100%;
+  width: calc(6 / 25.6 * 1vw);
   background: #7DFF00;
 }
 
 #avatar {
-  height: 3.95833333333vw;
-  width: 3.95833333333vw;
+  height: 100%;
+  width: calc(80 / 25.6 * 1vw);
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .player {
+  line-height: 1;
   display: flex;
   align-items: center;
   color: white;
-  height: 3.95833333333vw;
-  width: 16.875vw;
+  height: 100%;
+  width: calc(346 / 25.6 * 1vw);
 }
 
 .name {
-  margin-left: 0.703125vw;
-  font-size: 0.9375vw;
+  margin-left: calc(13 / 25.6 * 1vw);
+  font-size: calc(20 / 25.6 * 1vw);
   margin-top: 0.15625vw;
-  letter-spacing: 0.025vw;
+  letter-spacing: calc(0.3 / 25.6 * 1vw);;
   font-family: helvetica;
   text-transform: uppercase;
 }
 
-#level {
-  margin-left: 0.703125vw;
-  font-size: 0.72916666666vw;
+.levelBox {
+  height: calc(18 / 25.6 * 1vw);
+  margin-left: calc(10 / 25.6 * 1vw);
+  padding-left: calc(5 / 25.6 * 1vw);
+  padding-right: calc(5 / 25.6 * 1vw);
+  border-radius: calc(1 / 25.6 * 1vw);
+  box-shadow: inset 0 0 0 calc(1 / 25.6 * 1vw) rgba(255,255,255,0.20);
+  background: radial-gradient(at 50% 0, rgba(255,255,255,0.7), rgba(255,255,255,0)), linear-gradient(to bottom, #A76458, #964D44 45%, #6B3431 55%, #864637);
+}
+
+.level {
+  padding-top: calc(1 / 25.6 * 1vw);
+  font-size: calc(16.5 / 25.6 * 1vw);
   font-family: futura;
   text-transform: uppercase;
   color: black;
-  text-shadow: -1px 0 #BB8F86, 0 1px #BB8F86, 1px 0 #BB8F86, 0 -1px #BB8F86;
+  text-shadow: calc(-1 / 25.6 * 1vw) 0 #BB8F86, 0 calc(-1 / 25.6 * 1vw) #BB8F86, calc(1 / 25.6 * 1vw) 0 #BB8F86, 0 calc(1 / 25.6 * 1vw) #BB8F86;
 }

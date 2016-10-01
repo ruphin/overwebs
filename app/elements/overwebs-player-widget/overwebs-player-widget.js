@@ -21,7 +21,7 @@ Polymer({
       this.$.avatar.style.backgroundImage = 'url(https://blzgdapipro-a.akamaihd.net/game/unlocks/' + player.avatar + '.png)';
     }
     if (player.prestige) {
-      this.$.level.style.backgroundImage = 'url(/images/prestige/' + player.prestige + '.png)';
+      this.$.prestige.style.backgroundImage = 'url(/images/prestige/' + player.prestige + '.png)';
     }
     this.$.status.style.background = this._statusBackground(player);
   },
