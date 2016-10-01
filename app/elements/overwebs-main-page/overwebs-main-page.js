@@ -12,24 +12,12 @@ Polymer({
     },
     hero: {
       type: String,
-    },
-    test1: {
-      type: Object,
-    },
-    test2: {
-      type: Object,
+      observer: "_heroChanged"
     },
   },
 
-  _heroes: function(heroData) {
-    return Object.keys(heroData).map(key => heroData[key])
-  },
-
-  ready: function() {
-    // Pick a random hero if the hero isn't chosen explicitly
-    if (this.hero === undefined) {
-      let heroes = Object.keys(this.heroData);
-      this.hero = heroes[heroes.length * Math.random() << 0];
-    }
+  _heroChanged: function (hero) {
+    this.unlocked = this.playerData.unlocks[hero];
+    this.unlockable = this.heroData[hero].unlockable;
   }
 });
