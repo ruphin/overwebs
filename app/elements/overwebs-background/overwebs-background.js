@@ -9,6 +9,7 @@ Polymer({
     },
     hero: {
       type: String,
+      notify: true,
     },
     lowBandwidth: {
       type: Boolean,
