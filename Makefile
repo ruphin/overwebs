@@ -3,7 +3,7 @@ serve:
 .PHONY: serve
 
 build:
-	docker run -it --rm -v $$PWD:/app -p 5000:5000 ruphin/webdev build
+	docker run -it --rm -v $$PWD:/app -p 5000:5000 ruphin/webdev
 	docker build -t ruphin/overwebs .
 	docker push ruphin/overwebs
 .PHONY: build
