@@ -14,7 +14,6 @@ Polymer({
     lowBandwidth: {
       type: Boolean,
       value: false,
-      observer: "_changeBandwidth",
     },
     page: {
       type: String,
@@ -43,10 +42,7 @@ Polymer({
     // Create a video element for each background video from the dataset
     Object.keys(this._backgroundData).forEach((section) => {
       let video = document.createElement('video');
-
-      video.poster = this.resolveUrl(["./images", this.map, this.hero, this._backgroundData[section].fallback + ".jpg"].join("/"));
-
-      // If we're on low bandwidth, don't add a video source
+      // Add video sources unless we are on low bandwidth
       if (!this.lowBandwidth) {
         video.src = this.resolveUrl(["./videos", this.map, this.hero, section + ".mp4"].join("/"));
       }
@@ -56,25 +52,6 @@ Polymer({
       video.classList.add("hidden");
       Polymer.dom(this.root).appendChild(video);
       this._backgrounds[section] = video
-    });
-    //console.log(this._backgrounds)
-  },
-
-  _changeBandwidth: function() {
-    // Ignore any changes if we didn't load the backgrounds yet
-    // It will be handled in the initalizer
-    if (!this._backgrounds) {
-      return;
-    }
-    Object.keys(this._backgroundData).forEach((section) => {
-      let video = this._backgrounds[section]
-      if (this.lowBandwidth) {
-        video.poster = this.resolveUrl(["./images", this.map, this.hero, this._backgroundData[section].fallback + ".jpg"].join("/"));
-        video.removeAttribute("src");
-      } else {
-        video.src = this.resolveUrl(["./videos", this.map, this.hero, section + ".mp4"].join("/"));
-        video.removeAttribute("poster");
-      }
     });
   },
 
@@ -119,6 +96,12 @@ Polymer({
   },
 
   _transition: function (target) {
+    // If we are on low bandwith mode, skip transitions
+    if (this.lowBandwidth && this._backgroundData[target.id].transition) {
+      this._transition(this._backgrounds[this._backgroundData[target.id].transition]);
+      return;
+    }
+
     // Hide the old background if we were showing one
     // Stop any pending transitions
     // And stop playing video
@@ -135,10 +118,19 @@ Polymer({
 
     // Show the new background
     target.classList.remove("hidden");
+    target.poster = this.resolveUrl(["./images", this.map, this.hero, target.id + ".jpg"].join("/"));
+
+    // If we're not low bandwidth mode, start playing
+    if (!this.lowBandwidth && target.preload !== "auto") {
+      target.src = this.resolveUrl(["./videos", this.map, this.hero, target.id + ".mp4"].join("/"));
+      target.preload = "auto";
+      target.load();
+    }
+    target.play();
 
     this._currentlyShowing = target
 
-    // Set up a chain of videos that will be preloaded once the target video is loaded
+    // Set up a list of elements that should be preloaded
     let preloadTargets = []
     if (this._backgroundData[target.id].transition) {
       preloadTargets = preloadTargets.concat(this._backgroundData[target.id].transition);
@@ -148,59 +140,66 @@ Polymer({
     }
     preloadTargets = preloadTargets.map((preloadTarget) => { return this._backgrounds[preloadTarget]; });
 
-    // Start loading
-    let preload = (preloadTarget, i) => {
-      if (preloadTarget) {
-        if (preloadTarget.preload == "auto") {
-          preload(preloadTargets[i+1], i+1);
-          return;
+    preloadTargets.forEach((target) => {
+      if (this.lowBandwidth) {
+        target.poster = this.resolveUrl(["./images", this.map, this.hero, (this._backgroundData[target.id].transition || target.id) + ".jpg"].join("/"));
+      } else {
+      target.poster = this.resolveUrl(["./images", this.map, this.hero, target.id + ".jpg"].join("/"));
+        if (target.preload !== "auto") {
+          target.src = this.resolveUrl(["./videos", this.map, this.hero, target.id + ".mp4"].join("/"));
+          target.preload = "auto";
         }
-        //console.log("LOADING: ", preloadTarget.id)
-        preloadTarget.preload = "auto";
-        preloadTarget.load();
-        //console.log("OVERRIDING")
-        this._loadListener = () => { waitForBuffer(preloadTarget, () => { preload(preloadTargets[i+1], i+1); } ); };
-        //console.log("ADDING")
-        preloadTarget.addEventListener("progress", this._loadListener );
+        target.src = this.resolveUrl(["./videos", this.map, this.hero, target.id + ".mp4"].join("/"));
       }
-    }
+    });
+    //
+    // // Start loading
+    // let preload = (preloadTarget, i) => {
+    //   if (preloadTarget) {
+    //     if (preloadTarget.preload == "auto") {
+    //       preload(preloadTargets[i+1], i+1);
+    //       return;
+    //     }
+    //     //console.log("LOADING: ", preloadTarget.id)
+    //     preloadTarget.preload = "auto";
+    //     preloadTarget.load();
+    //     //console.log("OVERRIDING")
+    //     this._loadListener = () => { waitForBuffer(preloadTarget, () => { preload(preloadTargets[i+1], i+1); } ); };
+    //     //console.log("ADDING")
+    //     preloadTarget.addEventListener("progress", this._loadListener );
+    //   }
+    // }
+    //
+    // // FIXME: There's an issue where some progress event listeners are not removed.
+    //
+    // // This will wait for the given video element to be buffered for at least 5 seconds
+    // // And then fire the callback
+    // let waitForBuffer = (element, callback) => {
+    //   if (element._buffered == true) {
+    //     //console.log("ALREADY BUFFERED: ", element.id)
+    //     //console.log("REMOVING")
+    //     element.removeEventListener("progress", this._loadListener);
+    //     callback();
+    //     return;
+    //   }
+    //   if (element.buffered.length >= 1) {
+    //   //console.log("BUFFERING: ", element.id, element.buffered.end(0))
+    //     if(element.buffered.end(0) === element.duration || element.buffered.end(0) >= 5) {
+    //       //console.log("BUFFERED: ", element.id, element.buffered.end(0), element.duration)
+    //       //console.log("REMOVING")
+    //       element.removeEventListener("progress", this._loadListener);
+    //       element._buffered = true;
+    //       callback();
+    //     }
+    //   }
+    // }
+    //
+    // // Start preloading the next videos once the target video is buffered
+    // //console.log("OVERRIDING2")
+    // this._loadListener = () => { waitForBuffer(target, () => { preload(preloadTargets[0], 0); } ); };
+    // //console.log("ADDING2")
+    // target.addEventListener("progress", this._loadListener);
 
-    // FIXME: There's an issue where some progress event listeners are not removed.
-
-    // This will wait for the given video element to be buffered for at least 5 seconds
-    // And then fire the callback
-    let waitForBuffer = (element, callback) => {
-      if (element._buffered == true) {
-        //console.log("ALREADY BUFFERED: ", element.id)
-        //console.log("REMOVING")
-        element.removeEventListener("progress", this._loadListener);
-        callback();
-        return;
-      }
-      if (element.buffered.length >= 1) {
-      //console.log("BUFFERING: ", element.id, element.buffered.end(0))
-        if(element.buffered.end(0) === element.duration || element.buffered.end(0) >= 5) {
-          //console.log("BUFFERED: ", element.id, element.buffered.end(0), element.duration)
-          //console.log("REMOVING")
-          element.removeEventListener("progress", this._loadListener);
-          element._buffered = true;
-          callback();
-        }
-      }
-    }
-
-    // Start preloading the next videos once the target video is buffered
-    //console.log("OVERRIDING2")
-    this._loadListener = () => { waitForBuffer(target, () => { preload(preloadTargets[0], 0); } ); };
-    //console.log("ADDING2")
-    target.addEventListener("progress", this._loadListener);
-
-    // Start playing the target video
-    if (target.preload !== "auto") {
-      target.preload = "auto"
-      target.load()
-    }
-    target.play();
 
     // Either set up a transition to the next section, or enable looping on the current video
     if (this._backgroundData[target.id].transition) {
@@ -210,6 +209,5 @@ Polymer({
       this._endedListener = () => { target.play(); target.addEventListener("ended", this._endedListener); };
       target.addEventListener("ended", this._endedListener);
     }
-
   }
 });
