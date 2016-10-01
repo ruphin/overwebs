@@ -36,7 +36,8 @@ a {
       -webkit-text-stroke: 0.1775vw rgba(0,0,0,.15);
     }
     &:not(.disabled):hover {
-      transform: translate(2.685vw) scale(1.1);
+      padding-left: 5.2025vw;
+      transform: scale(1.1);
     }
     &.disabled {
       color: rgba(255,255,255,0.6);
@@ -75,7 +76,8 @@ a {
       -webkit-text-stroke: 0.1175vw rgba(154,166,195,.8);
     }
     &:hover {
-      transform: translate(0.645vw) scale(1.1);
+      padding-left: 3.2275vw;
+      transform: scale(1.1);
     }
   }
 }
