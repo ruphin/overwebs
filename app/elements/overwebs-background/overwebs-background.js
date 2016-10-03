@@ -59,7 +59,7 @@ Polymer({
   // We need some way to listen to what page we're going to
   // Perhaps individual pages should trigger events when they are opened?
   _loadPage: function (newPage, oldPage) {
-    //console.log("-", oldPage, "-", newPage, "-")
+    // TODO: This stuff is super hacky and there should be a better way
     if (newPage === "") {
       switch (oldPage) {
         case undefined:
@@ -87,7 +87,6 @@ Polymer({
       newPage = "gallery_in"
     }
 
-    //console.log("-", oldPage, "-", newPage, "-")
     // Unsure if this is necessary. The goal is to prevent flashes of no-background, but it doesn't work.
     // Even when video is pre-loaded or loaded from cache, it still takes 17ms or so to actually pull it from cache and play.
     // It's possible that we need to use posters to fix this.
