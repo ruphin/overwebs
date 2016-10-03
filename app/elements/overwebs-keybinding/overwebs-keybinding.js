@@ -7,11 +7,14 @@ let handleKeydown = (event) => {
   }
 
   if (registeredElements[event.key]) {
-    registeredElements[event.key].forEach((element) => {
+    // Use `every` so we can break from the loop if there's an override
+    registeredElements[event.key].every((element) => {
       if (element.offsetParent !== null) {
         event.stopPropagation();
         element.click();
       }
+      // If the element is not an override, return true to keep iterating over elements
+      return !element.override;
     });
   }
 }
@@ -25,8 +28,9 @@ Polymer({
       type: String,
       observer: '_register'
     },
-    out: {
-      type: String
+    override: {
+      type: Boolean,
+      value: false
     }
   },
 
@@ -41,7 +45,11 @@ Polymer({
       if (!registeredElements[newKey]) {
         registeredElements[newKey] = []
       }
-      registeredElements[newKey].push(this);
+      if (this.override) {
+        registeredElements[newKey].unshift(this);
+      } else {
+        registeredElements[newKey].push(this);
+      }
     }
   }
 });

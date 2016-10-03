@@ -66,6 +66,9 @@ Polymer({
       }
     }
 
+    // TODO: Enable or disable or move the chat widget depending on the page.
+    // Should this be responsibility of the app? I don't know.
+
     // Notify the background element that we changed route
     this.$.background.page = newRoute
     // Should individual 'page' elements do this?

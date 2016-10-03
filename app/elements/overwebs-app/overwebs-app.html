@@ -3,6 +3,8 @@
 <link rel="import" href="../overwebs-background/overwebs-background.html">
 <!-- Eager load the home page -->
 <link rel="import" href="../overwebs-main-page/overwebs-main-page.html">
+<link rel="import" href="../overwebs-chat-widget/overwebs-chat-widget.html">
+<link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
 <link rel="import" href="overwebs-app-style.html">
 
 <dom-module id="overwebs-app">
@@ -22,6 +24,9 @@
 
 <!--       <overwebs-loading-spinner yellow route="loot"></overwebs-loading-spinner> -->
     </div>
+
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-chat-widget tabindex="32767" player="[[playerData]]"></overwebs-chat-widget>
 
   </template>
   <script type="text/javascript" src="overwebs-app.js"></script>

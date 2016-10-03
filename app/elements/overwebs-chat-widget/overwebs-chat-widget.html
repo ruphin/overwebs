@@ -1,0 +1,26 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="overwebs-chat-widget-style.html">
+<link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
+
+<dom-module id="overwebs-chat-widget">
+  <template>
+    <style include="overwebs-chat-widget-style"></style>
+    <overwebs-keybinding id="enter" key="Enter"></overwebs-keybinding>
+    <overwebs-keybinding id="escape" override></overwebs-keybinding>
+    <div class="chatShadow"></div>
+    <div id="chatBox" class="chatBox">
+      <div class="chatLog">
+        <template id="domRepeat" id="messageList" is="dom-repeat" items="[[_history]]">
+          <div class="message">
+            [<span>[[item.author]]</span>]: <span>[[item.message]]</span>
+          </div>
+        </template>
+      </div>
+    </div>
+    <div class="button">Press Enter to chat</div>
+    <div class="entryBox">
+      <span id="channel">[[[_channel]]]: </span><input id="input" class="input" type="text" name="name" value="" autocomplete="off">
+    </div>
+  </template>
+  <script type="text/javascript" src="overwebs-chat-widget.js"></script>
+</dom-module>

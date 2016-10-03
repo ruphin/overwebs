@@ -1,0 +1,159 @@
+@font-face {
+    font-family: chat-widget-helvetica;
+    src: url(/fonts/Helvetica.ttf);
+}
+
+@font-face {
+    font-family: chat-widget-futura;
+    src: url(/fonts/Futura.ttf);
+}
+
+:host {
+  position: absolute;
+  bottom: calc(54 / 25.6 * 1vw);
+  left: calc(54 / 25.6 * 1vw);
+  font-family: chat-widget-helvetica;
+  font-size: calc(25 / 25.6 * 1vw);
+  color: #FFFFFF;
+  line-height: 1.4;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+
+  // Cancel style for being selectable
+  outline: none;
+
+  .chatBox {
+    z-index: 1;
+    direction: rtl;
+    box-sizing:border-box;
+    position: absolute;
+    bottom: calc(70 / 25.6 * 1vw);
+    left: calc(-26 / 25.6 * 1vw);
+    padding-left: calc(26 / 25.6 * 1vw);
+    width: calc(550 / 25.6 * 1vw);
+    height: calc(120 / 25.6 * 1vw);
+    overflow-y: scroll;
+    overflow-x: none;
+    &::-webkit-scrollbar {
+      position: absolute;
+      margin-right: 100px;
+      width: calc(14 / 25.6 * 1vw);
+    }
+    &::-webkit-scrollbar-track-piece {
+      background-image: linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, rgba(0,0,0,.05) 40%, rgba(0,0,0,.05) 60%, rgba(0,0,0,0) 60%, rgba(0,0,0,0)); // Time for magic
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.4);
+      border-radius: calc(64 / 25.6 * 1vw);
+      width: calc(14 / 25.6 * 1vw);
+      height: calc(14 / 25.6 * 1vw);
+    }
+  }
+
+  .chatLog {
+    box-sizing:border-box;
+    direction: ltr;
+    min-height: calc(120 / 25.6 * 1vw);
+    border-radius: calc(5 / 25.6 * 1vw);
+    font-family: chat-widget-helvetica;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .chatShadow {
+    position: absolute;
+    left: 0;
+    width: calc(534 / 25.6 * 1vw);
+    height: calc(120 / 25.6 * 1vw);
+    bottom: calc(62 / 25.6 * 1vw);
+    border-radius: calc(5 / 25.6 * 1vw);
+    background: rgba(0,0,0,0);
+    transition: background .2s, height .2s;
+  }
+
+  .button {
+    height: calc(54 / 25.6 * 1vw);
+    line-height: calc(54 / 25.6 * 1vw);
+    font-family: chat-widget-futura;
+    text-transform: uppercase;
+    font-size: calc(22/25.6*1vw);
+    display: inline-block;
+    box-shadow: 0 0 0 calc(2.6 / 25.6 * 1vw) rgba(220,220,220,0.8);
+    border-radius: calc(5 / 25.6 * 1vw);
+    color: rgba(255,255,255, 0.95);
+    background: rgba(80, 80, 80, 0.5);
+    padding-left: calc(14 / 25.6 * 1vw);
+    padding-right: calc(14 / 25.6 * 1vw);
+    overflow: hidden;
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .entryBox {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.65);
+    border-radius: calc(5 / 25.6 * 1vw);
+    padding-left: calc(14 / 25.6 * 1vw);
+    padding-right: calc(14 / 25.6 * 1vw);
+    width: calc(534 / 25.6 * 1vw);
+    height: 0;
+    overflow: hidden;
+  }
+
+  .input {
+    // Screw browsers
+    background: none;
+    padding: 0;
+    border: none;
+    -webkit-appearance: none;
+    // end Screw browsers
+
+    // This needs to be redefined because browsers love styling inputs
+    font-family: chat-widget-helvetica;
+    font-size: calc(25 / 25.6 * 1vw);
+    color: #FFFFFF;
+    line-height: 1.4;
+
+    flex-grow: 1;
+    margin-left: calc(6 / 25.6 * 1vw);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &.focus {
+    .chatLog {
+      min-height: calc(284 / 25.6 * 1vw);
+    }
+    .chatBox {
+      height: calc(284 / 25.6 * 1vw);
+      &::-webkit-scrollbar-track-piece {
+        background-image: linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, rgba(0,0,0,.1) 40%, rgba(0,0,0,.1) 60%, rgba(0,0,0,0) 60%, rgba(0,0,0,0)); // Time for magic
+      }
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.8);
+        border-radius: calc(64 / 25.6 * 1vw);
+        width: calc(14 / 25.6 * 1vw);
+        height: calc(14 / 25.6 * 1vw);
+      }
+    }
+    .chatShadow {
+      height: calc(306 / 25.6 * 1vw);
+      background: rgba(0,0,0,.65);
+    }
+    .entryBox {
+      height: calc(54 / 25.6 * 1vw);
+    }
+    .button {
+      height: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+}
