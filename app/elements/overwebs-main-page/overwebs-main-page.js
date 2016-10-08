@@ -10,14 +10,19 @@ Polymer({
     playerData: {
       type: Object
     },
+    backgroundSelection: {
+      type: Object
+    },
     hero: {
       type: String,
-      observer: "_heroChanged"
+      computed: '_hero(backgroundSelection)'
     },
   },
 
-  _heroChanged: function (hero) {
+  _hero: function (background) {
+    let hero = background.pop();
     this.unlocked = this.playerData.unlocks[hero];
     this.unlockable = this.heroData[hero].unlockable;
+    return hero;
   }
 });

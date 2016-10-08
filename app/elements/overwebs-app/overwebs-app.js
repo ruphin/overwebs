@@ -1,8 +1,13 @@
-// performance logging
-window.performance && performance.mark && performance.mark('overwebs-app - before register');
+let launchIntoFullscreen = (element) => {
+  let requestMethod = element.requestFullscreen || element.mozRequestFullScreen ||
+                      element.webkitRequestFullscreen || element.msRequestFullscreen;
+  if (requestMethod) {
+    requestMethod.call(element);
+  }
+  // Cute, but I need F11
+}
 
 Polymer({
-
   is: 'overwebs-app',
 
   properties: {
@@ -35,6 +40,12 @@ Polymer({
       setTimeout(() => { this._routeChanged(newRoute, oldRoute)},0);
       return;
     }
+
+    // TODO: Move to /main without reloading
+    if (newRoute.path == '/') {
+      window.location.href = "/main"
+    }
+
     // Remove initial '/' in the route path
     oldRoute = oldRoute && oldRoute.path.slice(1)
     newRoute = newRoute && newRoute.path.slice(1)
@@ -81,7 +92,7 @@ Polymer({
     // Lets just work on the background switching logic for now and figure out how to control it later
 
     // Lazy load any new pages we are visiting that haven't been loaded yet
-    if (newRoute != '') {
+    if (newRoute != '' && newRoute != 'secret') {
       let newRouteElement = this._routes[newRoute].tagName.toLowerCase()
       newPage = this.resolveUrl('../' + newRouteElement + '/' + newRouteElement + '.html')
       this.importHref(newPage, null, function() {
