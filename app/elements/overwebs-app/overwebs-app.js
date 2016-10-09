@@ -1,12 +1,3 @@
-let launchIntoFullscreen = (element) => {
-  let requestMethod = element.requestFullscreen || element.mozRequestFullScreen ||
-                      element.webkitRequestFullscreen || element.msRequestFullscreen;
-  if (requestMethod) {
-    requestMethod.call(element);
-  }
-  // Cute, but I need F11
-}
-
 Polymer({
   is: 'overwebs-app',
 
@@ -35,20 +26,25 @@ Polymer({
   },
 
   _routeChanged: function(newRoute, oldRoute) {
-    // This is here because some browsers call _routeChanged before 'ready'
+    // Some browsers call `_routeChanged` before `ready`.
+    // If this happens, `this._routes` is still empty.
+    // In that case, simply defer the call to `_routeChanged`.
     if (Object.keys(this._routes).length === 0) {
-      setTimeout(() => { this._routeChanged(newRoute, oldRoute)},0);
+      setTimeout(() => { this._routeChanged(newRoute, oldRoute) }, 0);
       return;
-    }
-
-    // TODO: Move to /main without reloading
-    if (newRoute.path == '/') {
-      window.location.href = "/main"
     }
 
     // Remove initial '/' in the route path
     oldRoute = oldRoute && oldRoute.path.slice(1)
     newRoute = newRoute && newRoute.path.slice(1)
+
+    // TODO: Find a better solution for this.
+    if (newRoute === '') {
+      newRoute = 'main'
+    }
+    if (oldRoute === '') {
+      oldRoute = 'main'
+    }
 
     if (newRoute === "exit-game") {
       this._showExitBanner();
@@ -82,17 +78,9 @@ Polymer({
 
     // Notify the background element that we changed route
     this.$.background.page = newRoute
-    // Should individual 'page' elements do this?
-    // Ideally the background element does both the video and static background loading
-    // But to do that it needs to know what page it's on
-    // What if someone doesn't use the whole app, but does use one page, and wants background with it
-    // Ideally they'd just use the page element, and the background element
-    // The background element should also be usable independently
-    // We need this to work independently from the 'app' element if we want that.
-    // Lets just work on the background switching logic for now and figure out how to control it later
 
     // Lazy load any new pages we are visiting that haven't been loaded yet
-    if (newRoute != '' && newRoute != 'secret') {
+    if (newRoute != 'main' && newRoute != 'secret') {
       let newRouteElement = this._routes[newRoute].tagName.toLowerCase()
       newPage = this.resolveUrl('../' + newRouteElement + '/' + newRouteElement + '.html')
       this.importHref(newPage, null, function() {

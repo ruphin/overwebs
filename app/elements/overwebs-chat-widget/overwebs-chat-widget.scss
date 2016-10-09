@@ -1,13 +1,3 @@
-@font-face {
-    font-family: chat-widget-helvetica;
-    src: url(/fonts/Helvetica.ttf);
-}
-
-@font-face {
-    font-family: chat-widget-futura;
-    src: url(/fonts/Futura.ttf);
-}
-
 :host {
   position: absolute;
   bottom: calc(54 / 25.6 * 1vw);

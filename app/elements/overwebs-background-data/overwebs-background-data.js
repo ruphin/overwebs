@@ -181,19 +181,23 @@ Polymer({
   },
 
   ready: function () {
-    // index all options
+    // index all possible backgroundSets
     let index = this._index(backgroundSets);
-    let backgroundLocation;
+
+    // If we want to select a specific backgroundSet
     if (this.select) {
-      // Choose a specific background
-      backgroundLocation = index[0] // TODO
-    } else {
-      // Choose a random background
-      backgroundLocation = index[Math.floor(Math.random() * index.length)];
+      // Treat `this.select` as a literal string to match
+      let selectRegex = new RegExp(this.select.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      // Limit our options to backgroundSets that match our selection
+      index = index.filter((i) => { return selectRegex.test(i); })
     }
 
+    // Choose a random background from the selected options
+    let backgroundLocation = index[Math.floor(Math.random() * index.length)];
+
+    // We weren't able to select anything
     if (!backgroundLocation) {
-      // We weren't able to select anything
+      console.warn("Could not select a backgroundSet");
       return;
     }
 

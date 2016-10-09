@@ -76,7 +76,6 @@ Polymer({
 
   // This is all good
   _transition: function (target) {
-    console.log(target)
     // If we are on low bandwith mode, skip transitions
     if (this.lowBandwidth && this.backgrounds[target.id].transition) {
       this._transition(this._backgroundElements[this.backgrounds[target.id].transition]);
@@ -107,7 +106,6 @@ Polymer({
         target.preload = "auto";
         target.load();
       }
-      console.log("PLAYING")
       target.play();
     }
 

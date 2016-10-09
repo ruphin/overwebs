@@ -1,14 +1,3 @@
-@font-face {
-    font-family: play-page-noodle;
-    src: url(/fonts/BigNoodleTooOblique.ttf);
-}
-
-@font-face {
-    font-family: play-page-futura;
-    src: url(/fonts/Futura.ttf);
-}
-
-
 :host {
   display: block;
   position: relative;
@@ -96,4 +85,3 @@
     box-shadow: 0 0 0 0.14vw #FFFFFF, inset 0 0 0 0.04vw #FFFFFF;
   }
 }
-

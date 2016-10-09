@@ -6,10 +6,10 @@ Polymer({
       notify: true,
       readOnly: true,
       value: {
-        name: 'Urugard',
-        level: 56,
+        name: 'Ruphin',
+        level: 76,
         prestige: 1,
-        avatar: '0x0250000000000B44',
+        avatar: '0x02500000000008E8',
         unlocks: {
           ana: 7,
           bastion: 23,

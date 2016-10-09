@@ -1,13 +1,25 @@
 <link rel="import" href="../../vendor/polymer/polymer.html">
 <link rel="import" href="overwebs-gallery-hero-style.html">
 
+<style media="screen">
+  @font-face {
+    font-family: gallery-hero-noodle;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+
+  @font-face {
+    font-family: gallery-hero-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+</style>
+
 <dom-module id="overwebs-gallery-hero">
   <template>
     <style include="overwebs-gallery-hero-style"></style>
     <div id="avatar"></div>
     <div id="name">[[name]]</div>
-    <div class="progress"><div id="completion"></div></div><!-- 
- --><span class="unlocked">[[unlocked]]</span><!-- 
+    <div class="progress"><div id="completion"></div></div><!--
+ --><span class="unlocked">[[unlocked]]</span><!--
  --><span class="unlockable">/[[unlockable]]</span>
   </template>
   <script type="text/javascript" src="overwebs-gallery-hero.js"></script>

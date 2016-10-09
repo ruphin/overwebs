@@ -1,13 +1,3 @@
-@font-face {
-  font-family: futura;
-  src: url(/fonts/Futura.ttf);
-}
-
-@font-face {
-    font-family: helvetica;
-    src: url(/fonts/Helvetica.ttf);
-}
-
 :host {
   display: flex;
   position: absolute;
@@ -44,7 +34,7 @@
   font-size: calc(20 / 25.6 * 1vw);
   margin-top: 0.15625vw;
   letter-spacing: calc(0.3 / 25.6 * 1vw);;
-  font-family: helvetica;
+  font-family: player-widget-helvetica;
   text-transform: uppercase;
 }
 
@@ -61,7 +51,7 @@
 .level {
   padding-top: calc(1 / 25.6 * 1vw);
   font-size: calc(16.5 / 25.6 * 1vw);
-  font-family: futura;
+  font-family: player-widget-futura;
   text-transform: uppercase;
   color: black;
   text-shadow: calc(-1 / 25.6 * 1vw) 0 #BB8F86, 0 calc(-1 / 25.6 * 1vw) #BB8F86, calc(1 / 25.6 * 1vw) 0 #BB8F86, 0 calc(1 / 25.6 * 1vw) #BB8F86;
