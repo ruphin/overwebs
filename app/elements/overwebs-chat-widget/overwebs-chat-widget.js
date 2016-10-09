@@ -33,6 +33,35 @@ Polymer({
       event.stopPropagation();
       event.preventDefault();
     }
+
+    // DEMO PURPOSES
+    this.$.spam1.onclick = (event) => {
+      setTimeout(() => {
+        this.postMessage("Guy1", "general", "What's good fam?");
+      }, 1000);
+      setTimeout(() => {
+        this.postMessage("Guy2", "general", "Yolo");
+      }, 2000);
+      setTimeout(() => {
+        this.postMessage("Guy3", "general", "Spam");
+      }, 4000);
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+    this.$.spam2.onclick = (event) => {
+      setTimeout(() => {
+        this.postMessage("Guy1", "general", "What's good fam?");
+      }, 1000);
+      setTimeout(() => {
+        this.postMessage("Guy2", "general", "Yolo");
+      }, 2000);
+      setTimeout(() => {
+        this.postMessage("Guy3", "general", "Spam");
+      }, 4000);
+      event.stopPropagation();
+      event.preventDefault();
+    }
   },
 
   postMessage: function(author, channel, message) {
