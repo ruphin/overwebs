@@ -66,6 +66,7 @@ Polymer({
   _onSubmit: function() {
     let message = this.$.input.value;
     if (nonPrintable.test(message)) {
+      document.activeElement.blur();
       return;
     }
     this.postMessage(this.player.name, this._channel, message);
