@@ -37,28 +37,28 @@ Polymer({
     // DEMO PURPOSES
     this.$.spam1.onclick = (event) => {
       setTimeout(() => {
-        this.postMessage("Guy1", "general", "What's good fam?");
-      }, 1000);
+        this.postMessage("Oxmaster", "general", "What up what up");
+      }, 5000);
       setTimeout(() => {
-        this.postMessage("Guy2", "general", "Yolo");
-      }, 2000);
+        this.postMessage("Tracer365", "general", "Boring....");
+      }, 9000);
       setTimeout(() => {
-        this.postMessage("Guy3", "general", "Spam");
-      }, 4000);
+        this.postMessage("Oxmaster", "general", "Nobody here?");
+      }, 60000);
       event.stopPropagation();
       event.preventDefault();
     }
 
     this.$.spam2.onclick = (event) => {
       setTimeout(() => {
-        this.postMessage("Guy1", "general", "What's good fam?");
-      }, 1000);
+        this.postMessage("Oxmaster", "general", "What's good fam");
+      }, 3000);
       setTimeout(() => {
-        this.postMessage("Guy2", "general", "Yolo");
-      }, 2000);
+        this.postMessage("d-snp", "general", "What's going on in this thread?");
+      }, 7000);
       setTimeout(() => {
-        this.postMessage("Guy3", "general", "Spam");
-      }, 4000);
+        this.postMessage("John", "general", "Anyone for competetive queue?");
+      }, 60000);
       event.stopPropagation();
       event.preventDefault();
     }
