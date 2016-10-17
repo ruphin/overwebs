@@ -161,26 +161,35 @@ let backgroundSets = {
   },
 }
 
-Polymer({
-  is: 'overwebs-background-data',
-  properties: {
-    backgrounds: {
-      type: Object,
-      notify: true,
-      readOnly: true,
-      value: {},
-    },
-    backgroundSelection: {
-      type: Object,
-      notify: true,
-      readOnly: true,
-    },
-    select: {
-      type: String,
+class OverwebsBackgroundData extends Polymer.Element {
+  static get is() { return 'overwebs-background-data' }
+  static get config() {
+    return {
+      properties: {
+        backgrounds: {
+          type: Object,
+          notify: true,
+          readOnly: true,
+          value: {},
+        },
+        backgroundSelection: {
+          type: Array,
+          notify: true,
+          readOnly: true,
+        },
+        select: {
+          type: String,
+        }
+      }
     }
-  },
+  }
 
-  ready: function () {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     // index all possible backgroundSets
     let index = this._index(backgroundSets);
 
@@ -202,10 +211,11 @@ Polymer({
     }
 
     // Remove the trailing slash
-    this._setBackgroundSelection(backgroundLocation.split('/').slice(0, -1));
+    this._backgroundSelection = backgroundLocation.split('/').slice(0, -1);
+    this.setAttribute('backgroundSelection', this._backgroundSelection)
 
     // Get the data object from the backgroundSets
-    let backgroundData = this.backgroundSelection.reduce((object, key) => { return object[key]; }, backgroundSets);
+    let backgroundData = this._backgroundSelection.reduce((object, key) => { return object[key]; }, backgroundSets);
 
     // Ok, we have selected backgroundData. Now we need to dynamically attach
     // video source locations, if those have not been added yet
@@ -214,15 +224,23 @@ Polymer({
       // Or if the background needs to mirror another one,
       // we don't have to do anything
       if (!backgroundData[background].mirror && !backgroundData[background].video && !backgroundData[background].image) {
-        backgroundData[background].video = this.resolveUrl(backgroundLocation + background + '.mp4');
-        backgroundData[background].image = this.resolveUrl(backgroundLocation + background + '.jpg');
+        // 2.0 WORKAROUND
+        // backgroundData[background].video = this.resolveUrl(backgroundLocation + background + '.mp4');
+        // backgroundData[background].image = this.resolveUrl(backgroundLocation + background + '.jpg');
+        backgroundData[background].video = backgroundLocation + background + '.mp4';
+        backgroundData[background].image = backgroundLocation + background + '.jpg';
       }
     }
 
-    this._setBackgrounds(backgroundData);
-  },
+    console.log('bg', this._background);
+    console.log('bgattr', this.getAttribute('background'))
+    this._background = backgroundData;
+    this.setAttribute('background', this._background)
+    console.log('bg', this._background);
+    console.log('bgattr', this.getAttribute('background'))
+  }
 
-  _index: function (tree) {
+  _index(tree) {
     let result = [];
     for (let property in tree) {
       if (tree[property].transition || tree[property].preload) {
@@ -232,4 +250,6 @@ Polymer({
     }
     return result;
   }
-});
+}
+
+customElements.define(OverwebsBackgroundData.is, OverwebsBackgroundData);

@@ -1,4 +1,4 @@
-<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../../vendor/polymer/polymer-element.html">
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
 <link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
 <link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
@@ -21,10 +21,10 @@
   <template>
     <style include="overwebs-main-menu-style"></style>
     <div class="main-menu">
-      <content select=".main"></content>
+      <slot name="main"></slot>
     </div>
     <div class="sub-menu">
-      <content select=".sub"></content>
+      <slot name="sub"></slot>
     </div>
   </template>
   <script type="text/javascript" src="overwebs-main-menu.js"></script>

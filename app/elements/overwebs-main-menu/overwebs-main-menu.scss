@@ -8,7 +8,7 @@ a {
   margin-top: 15.85vw;
   // margin-top: 13.42vw;
   width: 30vw;
-  ::content a {
+  ::slotted(a) {
     padding-left: 2.5175vw;
     margin-top: 0.3675vw;
     position: relative;
@@ -47,7 +47,7 @@ a {
   align-items: flex-start;
   margin-top: -0.05vw;
   width: 30vw;
-  ::content a {
+  ::slotted(a) {
     margin-top: 0.5125vw;
     padding-left: 2.5825vw;
     position: relative;

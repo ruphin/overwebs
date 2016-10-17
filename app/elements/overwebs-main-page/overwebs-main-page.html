@@ -1,4 +1,4 @@
-<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../../vendor/polymer/polymer-element.html">
 <link rel="import" href="../overwebs-main-menu/overwebs-main-menu.html">
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
 <link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
@@ -26,15 +26,15 @@
     <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
     <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <overwebs-main-menu>
-      <a href="/play" content="Play" class="main">Play</a>
+      <a href="/play" content="Play" slot="main">Play</a>
       <!-- <a href="" class="disabled" content="Searching" class="main">Searching</a> -->
-      <a href="/training" content="Training" class="main">Training</a>
-      <a href="/hero-gallery" content="Hero Gallery" class="main">Hero Gallery</a>
-      <a href="/loot" content="Loot Box" class="main">Loot Box</a>
-      <a href="/social" content="Social" class="sub">Social</a>
-      <a href="/career" content="Career Profile" class="sub">Career Profile</a>
-      <a href="/secret" content="Options" class="sub">Options</a>
-      <a href="#exit-game" content="Exit Game" class="sub">Exit Game</a>
+      <a href="/training" content="Training" slot="main">Training</a>
+      <a href="/hero-gallery" content="Hero Gallery" slot="main">Hero Gallery</a>
+      <a href="/loot" content="Loot Box" slot="main">Loot Box</a>
+      <a href="/social" content="Social" slot="sub">Social</a>
+      <a href="/career" content="Career Profile" slot="sub">Career Profile</a>
+      <a href="/secret" content="Options" slot="sub">Options</a>
+      <a href="#exit-game" content="Exit Game" slot="sub">Exit Game</a>
     </overwebs-main-menu>
     <div class="hero">
       <div class="nameShadow">{{hero}}</div>

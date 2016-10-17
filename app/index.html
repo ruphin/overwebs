@@ -30,8 +30,6 @@
 <overwebs-app></overwebs-app>
 
 <script>
-  Polymer = {lazyRegister: false, dom: 'shady'};
-
   (function() {
     if ('registerElement' in document
         && 'import' in document.createElement('link')
@@ -39,15 +37,25 @@
       // platform is good!
     } else {
       // polyfill the platform!
-      var e = document.createElement('script');
-      e.src = '/vendor/webcomponentsjs/webcomponents-lite.min.js';
+      let e = document.createElement('script');
+      e.src = '/vendor/webcomponentsjs/webcomponents-lite.js';
+      document.body.appendChild(e);
+    }
+
+    // 2.0 WORKAROUND
+    if ('customElements' in window) {
+      // We got it
+    } else {
+      // Polyfill I guess?
+      let e = document.createElement('script');
+      e.src = '/vendor/custom-elements/custom-elements.min.js';
       document.body.appendChild(e);
     }
   })();
 </script>
 
 <!-- Evil below -->
-<script>
+<!-- <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -56,4 +64,4 @@
   ga('send', 'pageview');
   ga('require', 'urlChangeTracker');
 </script>
-<script async src='/vendor/autotrack/autotrack.js'></script>
+<script async src='/vendor/autotrack/autotrack.js'></script> -->

@@ -1,22 +1,27 @@
-Polymer({
-  is: 'overwebs-background',
-  properties: {
-    backgrounds: {
-      type: Object,
-      observer: '_setBackgrounds'
-    },
-    lowBandwidth: {
-      type: Boolean,
-      value: false,
-    },
-    page: {
-      type: String,
-      observer: "_loadPage",
+class OverwebsBackground extends Polymer.Element {
+  static get is() { return 'overwebs-background' }
+  static get config() {
+    return {
+      properties: {
+        backgrounds: {
+          type: Object,
+          observer: '_setBackgrounds'
+        },
+        lowBandwidth: {
+          type: Boolean,
+          value: false,
+        },
+        page: {
+          type: String,
+          observer: "_loadPage",
+        }
+      }
     }
-  },
+  }
 
-  _setBackgrounds: function(backgrounds) {
+  _setBackgrounds(backgrounds) {
     this._backgroundElements = {}
+    console.log('backgrounds', backgrounds)
 
     // // Create a video element for each background video from the dataset
     for (let section in backgrounds) {
@@ -38,12 +43,12 @@ Polymer({
         this._backgroundElements[section] = this._backgroundElements[backgrounds[section].mirror];
       }
     }
-  },
+  }
 
   // This is probably not how we want to handle this.
   // We need some way to listen to what page we're going to
   // Perhaps individual pages should trigger events when they are opened?
-  _loadPage: function (newPage, oldPage) {
+  _loadPage(newPage, oldPage) {
     // Return if no backgrounds are loaded
     if (!this.backgrounds) {
       console.warn("Attempting to load page background, but background data is not loaded");
@@ -72,10 +77,10 @@ Polymer({
         this._currentlyShowing.currentTime = 0;
       }
     }
-  },
+  }
 
   // This is all good
-  _transition: function (target) {
+  _transition(target) {
     // If we are on low bandwith mode, skip transitions
     if (this.lowBandwidth && this.backgrounds[target.id].transition) {
       this._transition(this._backgroundElements[this.backgrounds[target.id].transition]);
@@ -154,4 +159,6 @@ Polymer({
       target.addEventListener("ended", this._endedListener);
     }
   }
-});
+}
+
+customElements.define(OverwebsBackground.is, OverwebsBackground);

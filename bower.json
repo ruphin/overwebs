@@ -6,8 +6,8 @@
   ],
   "private": true,
   "dependencies": {
-    "polymer": "polymer/polymer#^1.4.0",
-    "app-route": "PolymerElements/app-route#^0.9.2",
+    "polymer": "Polymer/polymer#2.0-preview",
+    "app-route": "PolymerElements/app-route#2.0-preview",
     "autotrack": "^1.0.3"
   },
   "devDependencies": {}
