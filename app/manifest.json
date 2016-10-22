@@ -1,0 +1,17 @@
+{
+  "name": "Overwebs",
+  "short_name": "Overwebs",
+  "start_url": "/",
+  "orientation": "landscape",
+  "display": "fullscreen",
+  "description": "Overwatch for the Web",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "icons": [
+    {
+      "src": "images/app.png",
+      "sizes": "400x400",
+      "type": "image/png"
+    }
+  ]
+}
