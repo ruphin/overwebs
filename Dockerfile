@@ -1,3 +1,3 @@
-FROM nginx:alpine
+FROM ruphin/webserve
 
 COPY dist /usr/share/nginx/html
