@@ -23,6 +23,6 @@ Polymer({
     let hero = background.pop();
     this.unlocked = this.playerData.unlocks[hero];
     this.unlockable = this.heroData[hero].unlockable;
-    return hero;
+    return this.heroData[hero].name;
   }
 });
