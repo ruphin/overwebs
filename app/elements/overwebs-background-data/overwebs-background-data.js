@@ -1,4 +1,84 @@
 let backgroundSets = {
+  volskaya: {
+    widowmaker: {
+      to_main: {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      main: {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+      },
+      play: {
+        preload: ['play_to_main'],
+      },
+      play_to_main: {
+        transition: 'main',
+      },
+      to_training: {
+        mirror: 'to_play'
+      },
+      training: {
+        mirror: 'training'
+      },
+      training_to_main: {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+    }
+  },
+  gibraltar: {
+    winston: {
+      to_main: {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      main: {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+      },
+      play: {
+        preload: ['play_to_main'],
+      },
+      play_to_main: {
+        transition: 'main',
+      },
+      to_training: {
+        mirror: 'to_play'
+      },
+      training: {
+        mirror: 'training'
+      },
+      training_to_main: {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+    }
+  },
   eichenwalde: {
     roadhog: {
       to_main: {
