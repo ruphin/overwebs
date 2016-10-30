@@ -1,4 +1,138 @@
 let backgroundSets = {
+  halloween: {
+    reaper: {
+      'to_main': {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'main': {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+        video: 'halloween/shared/to_play.mp4',
+        image: 'halloween/shared/to_play.jpg',
+      },
+      'play': {
+        preload: ['play_to_main'],
+        video: 'halloween/shared/play.mp4',
+        image: 'halloween/shared/play.jpg',
+      },
+      'play_to_main': {
+        transition: 'main',
+      },
+      'to_training': {
+        mirror: 'to_play'
+      },
+      'training': {
+        mirror: 'training'
+      },
+      'training_to_main': {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+        video: 'halloween/shared/to_hero-gallery.mp4',
+        image: 'halloween/shared/to_hero-gallery.jpg',
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+        video: 'halloween/shared/hero-gallery.mp4',
+        image: 'halloween/shared/hero-gallery.jpg',
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+    },
+    mercy: {
+      'to_main': {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'main': {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+        video: 'halloween/shared/to_play.mp4',
+        image: 'halloween/shared/to_play.jpg',
+      },
+      'play': {
+        preload: ['play_to_main'],
+        video: 'halloween/shared/play.mp4',
+        image: 'halloween/shared/play.jpg',
+      },
+      'play_to_main': {
+        transition: 'main',
+      },
+      'to_training': {
+        mirror: 'to_play'
+      },
+      'training': {
+        mirror: 'training'
+      },
+      'training_to_main': {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+        video: 'halloween/shared/to_hero-gallery.mp4',
+        image: 'halloween/shared/to_hero-gallery.jpg',
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+        video: 'halloween/shared/hero-gallery.mp4',
+        image: 'halloween/shared/hero-gallery.jpg',
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+    }
+  },
+  hollywood: {
+    tracer: {
+      'to_main': {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'main': {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+      },
+      'play': {
+        preload: ['play_to_main'],
+      },
+      'play_to_main': {
+        transition: 'main',
+      },
+      'to_training': {
+        mirror: 'to_play'
+      },
+      'training': {
+        mirror: 'training'
+      },
+      'training_to_main': {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+    }
+  },
   volskaya: {
     widowmaker: {
       to_main: {
@@ -257,10 +391,20 @@ Polymer({
     },
     select: {
       type: String,
+      observer: '_selectChanged'
     }
   },
 
+  _selectChanged: function (value) {
+    console.log("Select changed: ", value);
+      this._selectBackgrounds();
+  },
+
   ready: function () {
+    this._selectBackgrounds();
+  },
+
+  _selectBackgrounds() {
     // index all possible backgroundSets
     let index = this._index(backgroundSets);
 
@@ -269,7 +413,7 @@ Polymer({
       // Treat `this.select` as a literal string to match
       let selectRegex = new RegExp(this.select.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
       // Limit our options to backgroundSets that match our selection
-      index = index.filter((i) => { return selectRegex.test(i); })
+      index = index.filter((i) => { return selectRegex.test(i); });
     }
 
     // Choose a random background from the selected options
@@ -281,7 +425,8 @@ Polymer({
       return;
     }
 
-    // Remove the trailing slash
+    // TODO: This breaks if you set it again by changing select
+    // Set the backgroundSelection
     this._setBackgroundSelection(backgroundLocation.split('/').slice(0, -1));
 
     // Get the data object from the backgroundSets
@@ -290,12 +435,14 @@ Polymer({
     // Ok, we have selected backgroundData. Now we need to dynamically attach
     // video source locations, if those have not been added yet
     for (let background in backgroundData) {
-      // If the background already has defined a video or image,
-      // Or if the background needs to mirror another one,
+      // If the background needs to mirror another one,
       // we don't have to do anything
-      if (!backgroundData[background].mirror && !backgroundData[background].video && !backgroundData[background].image) {
-        backgroundData[background].video = this.resolveUrl(backgroundLocation + background + '.mp4');
-        backgroundData[background].image = this.resolveUrl(backgroundLocation + background + '.jpg');
+      if (!backgroundData[background].mirror) {
+        // Use the given sources if they are defined, otherwise infer the source
+        let backgroundVideo = backgroundData[background].video || `${backgroundLocation}${background}.mp4`;
+        let backgroundImage = backgroundData[background].image || `${backgroundLocation}${background}.jpg`;
+        backgroundData[background].video = this.resolveUrl(backgroundVideo);
+        backgroundData[background].image = this.resolveUrl(backgroundImage);
       }
     }
 
