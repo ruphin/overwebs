@@ -2,6 +2,8 @@
 <link rel="import" href="overwebs-chat-widget-style.html">
 <link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
 <link rel="import" href="../overwebs-keybinding/overwebs-keybinding.html">
+<link rel="import" href="../overwebs-chat-interaction/overwebs-chat-interaction.html">
+<link rel="import" href="../../vendor/polymerfire/firebase-app.html">
 
 <style media="screen">
   @font-face {
@@ -34,6 +36,13 @@
     <div class="entryBox">
       <span id="channel">[[[_channel]]]: </span><input id="input" class="input" type="text" name="name" value="" autocomplete="off">
     </div>
+    <overwebs-chat-interaction id="chatInteraction"></overwebs-chat-interaction>
+    <firebase-app
+      app="{{firebase}}"
+      auth-domain="overwebs-86c53.firebaseapp.com"
+      database-url="https://overwebs-86c53.firebaseio.com"
+      api-key="AIzaSyD-FCqLAtCYYCitKmErFWT2xEQyHk7fhBU">
+    </firebase-app>
   </template>
   <script type="text/javascript" src="overwebs-chat-widget.js"></script>
 </dom-module>
