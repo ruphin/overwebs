@@ -97,9 +97,9 @@ Polymer({
     this.$.chatInteraction.messagePosted()
     //this.postMessage(this.player.name, this._channel, message);
     this.postMessage('You', this._channel, message);
+    this.$.input.value = "";
     // Push any messages posted to firebase
     this.firebase.database().ref(`messages/${this.firebaseUser}`).push(message);
-    this.$.input.value = "";
 
   },
 
