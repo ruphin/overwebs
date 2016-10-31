@@ -37,24 +37,25 @@ Polymer({
     this.addEventListener('post-message', (e) => {
       let m = e.detail;
       this.postMessage(m.author, m.channel, m.message);
-    })
+    });
 
     // Check if this user has previously used the app on this device.
     // If so, re-login with his old ID
     // Otherwise,
     let cookieID = document.cookie.replace(/(?:(?:^|.*;\s*)firebaseID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     if (cookieID) {
+      console.log(this.firebase)
       // This user already has a login. Signin with this existing login
       this.firebase.auth().signInWithEmailAndPassword(`${cookieID}@ruph.in`, cookieID)
       .then((e) => { this.firebaseUser = e.uid; }) // Store his uid if login succesful
-      .catch((e) => { console.log(e) }); // Log error
+      .catch((e) => { console.log(e); }); // Log error
     } else {
       // This user has no existing login. Generate a random one, and log him in with that
       let randomID = Math.random().toString(36).slice(2,-10) // Generate some random alphanumerics for his ID
       document.cookie = `firebaseID=${randomID}` // Store his ID in a cookie
       this.firebase.auth().createUserWithEmailAndPassword(`${randomID}@ruph.in`, randomID)
       .then((e) => { this.firebaseUser = e.uid; }) // Store his uid if login succesful
-      .catch((e) => { console.log(e) }); // Log error
+      .catch((e) => { console.log(e); }); // Log error
     }
   },
 
