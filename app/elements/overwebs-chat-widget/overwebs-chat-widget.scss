@@ -4,8 +4,6 @@
   left: calc(54 / 25.6 * 1vw);
   font-family: chat-widget-helvetica;
   font-size: calc(25 / 25.6 * 1vw);
-  color: #FFFFFF;
-  line-height: 1.4;
   display: flex;
   flex-flow: column;
   align-items: flex-start;
@@ -25,6 +23,9 @@
     height: calc(120 / 25.6 * 1vw);
     overflow-y: scroll;
     overflow-x: none;
+    color: #FFFFFF;
+    line-height: 1.4;
+    text-shadow: calc(1 / 25.6 * 1vw) calc(1 / 25.6 * 1vw) 0 #000;
     &::-webkit-scrollbar {
       position: absolute;
       margin-right: 100px;
@@ -93,6 +94,9 @@
     width: calc(534 / 25.6 * 1vw);
     height: 0;
     overflow: hidden;
+    color: #FFFFFF;
+    line-height: 1.4;
+    text-shadow: calc(1 / 25.6 * 1vw) calc(1 / 25.6 * 1vw) 0 #000;
   }
 
   .input {
@@ -107,6 +111,7 @@
     font-family: chat-widget-helvetica;
     font-size: calc(25 / 25.6 * 1vw);
     color: #FFFFFF;
+    text-shadow: calc(1 / 25.6 * 1vw) calc(1 / 25.6 * 1vw) 0 #000;
     line-height: 1.4;
 
     flex-grow: 1;
