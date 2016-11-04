@@ -2,7 +2,7 @@
   position: absolute;
   bottom: calc(54 / 25.6 * 1vw);
   left: calc(54 / 25.6 * 1vw);
-  font-family: chat-widget-helvetica;
+  font-family: arial; // This should be some form of Helvetica
   font-size: calc(25 / 25.6 * 1vw);
   display: flex;
   flex-flow: column;
@@ -25,17 +25,17 @@
     overflow-x: none;
     color: #FFFFFF;
     line-height: 1.4;
-    text-shadow: calc(1 / 25.6 * 1vw) calc(1 / 25.6 * 1vw) 0 #000;
+    text-shadow: calc(.6 / 25.6 * 1vw) calc(.8 / 25.6 * 1vw) #000;
     &::-webkit-scrollbar {
       position: absolute;
       margin-right: 100px;
       width: calc(14 / 25.6 * 1vw);
     }
     &::-webkit-scrollbar-track-piece {
-      background-image: linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, rgba(0,0,0,.05) 40%, rgba(0,0,0,.05) 60%, rgba(0,0,0,0) 60%, rgba(0,0,0,0)); // Time for magic
+      background-image: none;
     }
     &::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.4);
+      background: none;
       border-radius: calc(64 / 25.6 * 1vw);
       width: calc(14 / 25.6 * 1vw);
       height: calc(14 / 25.6 * 1vw);
@@ -47,7 +47,7 @@
     direction: ltr;
     min-height: calc(120 / 25.6 * 1vw);
     border-radius: calc(5 / 25.6 * 1vw);
-    font-family: chat-widget-helvetica;
+    font-family: arial; // This should be some form of Helvetica
     display: flex;
     flex-direction: column-reverse;
   }
@@ -96,7 +96,7 @@
     overflow: hidden;
     color: #FFFFFF;
     line-height: 1.4;
-    text-shadow: calc(1 / 25.6 * 1vw) calc(1 / 25.6 * 1vw) 0 #000;
+    text-shadow: calc(.5 / 25.6 * 1vw) calc(.5 / 25.6 * 1vw) 0 #000;
   }
 
   .input {
@@ -108,10 +108,10 @@
     // end Screw browsers
 
     // This needs to be redefined because browsers love styling inputs
-    font-family: chat-widget-helvetica;
+    font-family: arial; // This should be some form of Helvetica
     font-size: calc(25 / 25.6 * 1vw);
     color: #FFFFFF;
-    text-shadow: calc(1 / 25.6 * 1vw) calc(1 / 25.6 * 1vw) 0 #000;
+    text-shadow: calc(.5 / 25.6 * 1vw) calc(.5 / 25.6 * 1vw) 0 #000;
     line-height: 1.4;
 
     flex-grow: 1;
@@ -129,13 +129,10 @@
     .chatBox {
       height: calc(284 / 25.6 * 1vw);
       &::-webkit-scrollbar-track-piece {
-        background-image: linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, rgba(0,0,0,.1) 40%, rgba(0,0,0,.1) 60%, rgba(0,0,0,0) 60%, rgba(0,0,0,0)); // Time for magic
+        background-image: linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,0) 35%, rgba(0,0,0,.05) 35%, rgba(0,0,0,.05) 65%, rgba(0,0,0,0) 65%, rgba(0,0,0,0)); // Time for magic
       }
       &::-webkit-scrollbar-thumb {
         background: rgba(255,255,255,0.8);
-        border-radius: calc(64 / 25.6 * 1vw);
-        width: calc(14 / 25.6 * 1vw);
-        height: calc(14 / 25.6 * 1vw);
       }
     }
     .chatShadow {

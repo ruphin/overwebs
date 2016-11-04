@@ -44,7 +44,6 @@ Polymer({
     // Otherwise,
     let cookieID = document.cookie.replace(/(?:(?:^|.*;\s*)firebaseID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     if (cookieID) {
-      console.log(this.firebase)
       // This user already has a login. Signin with this existing login
       this.firebase.auth().signInWithEmailAndPassword(`${cookieID}@ruph.in`, cookieID)
       .then((e) => { this.firebaseUser = e.uid; }) // Store his uid if login succesful
