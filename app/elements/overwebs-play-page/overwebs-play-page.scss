@@ -30,9 +30,11 @@
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: stretch;
+  margin-top: calc(3/25.6*1vw);
   .button {
-    margin-top: 0.46875vw;
+    margin-top: calc(3/25.6*1vw);
     height: 2.265625vw;
     line-height: 2.265625vw;
     font-family: play-page-noodle;
@@ -45,12 +47,13 @@
 
     &:not(.info) {
       flex-grow: 1;
+      min-width: 60%
     }
 
     &.info {
       height: 2.265625vw;
       width: 2.265625vw;
-      margin-right: 0.14vw;
+      margin-right: calc(3/25.6*1vw);
       background-color: rgba(117, 187, 232, 0.95);
       color: white;
       font-family: play-page-futura;

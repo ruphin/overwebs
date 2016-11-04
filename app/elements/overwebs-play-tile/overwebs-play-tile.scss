@@ -69,7 +69,7 @@
     // Ideally these tiles are configurable by json entirely
     .label {
       ::content .title {
-        font-size: 1.5vw;
+        calc(30/25.6*1vw)
       }
     }
   }
@@ -108,7 +108,7 @@
 }
 
 .label {
-  height: 4.6875vw;
+  height: calc(118/25.6*1vw);
   display: flex;
   justify-content: center;
   align-items: center;
