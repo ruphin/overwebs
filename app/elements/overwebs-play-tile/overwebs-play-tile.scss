@@ -69,7 +69,7 @@
     // Ideally these tiles are configurable by json entirely
     .label {
       ::content .title {
-        calc(30/25.6*1vw)
+        font-size: calc(44/25.6*1vw);
       }
     }
   }
