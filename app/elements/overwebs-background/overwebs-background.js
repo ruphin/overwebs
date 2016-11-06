@@ -11,22 +11,31 @@ Polymer({
     },
     page: {
       type: String,
-      observer: "_loadPage",
+      observer: "_pageChanged",
     }
   },
 
   _setBackgrounds: function(backgrounds) {
+    // Remove existing backgroundElements
+    if (this._backgroundElements) {
+      for (let videoElement in this._backgroundElements) {
+        // We need to check if the element exists, because one backgroundElement can mirror another, so it may already be removed.
+        this._backgroundElements[videoElement] && this._backgroundElements[videoElement].remove();
+      }
+    }
+
     this._backgroundElements = {}
 
-    // // Create a video element for each background video from the dataset
+    // Create a video element for each background video from the dataset
     for (let section in backgrounds) {
       if (!backgrounds[section].mirror) {
         let video = document.createElement('video');
         video.videoSource = backgrounds[section].video;
         video.posterSource = backgrounds[section].image;
         video.playsInline = true;
-        video.preload = "none"
-        video.id = section
+        video.preload = "none";
+        video.loop = !backgrounds[section].transition
+        video.id = section;
         video.classList.add("hidden");
         Polymer.dom(this.root).appendChild(video);
         this._backgroundElements[section] = video;
@@ -38,13 +47,11 @@ Polymer({
         this._backgroundElements[section] = this._backgroundElements[backgrounds[section].mirror];
       }
     }
+
+    this._pageChanged(this.page);
   },
 
-  // This is probably not how we want to handle this.
-  // We need some way to listen to what page we're going to
-  // Perhaps individual pages should trigger events when they are opened?
-  _loadPage: function (newPage, oldPage) {
-    // Return if no backgrounds are loaded
+  _pageChanged: function (newPage, oldPage) {
     if (!this.backgrounds) {
       console.warn("Attempting to load page background, but background data is not loaded");
       return;
@@ -64,14 +71,20 @@ Polymer({
     } else {
       console.warn("Page has no background data");
       if (this._currentlyShowing) {
-        this._currentlyShowing.classList.add("hidden");
-        this._currentlyShowing.removeEventListener("ended", this._endedListener);
-        // Pause only if playing?
-        this._currentlyShowing.pause();
-        this._currentlyShowing.loop = false;
-        this._currentlyShowing.currentTime = 0;
+        this._stop(this._currentlyShowing)
       }
     }
+  },
+
+  // Stop and hide the given video element.
+  // Also remove any pending transitions.
+  _stop(element) {
+    element.classList.add("hidden");
+    element.removeEventListener("ended", this._endedListener);
+    if (!element.paused) {
+      element.pause();
+    }
+    element.currentTime = 0;
   },
 
   // This is all good
@@ -87,15 +100,8 @@ Polymer({
     target.classList.remove("hidden");
 
     // Hide whatever we were previously showing
-    // Stop any pending transitions
-    // And stop playing video
     if (this._currentlyShowing && target !== this._currentlyShowing) {
-      this._currentlyShowing.classList.add("hidden");
-      this._currentlyShowing.removeEventListener("ended", this._endedListener);
-      // Pause only if playing?
-      this._currentlyShowing.pause();
-      this._currentlyShowing.loop = false;
-      this._currentlyShowing.currentTime = 0;
+      this._stop(this._currentlyShowing);
     }
 
     // If we're not low bandwidth mode, start playing
@@ -148,9 +154,6 @@ Polymer({
     // Either set up a transition to the next section, or enable looping on the current video
     if (this.backgrounds[target.id].transition) {
       this._endedListener = () => { this._transition(this._backgroundElements[this.backgrounds[target.id].transition]); };
-      target.addEventListener("ended", this._endedListener);
-    } else {
-      this._endedListener = () => { target.play(); target.addEventListener("ended", this._endedListener); };
       target.addEventListener("ended", this._endedListener);
     }
   }

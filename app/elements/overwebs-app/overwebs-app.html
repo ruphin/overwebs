@@ -15,11 +15,11 @@
 
     <app-location route="{{route}}"></app-location>
 
-    <overwebs-background-data backgrounds="{{backgrounds}}" background-selection="{{backgroundSelection}}"></overwebs-background-data>
+    <overwebs-background-data id="backgroundData" backgrounds="{{backgrounds}}" background-selection="{{backgroundSelection}}"></overwebs-background-data>
     <overwebs-background id="background" backgrounds="[[backgrounds]]"></overwebs-background>
 
     <div id="pages">
-      <a href="/main" route="secret" id="secret"></a>
+      <a href="/" route="secret" id="secret"></a>
       <overwebs-main-page route="main" background-selection="[[backgroundSelection]]"></overwebs-main-page>
       <overwebs-gallery-page route="hero-gallery"></overwebs-gallery-page>
       <overwebs-play-page route="play"></overwebs-play-page>
@@ -27,7 +27,7 @@
     </div>
 
     <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
-    <overwebs-chat-widget tabindex="32767" player="[[playerData]]"></overwebs-chat-widget>
+    <overwebs-chat-widget tabindex="-1" player="[[playerData]]"></overwebs-chat-widget>
 
   </template>
   <script type="text/javascript" src="overwebs-app.js"></script>

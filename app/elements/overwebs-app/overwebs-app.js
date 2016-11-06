@@ -34,6 +34,11 @@ Polymer({
       return;
     }
 
+    // I'm not sure if this belongs here. Maybe I need to extract the logic for this somehow and expose an API
+    if (newRoute.__queryParams && newRoute.__queryParams.background) {
+      this.$.backgroundData.select = newRoute.__queryParams.background;
+    }
+
     // Remove initial '/' in the route path
     oldRoute = oldRoute && oldRoute.path.slice(1)
     newRoute = newRoute && newRoute.path.slice(1)
@@ -44,16 +49,6 @@ Polymer({
     }
     if (oldRoute === '') {
       oldRoute = 'main'
-    }
-
-    if (newRoute === "exit-game") {
-      this._showExitBanner();
-      return;
-    }
-
-    if (oldRoute === "exit-game") {
-      this._hideExitBanner();
-      return;
     }
 
     // Hide the old page
@@ -88,15 +83,5 @@ Polymer({
         window.history.back();
       }, true);
     }
-  },
-
-  _showExitBanner: function() {
-    this.style.opacity = 0.5
-    console.log("Really Quit?")
-  },
-
-  _hideExitBanner: function() {
-    this.style.opacity = 1
-    console.log("Phew!!")
   },
 });
