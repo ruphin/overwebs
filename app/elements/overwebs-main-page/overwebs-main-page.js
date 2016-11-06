@@ -20,7 +20,7 @@ Polymer({
   },
 
   _hero: function (background) {
-    let hero = background.pop();
+    let hero = background.split('/').slice(0,-1).pop();
     this.unlocked = this.playerData.unlocks[hero];
     this.unlockable = this.heroData[hero].unlockable;
     return this.heroData[hero].name;
