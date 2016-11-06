@@ -10,145 +10,153 @@ Polymer({
           id: 'ana',
           name: 'Ana',
           unlockable: 59,
-          color: '#400A44'
+          color: '#400A44',
         },
         bastion: {
           id: 'bastion',
           name: 'Bastion',
           unlockable: 60,
-          color: '#1D2B14'
+          color: '#1D2B14',
         },
         dva: {
           id: 'dva',
           name: 'D.Va',
           unlockable: 60,
-          color: '#F93080'
+          color: '#F93080',
+          background: true,
         },
         genji: {
           id: 'genji',
           name: 'Genji',
           unlockable: 60,
-          color: '#32F600'
+          color: '#32F600',
         },
         hanzo: {
           id: 'hanzo',
           name: 'Hanzo',
           unlockable: 59,
-          color: '#706025'
+          color: '#706025',
         },
         junkrat: {
           id: 'junkrat',
           name: 'Junkrat',
           unlockable: 59,
-          color: '#F27000'
+          color: '#F27000',
         },
         lucio: {
           id: 'lucio',
           name: 'Lúcio',
           unlockable: 63,
-          color: '#238B02'
+          color: '#238B02',
         },
         mccree: {
           id: 'mccree',
           name: 'McCree',
           unlockable: 60,
-          color: '#640607'
+          color: '#640607',
         },
         mei: {
           id: 'mei',
           name: 'Mei',
           unlockable: 60,
-          color: '#1351E4'
+          color: '#1351E4',
         },
         mercy: {
           id: 'mercy',
           name: 'Mercy',
           unlockable: 60,
-          color: '#F5E269'
+          color: '#F5E269',
+          background: true,
         },
         pharah: {
           id: 'pharah',
           name: 'Pharah',
           unlockable: 61,
-          color: '#001984'
+          color: '#001984',
         },
         reaper: {
           id: 'reaper',
           name: 'Reaper',
           unlockable: 61,
-          color: '#1D0002'
+          color: '#1D0002',
+          background: true,
         },
         reinhardt: {
           id: 'reinhardt',
           name: 'Reinhardt',
           unlockable: 61,
           color: '#334142',
-          scaling: 0.9
+          scaling: 0.9,
+          background: true,
         },
         roadhog: {
           id: 'roadhog',
           name: 'Roadhog',
           unlockable: 59,
-          color: '#6C2803'
+          color: '#6C2803',
+          background: true,
         },
         soldier76: {
           id: 'soldier76',
           name: 'Soldier: 76',
           unlockable: 61,
           color: '#0F132E',
-          scaling: 0.8
+          scaling: 0.8,
+        },
+        sombra: {
+          id: 'sombra',
+          name: 'Sombra',
+          unlockable: 60,
+          color: '#75317E',
         },
         symmetra: {
           id: 'symmetra',
           name: 'Symmetra',
           unlockable: 60,
           color: '#2E7595',
-          scaling: 0.9
+          scaling: 0.9,
         },
         torbjorn: {
           id: 'torbjorn',
           name: 'Torbjörn',
           unlockable: 61,
           color: '#79120B',
-          scaling: 0.9
+          scaling: 0.9,
         },
         tracer: {
           id: 'tracer',
           name: 'Tracer',
           unlockable: 62,
-          color: '#BA3202'
+          color: '#BA3202',
+          background: true,
         },
         widowmaker: {
           id: 'widowmaker',
           name: 'Widowmaker',
           unlockable: 62,
           color: '#410B45',
-          scaling: 0.7
+          scaling: 0.7,
+          background: true,
         },
         winston: {
           id: 'winston',
           name: 'Winston',
           unlockable: 60,
-          color: '#46496A'
+          color: '#46496A',
+          background: true,
         },
         zarya: {
           id: 'zarya',
           name: 'Zarya',
           unlockable: 61,
-          color: '#EB1C62'
+          color: '#EB1C62',
         },
         zenyatta: {
           id: 'zenyatta',
           name: 'Zenyatta',
           unlockable: 60,
-          color: '#F8DA1A'
+          color: '#F8DA1A',
         },
-        // sombra: {
-        //   id: 'sombra',
-        //   name: 'Sombra',
-        //   unlockable: 60,
-        //   color: '#FFFFFF'
-        // },
       }
     }
   }

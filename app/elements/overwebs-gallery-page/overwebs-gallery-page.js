@@ -28,6 +28,14 @@ Polymer({
     return playerData.unlocks
   },
 
+  _backgroundRef: function(hero) {
+    if (!hero.background) {
+      return "javascript:;";
+    } else {
+      return `/?background=./${hero.id}`;
+    }
+  },
+
   ready: function() {
     this.$.backButton.onclick = (event) => {
       event.stopPropagation();

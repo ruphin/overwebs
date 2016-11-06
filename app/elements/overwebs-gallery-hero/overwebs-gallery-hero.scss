@@ -1,6 +1,7 @@
 :host {
   width: 6.5625vw;
   height: 14.84375vw;
+  display: block;
   transition: transform 0.15s ease-in-out;
   text-align: center;
   overflow: hidden;
@@ -81,6 +82,9 @@
   }
   &.zenyatta {
     background-image: url('images/zenyatta.jpg')
+  }
+  &.sombra {
+    background-image: url('images/sombra.jpg')
   }
 }
 

@@ -17,16 +17,17 @@
   }
 }
 
+a.hero {
+  text-decoration: none;
+  margin-left: 0.3125vw;
+  margin-right: 0.3125vw;
+  margin-bottom: 0.625vw;
+}
+
 .hero-gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-left: 6.875vw;
   width: 86.25vw;
-}
-
-overwebs-gallery-hero {
-  margin-left: 0.3125vw;
-  margin-right: 0.3125vw;
-  margin-bottom: 0.625vw;
 }

@@ -33,7 +33,7 @@ Polymer({
           winston: 22,
           zarya: 25,
           zenyatta: 45,
-          sombra: 0,
+          sombra: 10,
         }
       }
     }
