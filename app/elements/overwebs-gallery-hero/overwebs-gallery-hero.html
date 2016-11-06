@@ -16,11 +16,23 @@
 <dom-module id="overwebs-gallery-hero">
   <template>
     <style include="overwebs-gallery-hero-style"></style>
-    <div id="avatar"></div>
-    <div id="name">[[name]]</div>
-    <div class="progress"><div id="completion"></div></div><!--
- --><span class="unlocked">[[unlocked]]</span><!--
- --><span class="unlockable">/[[unlockable]]</span>
+    <div class="content">
+      <div id="name">[[name]]</div>
+      <div class="progress"><div id="completion"></div></div>
+      <span class="unlocked">[[unlocked]]<span class="unlockable">/[[unlockable]]</span></span>
+
+    </div>
+    <div class="shadow"></div>
   </template>
   <script type="text/javascript" src="overwebs-gallery-hero.js"></script>
 </dom-module>
+
+
+<template>
+  <style include="overwebs-gallery-hero-style"></style>
+  <div id="avatar"></div>
+  <div id="name">[[name]]</div>
+  <div class="progress"><div id="completion"></div></div><!--
+--><span class="unlocked">[[unlocked]]</span><!--
+--><span class="unlockable">/[[unlockable]]</span>
+</template>
