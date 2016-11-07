@@ -5,6 +5,70 @@
   height: 100vh;
 }
 
+.overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  flex-direction: row;
+  align-items: center;
+
+  &.visible {
+    display: flex;
+  }
+
+  .content {
+    flex-grow: 1;
+    background: black;
+  }
+
+
+  .banner {
+    opacity: 0;
+    transition: opacity 0.4s;
+    background-position: center;
+    background-size: cover;
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  &#season2 {
+    .banner {
+      height: calc(732/25.6*1vw);
+      background-image: url('images/season2.jpg');
+    }
+  }
+
+  .buttonblock {
+    height: calc(131/25.6*1vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #overlayButton {
+      display: inline-block;
+      background: #AF7019;
+      color: #FFFFFF;
+      font-family: play-page-futura;
+      text-transform: uppercase;
+      font-size: calc(46/25.6*1vw);
+      line-height: calc(75/25.6*1vw);
+      padding-left: calc(65/25.6*1vw);
+      padding-right: calc(65/25.6*1vw);
+      border-radius: calc(5/25.6*1vw);
+      text-shadow: 0 0 calc(4/25.6*1vw) rgba(255, 255, 255, 0.5);
+      &:hover {
+        animation-duration: 1.2s;
+        animation-name: borderglow;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}
+
 .header {
   display: block;
   height: 15.625vw;
@@ -21,7 +85,7 @@
   justify-content: center;
   flex-wrap: wrap;
   > * {
-    margin-right: 1.9225vw;
+    margin-right: calc(50/25.6*1vw);
     &:last-child {
       margin-right: 0;
     }
@@ -35,29 +99,31 @@
   margin-top: calc(3/25.6*1vw);
   .button {
     margin-top: calc(3/25.6*1vw);
-    height: 2.265625vw;
-    line-height: 2.265625vw;
+    height: calc(57/25.6*1vw);
+    line-height: calc(57/25.6*1vw);
     font-family: play-page-noodle;
     font-size: 1.65vw;
     background-color: rgba(255, 208, 94, 0.95);
     text-decoration: none;
     color: rgba(82, 72, 59, 0.98);
     text-align: center;
-    border-radius: 0.15625vw;
+    border-radius: calc(5/25.6*1vw);
 
     &:not(.info) {
       flex-grow: 1;
-      min-width: 60%
+      min-width: 60%;
+      box-shadow: 0 0 calc(4/25.6*1vw) 0 rgba(255, 208, 94, 0.8);
     }
 
     &.info {
-      height: 2.265625vw;
-      width: 2.265625vw;
+      height: calc(57/25.6*1vw);
+      width: calc(57/25.6*1vw);
       margin-right: calc(3/25.6*1vw);
       background-color: rgba(117, 187, 232, 0.95);
       color: white;
       font-family: play-page-futura;
       font-size: 1.40625vw;
+      box-shadow: 0 0 calc(4/25.6*1vw) 0 rgba(117, 187, 232, 0.8);
       &:hover {
         background-color: rgba(127, 197, 242, 0.95);
       }

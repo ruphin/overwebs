@@ -52,8 +52,8 @@
         </overwebs-play-tile>
         <div class="buttons">
           <a href="#competetive-info" class="info button">i</a>
-          <a href="#season-details" class="button">Season 2</a>
-          <a href="#season-details" class="button">Leaderboard</a>
+          <a id="seasonInfoButton" href="#season-details" class="button">Season 2</a>
+          <a href="#leaderboard" class="button">Leaderboard</a>
         </div>
       </div>
       <overwebs-play-tile custom-game>
@@ -71,6 +71,14 @@
       </div>
     </div>
     <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
+    <div id="season2" class="overlay">
+      <div class="content">
+        <div class="banner"></div>
+        <div class="buttonblock">
+          <span id="overlayButton">Ok</span>
+        </div>
+      </div>
+    </div>
   </template>
   <script type="text/javascript" src="overwebs-play-page.js"></script>
 </dom-module>
