@@ -38,19 +38,58 @@
   text-transform: uppercase;
 }
 
-.levelBox {
+#levelBox {
   height: calc(24 / 25.6 * 1vw);
   margin-left: calc(10 / 25.6 * 1vw);
   padding-left: calc(8 / 25.6 * 1vw);
-  padding-right: calc(8 / 25.6 * 1vw);
   border-radius: calc(3 / 25.6 * 1vw);
-  background: #A35435;
+  padding-right: calc(2 / 25.6 * 1vw);
+  display: flex;
+  align-items: center;
 }
 
 .level {
-  padding-top: calc(1 / 25.6 * 1vw);
-  font-size: calc(20 / 25.6 * 1vw);
+  font-size: calc(19 / 25.6 * 1vw);
   line-height: calc(24 / 25.6 * 1vw);
+  padding-right: calc(6 / 25.6 * 1vw);
   font-family: player-widget-futura;
   color: white;
+  transform: translateY(calc(1 / 25.6 * 1vw));
+}
+
+.prestige {
+  display: inline-block;
+  border-radius: calc(3 / 25.6 * 1vw);
+  font-family: player-widget-futura;
+  background: #FFFFFF;
+  font-size: calc(24 / 25.6 * 1vw);
+  line-height: calc(20 / 25.6 * 1vw);
+  .star {
+    display: inline-block;
+    transform: translateY(calc(1 / 25.6 * 1vw));
+  }
+  .star + .star {
+    margin-left: calc(-2 / 25.6 * 1vw);
+  }
+}
+
+#levelBox.bronze {
+  background: #A35435;
+  .prestige {
+    color: #A35435;
+  }
+}
+
+#levelBox.silver {
+  background: silver; // TODO: fix placeholder
+  .prestige {
+    color: silver; // TODO: fix placeholder
+  }
+}
+
+#levelBox.gold {
+  background: gold; // TODO: fix placeholder
+  .prestige {
+    color: gold; // TODO: fix placeholder
+  }
 }

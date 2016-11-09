@@ -7,7 +7,7 @@ Polymer({
       readOnly: true,
       value: {
         name: 'Ruphin',
-        level: 76,
+        level: 179,
         prestige: 1,
         avatar: '0x02500000000008E8',
         unlocks: {

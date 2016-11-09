@@ -1,3 +1,5 @@
+let prestige = ['bronze', 'silver', 'gold']
+
 Polymer({
   is: 'overwebs-player-widget',
   properties: {
@@ -10,19 +12,17 @@ Polymer({
       type: String,
       computed: '_name(player)'
     },
-    level: {
-      type: Number,
-      computed: '_level(player)'
-    },
   },
 
   _playerChanged: function(player) {
+    if (player === undefined) {
+      return;
+    }
     if (player.avatar) {
       this.$.avatar.style.backgroundImage = 'url(https://blzgdapipro-a.akamaihd.net/game/unlocks/' + player.avatar + '.png)';
     }
-    if (player.prestige) {
-      this.$.prestige.style.backgroundImage = 'url(/images/prestige/' + player.prestige + '.png)';
-    }
+    this.$.levelBox.classList.remove(prestige);
+    this.$.levelBox.classList.add(prestige[Math.trunc(player.level / 600)]);
     this.$.status.style.background = this._statusBackground(player);
   },
 
@@ -40,7 +40,11 @@ Polymer({
   },
 
   _level: function(player) {
-    return player.level || '';
+    return player.level % 100;
   },
+
+  _stars: function(player) {
+    return Array.from('★'.repeat(Math.trunc((player.level % 600) / 100)));
+  }
 
 });
