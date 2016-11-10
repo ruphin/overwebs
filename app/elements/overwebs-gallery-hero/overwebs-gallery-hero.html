@@ -16,11 +16,13 @@
 <dom-module id="overwebs-gallery-hero">
   <template>
     <style include="overwebs-gallery-hero-style"></style>
+    <template is="dom-if" if="[[new]]">
+      <div class="new">new!</div>
+    </template>
     <div class="content">
       <div id="name">[[name]]</div>
       <div class="progress"><div id="completion"></div></div>
       <span class="unlocked">[[unlocked]]<span class="unlockable">/[[unlockable]]</span></span>
-
     </div>
     <div class="shadow"></div>
   </template>

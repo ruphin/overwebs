@@ -21,6 +21,11 @@ Polymer({
     unlockable: {
       type: Number,
       computed: '_unlockable(hero)'
+    },
+    'new': {
+      type: Boolean,
+      computed: '_new(hero)',
+      reflectToAttribute: true,
     }
   },
 
@@ -50,5 +55,7 @@ Polymer({
   _unlockable: function(hero) {
     return hero.unlockable || 1;
   },
-
+  _new: function(hero) {
+    return !!hero.background
+  }
 });
