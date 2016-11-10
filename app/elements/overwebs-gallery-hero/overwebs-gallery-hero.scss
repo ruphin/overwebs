@@ -1,109 +1,4 @@
-@keyframes contentglow {
-  0% {
-    box-shadow: inset calc(1/25.6*1vw) calc(-1/25.6*1vw) 0 0 rgba(255, 255, 192, .9),
-                inset calc(2/25.6*1vw) calc(-2/25.6*1vw) 0 0 rgba(255, 255, 192, .7),
-                inset calc(3/25.6*1vw) calc(-3/25.6*1vw) 0 0 rgba(255, 255, 192, .1),
-                inset calc(4/25.6*1vw) calc(-4/25.6*1vw) 0 0 rgba(255, 255, 192, .075),
-                inset calc(5/25.6*1vw) calc(-5/25.6*1vw) 0 0 rgba(255, 255, 192, .05),
-                inset calc(6/25.6*1vw) calc(-6/25.6*1vw) 0 0 rgba(255, 255, 192, .025),
-                inset calc(-1/25.6*1vw) 0 0 0 rgba(255, 255, 192, .9),
-                inset calc(-2/25.6*1vw) 0 0 0 rgba(255, 255, 192, .7),
-                inset calc(-3/25.6*1vw) 0 0 0 rgba(255, 255, 192, .1),
-                inset calc(-4/25.6*1vw) 0 0 0 rgba(255, 255, 192, .075),
-                inset calc(-5/25.6*1vw) 0 0 0 rgba(255, 255, 192, .05),
-                inset calc(-6/25.6*1vw) 0 0 0 rgba(255, 255, 192, .025);
-  }
-
-  5% {
-    box-shadow: inset calc(1/25.6*1vw) calc(-1/25.6*1vw) 0 0 rgba(255, 255, 192, .9),
-                inset calc(2/25.6*1vw) calc(-2/25.6*1vw) 0 0 rgba(255, 255, 192, .7),
-                inset calc(3/25.6*1vw) calc(-3/25.6*1vw) 0 0 rgba(255, 255, 192, .1),
-                inset calc(4/25.6*1vw) calc(-4/25.6*1vw) 0 0 rgba(255, 255, 192, .075),
-                inset calc(5/25.6*1vw) calc(-5/25.6*1vw) 0 0 rgba(255, 255, 192, .05),
-                inset calc(6/25.6*1vw) calc(-6/25.6*1vw) 0 0 rgba(255, 255, 192, .025),
-                inset calc(-1/25.6*1vw) 0 0 0 rgba(255, 255, 192, .9),
-                inset calc(-2/25.6*1vw) 0 0 0 rgba(255, 255, 192, .7),
-                inset calc(-3/25.6*1vw) 0 0 0 rgba(255, 255, 192, .1),
-                inset calc(-4/25.6*1vw) 0 0 0 rgba(255, 255, 192, .075),
-                inset calc(-5/25.6*1vw) 0 0 0 rgba(255, 255, 192, .05),
-                inset calc(-6/25.6*1vw) 0 0 0 rgba(255, 255, 192, .025);
-  }
-
-  100% {
-    box-shadow: inset calc(1/25.6*1vw) calc(-1/25.6*1vw) 0 0 rgba(255, 246, 181, .9),
-                inset calc(2/25.6*1vw) calc(-2/25.6*1vw) 0 0 rgba(255, 246, 181, .7),
-                inset calc(3/25.6*1vw) calc(-3/25.6*1vw) 0 0 rgba(255, 246, 181, .1),
-                inset calc(4/25.6*1vw) calc(-4/25.6*1vw) 0 0 rgba(255, 246, 181, .075),
-                inset calc(5/25.6*1vw) calc(-5/25.6*1vw) 0 0 rgba(255, 246, 181, .05),
-                inset calc(6/25.6*1vw) calc(-6/25.6*1vw) 0 0 rgba(255, 246, 181, .025),
-                inset calc(-1/25.6*1vw) 0 0 0 rgba(255, 246, 181, .9),
-                inset calc(-2/25.6*1vw) 0 0 0 rgba(255, 246, 181, .7),
-                inset calc(-3/25.6*1vw) 0 0 0 rgba(255, 246, 181, .1),
-                inset calc(-4/25.6*1vw) 0 0 0 rgba(255, 246, 181, .075),
-                inset calc(-5/25.6*1vw) 0 0 0 rgba(255, 246, 181, .05),
-                inset calc(-6/25.6*1vw) 0 0 0 rgba(255, 246, 181, .025);
-  }
-}
-
-@keyframes completionglow {
-  0% {
-    box-shadow: inset calc(1/25.6*1vw) 0 0 0 rgba(255, 255, 192, .9),
-                inset calc(2/25.6*1vw) 0 0 0 rgba(255, 255, 192, .7),
-                inset calc(3/25.6*1vw) 0 0 0 rgba(255, 255, 192, .1),
-                inset calc(4/25.6*1vw) 0 0 0 rgba(255, 255, 192, .075),
-                inset calc(5/25.6*1vw) 0 0 0 rgba(255, 255, 192, .05),
-                inset calc(6/25.6*1vw) 0 0 0 rgba(255, 255, 192, .025);
-  }
-
-  5% {
-    box-shadow: inset calc(1/25.6*1vw) 0 0 0 rgba(255, 255, 192, .9),
-                inset calc(2/25.6*1vw) 0 0 0 rgba(255, 255, 192, .7),
-                inset calc(3/25.6*1vw) 0 0 0 rgba(255, 255, 192, .1),
-                inset calc(4/25.6*1vw) 0 0 0 rgba(255, 255, 192, .075),
-                inset calc(5/25.6*1vw) 0 0 0 rgba(255, 255, 192, .05),
-                inset calc(6/25.6*1vw) 0 0 0 rgba(255, 255, 192, .025);
-  }
-
-  100% {
-    box-shadow: inset calc(1/25.6*1vw) 0 0 0 rgba(255, 246, 181, .9),
-                inset calc(2/25.6*1vw) 0 0 0 rgba(255, 246, 181, .7),
-                inset calc(3/25.6*1vw) 0 0 0 rgba(255, 246, 181, .1),
-                inset calc(4/25.6*1vw) 0 0 0 rgba(255, 246, 181, .075),
-                inset calc(5/25.6*1vw) 0 0 0 rgba(255, 246, 181, .05),
-                inset calc(6/25.6*1vw) 0 0 0 rgba(255, 246, 181, .025);
-  }
-}
-
-@keyframes progressglow {
-  0% {
-    box-shadow: inset calc(-1/25.6*1vw) 0 0 0 rgba(255, 255, 192, .9),
-                inset calc(-2/25.6*1vw) 0 0 0 rgba(255, 255, 192, .7),
-                inset calc(-3/25.6*1vw) 0 0 0 rgba(255, 255, 192, .1),
-                inset calc(-4/25.6*1vw) 0 0 0 rgba(255, 255, 192, .075),
-                inset calc(-5/25.6*1vw) 0 0 0 rgba(255, 255, 192, .05),
-                inset calc(-6/25.6*1vw) 0 0 0 rgba(255, 255, 192, .025);
-  }
-
-  5% {
-    box-shadow: inset calc(-1/25.6*1vw) 0 0 0 rgba(255, 255, 192, .9),
-                inset calc(-2/25.6*1vw) 0 0 0 rgba(255, 255, 192, .7),
-                inset calc(-3/25.6*1vw) 0 0 0 rgba(255, 255, 192, .1),
-                inset calc(-4/25.6*1vw) 0 0 0 rgba(255, 255, 192, .075),
-                inset calc(-5/25.6*1vw) 0 0 0 rgba(255, 255, 192, .05),
-                inset calc(-6/25.6*1vw) 0 0 0 rgba(255, 255, 192, .025);
-  }
-
-  100% {
-    box-shadow: inset calc(-1/25.6*1vw) 0 0 0 rgba(255, 246, 181, .9),
-                inset calc(-2/25.6*1vw) 0 0 0 rgba(255, 246, 181, .7),
-                inset calc(-3/25.6*1vw) 0 0 0 rgba(255, 246, 181, .1),
-                inset calc(-4/25.6*1vw) 0 0 0 rgba(255, 246, 181, .075),
-                inset calc(-5/25.6*1vw) 0 0 0 rgba(255, 246, 181, .05),
-                inset calc(-6/25.6*1vw) 0 0 0 rgba(255, 246, 181, .025);
-  }
-}
-
-@keyframes hostglow {
+@keyframes glow {
   0% {
     box-shadow: 0 0 0 calc(1/25.6*1vw) rgba(255, 255, 76, .9),
                 0 0 0 calc(2/25.6*1vw) rgba(255, 255, 76, .7),
@@ -150,7 +45,7 @@
   }
 }
 
-@keyframes hostglowhover {
+@keyframes hoverglow {
   0% {
     box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF,
                 inset 0 0 0 calc(1/25.6*1vw) rgba(255, 255, 192, .9),
@@ -183,6 +78,7 @@
 }
 
 :host {
+  position: relative;
   width: calc(168/25.6*1vw);
   height: calc(380/25.6*1vw);
   display: flex;
@@ -192,20 +88,13 @@
   justify-content: flex-end;
   transition: transform 0.15s ease-in-out;
   text-align: center;
-  overflow: hidden;
   &:hover {
-    transform: scale(1.2,1.2);
     box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF;
+    transform: scale(1.2,1.2);
     transition: transform 0.08s ease-out;
-  }
-  &[new] {
-    animation-duration: 1.5s;
-    animation-name: hostglow;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    animation-direction: alternate;
-    &:hover {
-      animation-name: hostglowhover;
+
+    .glow {
+      animation-name: hoverglow;
     }
   }
   background-size: contain;
@@ -288,29 +177,6 @@
     height: calc(168/25.6*1vw);
     background: radial-gradient(ellipse farthest-corner at 50% -15%, #DADCE5, #D2D1D6 50%, #ADABBB);
   }
-  &[new] .content {
-    animation-duration: 1.5s;
-    animation-name: contentglow;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    animation-direction: alternate;
-
-    .progress {
-      animation-duration: 1.5s;
-      animation-name: progressglow;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
-      animation-direction: alternate;
-    }
-
-    #completion {
-      animation-duration: 1.5s;
-      animation-name: completionglow;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
-      animation-direction: alternate;
-    }
-  }
 }
 
 .new {
@@ -333,6 +199,19 @@
               inset 0 0 0 calc(1/25.6*1vw) rgba(255, 246, 181, .3),
               inset 0 0 0 calc(2/25.6*1vw) rgba(254, 162, 30, .9),
               inset 0 0 0 calc(3/25.6*1vw) rgba(254, 162, 30, .2),
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-duration: 1.5s;
+  animation-name: glow;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
 }
 
 #name {

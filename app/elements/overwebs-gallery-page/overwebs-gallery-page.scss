@@ -1,3 +1,13 @@
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 :host {
   display: block;
   position: relative;
@@ -18,10 +28,100 @@
 }
 
 a.hero {
+  z-index: 1;
   text-decoration: none;
   margin-left: 0.3125vw;
   margin-right: 0.3125vw;
   margin-bottom: 0.625vw;
+
+  animation-duration: 0.2s;
+  animation-name: fadein;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  transition: z-index 0.05s step-end;
+  &:hover {
+    transition: none;
+    z-index: 2;
+  }
+
+  &:nth-of-type(2) {
+    animation-delay: 0.02s;
+  }
+  &:nth-of-type(3) {
+    animation-delay: 0.04s;
+  }
+  &:nth-of-type(4) {
+    animation-delay: 0.06s;
+  }
+  &:nth-of-type(5) {
+    animation-delay: 0.08s;
+  }
+  &:nth-of-type(6) {
+    animation-delay: 0.1s;
+  }
+  &:nth-of-type(7) {
+    animation-delay: 0.12s;
+  }
+  &:nth-of-type(8) {
+    animation-delay: 0.14s;
+  }
+  &:nth-of-type(9) {
+    animation-delay: 0.16s;
+  }
+  &:nth-of-type(10) {
+    animation-delay: 0.18s;
+  }
+  &:nth-of-type(11) {
+    animation-delay: 0.2s;
+  }
+  &:nth-of-type(12) {
+    animation-delay: 0.22s;
+  }
+  &:nth-of-type(13) {
+    animation-delay: 0.24s;
+  }
+  &:nth-of-type(14) {
+    animation-delay: 0.26s;
+  }
+  &:nth-of-type(15) {
+    animation-delay: 0.28s;
+  }
+  &:nth-of-type(16) {
+    animation-delay: 0.3s;
+  }
+  &:nth-of-type(17) {
+    animation-delay: 0.32s;
+  }
+  &:nth-of-type(18) {
+    animation-delay: 0.34s;
+  }
+  &:nth-of-type(19) {
+    animation-delay: 0.36s;
+  }
+  &:nth-of-type(20) {
+    animation-delay: 0.38s;
+  }
+  &:nth-of-type(21) {
+    animation-delay: 0.4s;
+  }
+  &:nth-of-type(22) {
+    animation-delay: 0.42s;
+  }
+  &:nth-of-type(23) {
+    animation-delay: 0.44s;
+  }
+  &:nth-of-type(24) {
+    animation-delay: 0.46s;
+  }
+  &:nth-of-type(25) {
+    animation-delay: 0.48s;
+  }
+  &:nth-of-type(26) {
+    animation-delay: 0.5s;
+  }
+
 }
 
 .hero-gallery {
