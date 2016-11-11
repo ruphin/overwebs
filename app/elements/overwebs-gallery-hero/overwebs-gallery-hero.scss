@@ -77,6 +77,31 @@
   }
 }
 
+
+@keyframes newshine {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 0.1;
+  }
+  35% {
+    opacity: .71;
+  }
+  50% {
+    opacity: .65;
+  }
+  65% {
+    opacity: .7;
+  }
+  99% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 :host {
   position: relative;
   width: calc(168/25.6*1vw);
@@ -92,8 +117,15 @@
     box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF;
     transform: scale(1.2,1.2);
     transition: transform 0.08s ease-out;
-
+  }
+  &[new] {
     .glow {
+      display: block;
+    }
+    .new{
+      display: flex;
+    }
+    &:hover .glow {
       animation-name: hoverglow;
     }
   }
@@ -180,7 +212,8 @@
 }
 
 .new {
-  display: flex;
+  position: relative;
+  display: none;
   justify-content: center;
   align-items: center;
   background: rgba(0,0,0,0.7);
@@ -198,10 +231,27 @@
   box-shadow: 0 0 0 calc(3/25.6*1vw) rgba(0,0,0,0.7),
               inset 0 0 0 calc(1/25.6*1vw) rgba(255, 246, 181, .3),
               inset 0 0 0 calc(2/25.6*1vw) rgba(254, 162, 30, .9),
-              inset 0 0 0 calc(3/25.6*1vw) rgba(254, 162, 30, .2),
+              inset 0 0 0 calc(3/25.6*1vw) rgba(254, 162, 30, .2);
+  #glow {
+    pointer-events: none;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: calc(200/25.6*1vw);
+    width: calc(200/25.6*1vw);
+    background: url('images/newFlare.png') center no-repeat;
+    background-size: contain;
+    animation-duration: 4s;
+    animation-name: newshine;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
 }
 
 .glow {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;

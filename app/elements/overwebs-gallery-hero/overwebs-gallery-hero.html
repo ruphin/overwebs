@@ -16,10 +16,8 @@
 <dom-module id="overwebs-gallery-hero">
   <template>
     <style include="overwebs-gallery-hero-style"></style>
-    <template is="dom-if" if="[[new]]">
-      <div class="new">new!</div>
-      <div class="glow"></div>
-    </template>
+    <div class="new">new!<div id="glow"></div></div>
+    <div class="glow"></div>
     <div class="content">
       <div id="name">[[name]]</div>
       <div class="progress"><div id="completion"></div></div>
