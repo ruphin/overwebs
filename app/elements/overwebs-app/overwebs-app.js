@@ -64,8 +64,8 @@ Polymer({
       if (this._routes[oldRoute]) {
         console.warn("Requested page does not exist");
         window.history.back();
-        return;
       }
+      return;
     }
 
     // TODO: Enable or disable or move the chat widget depending on the page.
@@ -75,7 +75,7 @@ Polymer({
     this.$.background.page = newRoute
 
     // Lazy load any new pages we are visiting that haven't been loaded yet
-    if (newRoute != 'main' && newRoute != 'secret') {
+    if (newRoute != 'main' && this._routes[newRoute] && newRoute != 'secret') {
       let newRouteElement = this._routes[newRoute].tagName.toLowerCase()
       newPage = this.resolveUrl('../' + newRouteElement + '/' + newRouteElement + '.html')
       this.importHref(newPage, null, function() {
