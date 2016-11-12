@@ -103,12 +103,12 @@ Polymer({
           color: '#0F132E',
           scaling: 0.8,
         },
-        // sombra: {
-        //   id: 'sombra',
-        //   name: 'Sombra',
-        //   unlockable: 60,
-        //   color: '#75317E',
-        // },
+        sombra: {
+          id: 'sombra',
+          name: 'Sombra',
+          unlockable: 60,
+          color: '#75317E',
+        },
         symmetra: {
           id: 'symmetra',
           name: 'Symmetra',
