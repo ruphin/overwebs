@@ -1,5 +1,6 @@
 :host {
   position: absolute;
+  z-index: 10;
   bottom: calc(54 / 25.6 * 1vw);
   left: calc(54 / 25.6 * 1vw);
   font-family: arial; // This should be some form of Helvetica
@@ -50,6 +51,12 @@
     font-family: arial; // This should be some form of Helvetica
     display: flex;
     flex-direction: column-reverse;
+    .message {
+      line-height: calc(30 / 25.6 * 1vw);
+    }
+    .message + .message {
+      margin-bottom: calc(8 / 25.6 * 1vw);
+    }
   }
 
   .chatShadow {
