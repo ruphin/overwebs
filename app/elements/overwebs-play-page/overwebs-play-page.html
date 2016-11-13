@@ -19,6 +19,8 @@
 <dom-module id="overwebs-play-page">
   <template>
     <style include="overwebs-play-page-style"></style>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <svg class="header" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="fillgradient" x1="0" x2="0" y1="0" y2="1">
@@ -31,54 +33,35 @@
         </linearGradient>
       </defs>
       <g>
-        <text id="text" x="4.225vw" y="14.85vw" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">PLAY</text>
+        <text id="text" x="0" y="95%" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">Play</text>
       </g>
     </svg>
-    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
-    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <div class="modes">
       <overwebs-play-tile quick-play>
-        <span class="title">Quick Play</span>
-        <span class="hover-text">Jump into a game against other players of your skill level.</span>
+        <div slot="title">Quick Play</div>
+        <div slot="description">Jump into a game against other players of your skill level.</div>
       </overwebs-play-tile>
-      <overwebs-play-tile vs-ai>
-        <span class="title">Play vs. AI</span>
-        <span class="hover-text">Hone your skills against a team of AI-controlled heroes.</span>
+      <overwebs-play-tile arcade>
+        <div slot="title">Arcade</div>
+        <div slot="description">New game modes! New Rules! New maps! Enter the arcade.</div>
       </overwebs-play-tile>
-      <div>
-        <overwebs-play-tile competetive-play>
-          <span class="title">Competitive Play</span>
-          <span class="hover-text">Compete against other players and work your way up the ranks.</span>
+      <a href="/competitive">
+        <overwebs-play-tile competitive-play info>
+          <div slot="title">Competitive Play</div>
+          <div slot="description">Compete against other players and work your way up the ranks.</div>
         </overwebs-play-tile>
-        <div class="buttons">
-          <a href="#competetive-info" class="info button">i</a>
-          <a id="seasonInfoButton" href="#season-details" class="button">Season 2</a>
-          <a href="#leaderboard" class="button">Leaderboard</a>
-        </div>
-      </div>
+      </a>
+      <overwebs-play-tile play-vs-ai>
+        <div slot="icon" class="play-vs-ai-icon"></div>
+        <div slot="title">Play vs. AI</div>
+        <div slot="description">Hone your skills against a team of AI-controlled heroes.</div>
+      </overwebs-play-tile>
       <overwebs-play-tile custom-game>
-        <span class="title">Custom Game</span>
-        <span class="hover-text">Change the rules and play a game with your friends or AI.</span>
+        <div slot="title">Custom Game</div>
+        <div slot="description">Change the rules and play a game with your friends or AI.</div>
       </overwebs-play-tile>
-      <div>
-        <overwebs-play-tile brawl>
-          <span class="title">Justice rains from above</span>
-          <span class="hover-text">Achieve aerial superiority.</span>
-        </overwebs-play-tile>
-        <div class="buttons">
-          <a href="#season-details" class="button">Brawl details</a>
-        </div>
-      </div>
     </div>
     <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
-    <div id="season2" class="overlay">
-      <div class="content">
-        <div class="banner"></div>
-        <div class="buttonblock">
-          <span id="overlayButton">Ok</span>
-        </div>
-      </div>
-    </div>
   </template>
   <script type="text/javascript" src="overwebs-play-page.js"></script>
 </dom-module>

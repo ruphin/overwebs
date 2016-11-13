@@ -9,11 +9,18 @@
     font-family: training-page-noodle;
     src: url("/fonts/BigNoodleTooOblique.ttf");
   }
+
+  @font-face {
+    font-family: play-page-futura;
+    src: url("/fonts/Futura.ttf");
+  }
 </style>
 
 <dom-module id="overwebs-training-page">
   <template>
     <style include="overwebs-training-page-style"></style>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <svg class="header" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="fillgradient" x1="0" x2="0" y1="0" y2="1">
@@ -26,28 +33,24 @@
         </linearGradient>
       </defs>
       <g>
-        <text id="text" x="4.225vw" y="14.85vw" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">TRAINING</text>
+        <text id="text" x="0" y="95%" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">Training</text>
       </g>
     </svg>
-    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
-    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <div class="modes">
       <overwebs-play-tile tutorial>
-        <span class="title">Tutorial</span>
-        <span class="hover-text">Jump into a game against other players of your skill level.</span>
+        <div slot="title">Tutorial</div>
+        <div slot="description">Learn the basics of Overwatch.</div>
       </overwebs-play-tile>
-        <overwebs-play-tile practice>
-          <span class="title">Practice range</span>
-          <span class="hover-text">Compete against other players and work your way up the ranks.</span>
-        </overwebs-play-tile>
-      <overwebs-play-tile vs-ai>
-        <span class="title">Play vs. AI</span>
-        <span class="hover-text">Hone your skills against a team of AI-controlled heroes.</span>
+      <overwebs-play-tile arcade>
+        <div slot="title">Practice Range</div>
+        <div slot="description">Practice using your weapons and abilities.</div>
+      </overwebs-play-tile>
+      <overwebs-play-tile play-vs-ai>
+        <div slot="title">Practice vs. AI</div>
+        <div slot="description">Hone your skill by playing against AI-controlled heroes.</div>
       </overwebs-play-tile>
     </div>
     <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
-
-    <overwebs-back-button></overwebs-back-button>
   </template>
   <script type="text/javascript" src="overwebs-training-page.js"></script>
 </dom-module>

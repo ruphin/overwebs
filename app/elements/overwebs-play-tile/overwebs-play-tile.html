@@ -21,18 +21,17 @@
 <dom-module id="overwebs-play-tile">
   <template>
     <style include="overwebs-play-tile-style"></style>
-    <div class="popup">
-      <div class="container">
-        <content select=".hover-text"></content>
+    <div class="content">
+      <slot name="icon"><div class="icon"></div></slot>
+      <slot name="title"></slot>
+      <slot name="description"></slot>
+      <div class="hotkey">
+        <div class="rmb"></div>
+      </div>
+      <div class="info">
+        <div class="i">i</div>
       </div>
     </div>
-    <div class="label">
-      <content select=".title"></content>
-    </div>
-    <div class="corner top left"></div>
-    <div class="corner top right"></div>
-    <div class="corner bottom left"></div>
-    <div class="corner bottom right"></div>
   </template>
   <script type="text/javascript" src="overwebs-play-tile.js"></script>
 </dom-module>

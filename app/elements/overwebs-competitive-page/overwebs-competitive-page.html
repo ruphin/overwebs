@@ -1,0 +1,90 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
+<link rel="import" href="overwebs-competitive-page-style.html">
+
+<style>
+  @font-face {
+    font-family: competitive-page-noodle;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+
+  @font-face {
+    font-family: competitive-page-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+</style>
+
+<dom-module id="overwebs-competitive-page">
+  <template>
+    <style include="overwebs-competitive-page-style"></style>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
+    <div class="container">
+      <div class="back"></div>
+      <div class="competitive">
+        <div class="header">
+          Competitive PLay
+        </div>
+        <div class="text">
+          Compete against other players and work your way up the ranks.
+        </div>
+        <div class="title">
+          Season 3
+        </div>
+        <div class="subtitle">
+          Rewards
+        </div>
+        <div class="text">
+          You can earn the following rewards at the end of the season by participating in competitive play:
+        </div>
+        <button class="blue">
+          <span class="i">i</span> Rewards
+        </button>
+      </div>
+      <div class="info">
+        <div class="header"><span class="i">i</span>Info</div>
+        <div class="infobox">
+          <div class="infotext">
+            <div class="title">
+              Skill rating
+            </div>
+            <ul>
+              <li>10 Placement matches</li>
+              <li>Skill rating determined (1-5000)</li>
+              <li>Skill rating adjusts after each win or loss</li>
+            </ul>
+
+            <div class="title">
+              Competitive Matches
+            </div>
+            <ul>
+              <li>Matches last multiple rounds</li>
+              <li>Earn points by taking objectives</li>
+              <li>Most points win!</li>
+            </ul>
+            <div class="title">
+              Seasons
+            </div>
+            <ul>
+              <li>New season every 3 months</li>
+              <li>Earn exclusive rewards</li>
+              <li>Placement starts again each season</li>
+            </ul>
+          </div>
+          <button class="blue">
+            <span class="i">i</span>Tier Legend
+          </button>
+          <button class="blue">
+            <span class="i leaderboard"></span>Leaderboard
+          </button>
+          <button class="big yellow">
+            Play
+          </button>
+        </div>
+      </div>
+    </div>
+    <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
+  </template>
+  <script type="text/javascript" src="overwebs-competitive-page.js"></script>
+</dom-module>

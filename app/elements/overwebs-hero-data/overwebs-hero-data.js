@@ -17,19 +17,20 @@ Polymer({
           name: 'Bastion',
           unlockable: 60,
           color: '#1D2B14',
+          background: true,
         },
         dva: {
           id: 'dva',
           name: 'D.Va',
           unlockable: 60,
           color: '#F93080',
-          background: true,
         },
         genji: {
           id: 'genji',
           name: 'Genji',
           unlockable: 60,
           color: '#32F600',
+          background: true,
         },
         hanzo: {
           id: 'hanzo',
@@ -66,20 +67,19 @@ Polymer({
           name: 'Mercy',
           unlockable: 60,
           color: '#F5E269',
-          background: true,
         },
         pharah: {
           id: 'pharah',
           name: 'Pharah',
           unlockable: 61,
           color: '#001984',
+          background: true,
         },
         reaper: {
           id: 'reaper',
           name: 'Reaper',
           unlockable: 61,
           color: '#1D0002',
-          background: true,
         },
         reinhardt: {
           id: 'reinhardt',
@@ -87,14 +87,12 @@ Polymer({
           unlockable: 61,
           color: '#334142',
           scaling: 0.9,
-          background: true,
         },
         roadhog: {
           id: 'roadhog',
           name: 'Roadhog',
           unlockable: 59,
           color: '#6C2803',
-          background: true,
         },
         soldier76: {
           id: 'soldier76',
@@ -102,12 +100,14 @@ Polymer({
           unlockable: 61,
           color: '#0F132E',
           scaling: 0.8,
+          background: true,
         },
         sombra: {
           id: 'sombra',
           name: 'Sombra',
           unlockable: 60,
           color: '#75317E',
+          background: true,
         },
         symmetra: {
           id: 'symmetra',
@@ -128,7 +128,6 @@ Polymer({
           name: 'Tracer',
           unlockable: 62,
           color: '#BA3202',
-          background: true,
         },
         widowmaker: {
           id: 'widowmaker',
@@ -136,14 +135,12 @@ Polymer({
           unlockable: 62,
           color: '#410B45',
           scaling: 0.7,
-          background: true,
         },
         winston: {
           id: 'winston',
           name: 'Winston',
           unlockable: 60,
           color: '#46496A',
-          background: true,
         },
         zarya: {
           id: 'zarya',

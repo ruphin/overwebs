@@ -1,30 +1,150 @@
 :host {
   display: block;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
 }
 
 .header {
-  display: block;
-  height: 15.625vw;
-  margin-bottom: -1vw;
-  width: 50vw;
+  position: absolute;
+  top: calc(184/25.6*1vw);
+  left: calc(120/25.6*1vw);
+  height: calc(230/25.6*1vw);
+  width: 50%;
   #text {
     font-family: training-page-noodle;
-    font-size: 10.625vw;
+    font-size: calc(266/25.6*1vw);
   }
+  animation-duration: 0.6s;
+  animation-name: headermove;
+  animation-iteration-count: 1;
+  // animation-timing-function: cubic-bezier(.3,.87,.13,.99);
+  animation-timing-function: ease-out;
+  animation-direction: normal;
 }
 
 .modes {
+  margin-top: calc(378/25.6*1vw);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   > * {
-    margin-right: 1.9225vw;
+    animation-duration: 0.2s;
+    animation-name: fadein;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-direction: normal;
+    animation-fill-mode: both;
+
+    &:nth-of-type(2) {
+      animation-delay: 0.05s;
+    }
+    &:nth-of-type(3) {
+      animation-delay: 0.10s;
+    }
+    &:nth-of-type(4) {
+      animation-delay: 0.15s;
+    }
+    &:nth-of-type(5) {
+      animation-delay: 0.20s;
+    }
+
+    margin-right: calc(16/25.6*1vw);
     &:last-child {
       margin-right: 0;
     }
+
+    &:hover {
+      z-index: 2;
+    }
+  }
+}
+
+
+
+.overlay {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: rgba(0,0,0,0.3);
+  flex-direction: row;
+  align-items: center;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .content {
+    flex-grow: 1;
+    background: black;
+  }
+
+
+  .banner {
+    opacity: 0;
+    transition: opacity 0.4s;
+    background-position: center;
+    background-size: cover;
+  }
+  &.visible .banner {
+    opacity: 1;
+  }
+
+  &#season2 .banner {
+    height: calc(732/25.6*1vw);
+    background-image: url('images/season2.jpg');
+  }
+
+  .buttonblock {
+    height: calc(131/25.6*1vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #overlayButton {
+      display: inline-block;
+      background: #AF7019;
+      color: #FFFFFF;
+      font-family: training-page-futura;
+      text-transform: uppercase;
+      font-size: calc(46/25.6*1vw);
+      line-height: calc(75/25.6*1vw);
+      padding-left: calc(65/25.6*1vw);
+      padding-right: calc(65/25.6*1vw);
+      border-radius: calc(5/25.6*1vw);
+      text-shadow: 0 0 calc(4/25.6*1vw) rgba(255, 255, 255, 0.5);
+      &:hover {
+        animation-duration: 1.2s;
+        animation-name: borderglow;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes headermove {
+  from {
+    opacity: 0;
+    transform: translateY(calc(calc(30/25.6*1vw)));
+  },
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

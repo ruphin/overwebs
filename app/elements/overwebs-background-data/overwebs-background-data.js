@@ -162,6 +162,11 @@ let backgroundSets = {
         video: 'hollywood/shared/competitive.mp4',
         image: 'hollywood/shared/competitive.jpg',
       },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'hollywood/shared/competitive_to_play.mp4',
+        image: 'hollywood/shared/competitive_to_play.jpg',
+      },
       'play_to_main': {
         transition: 'main',
       },
@@ -259,6 +264,11 @@ let backgroundSets = {
         video: 'volskaya/shared/competitive.mp4',
         image: 'volskaya/shared/competitive.jpg',
       },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'volskaya/shared/competitive_to_play.mp4',
+        image: 'volskaya/shared/competitive_to_play.jpg',
+      },
       'play_to_main': {
         transition: 'main',
       },
@@ -315,6 +325,11 @@ let backgroundSets = {
         preload: ['competitive_to_play'],
         video: 'volskaya/shared/competitive.mp4',
         image: 'volskaya/shared/competitive.jpg',
+      },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'volskaya/shared/competitive_to_play.mp4',
+        image: 'volskaya/shared/competitive_to_play.jpg',
       },
       'play_to_main': {
         transition: 'main',
@@ -412,6 +427,11 @@ let backgroundSets = {
         preload: ['competitive_to_play'],
         video: 'gibraltar/shared/competitive.mp4',
         image: 'gibraltar/shared/competitive.jpg',
+      },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'gibraltar/shared/competitive_to_play.mp4',
+        image: 'gibraltar/shared/competitive_to_play.jpg',
       },
       'play_to_main': {
         transition: 'main',
@@ -629,6 +649,11 @@ let backgroundSets = {
         preload: ['competitive_to_play'],
         video: 'temple_of_anubis/shared/competitive.mp4',
         image: 'temple_of_anubis/shared/competitive.jpg',
+      },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'temple_of_anubis/shared/competitive_to_play.mp4',
+        image: 'temple_of_anubis/shared/competitive_to_play.jpg',
       },
       'play_to_main': {
         transition: 'main',
