@@ -1,0 +1,187 @@
+:host {
+  position: relative;
+  height: calc(370/25.6*1vw);
+  width: calc(640/25.6*1vw);
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  align-items: flex-end;
+  justify-content: flex-end;
+  transition: transform 0.1s linear;
+
+  &[big] {
+    height: calc(771/25.6*1vw);
+    width: calc(830/25.6*1vw);
+  }
+
+  &[mystery-duel] {
+    background-image: url(images/mysteryDuel.png);
+  }
+  &[elimination] {
+    background-image: url(images/elimination.png);
+  }
+  &[mystery-heroes] {
+    background-image: url(images/mysteryHeroes.png);
+  }
+  &[all-brawls] {
+    background-image: url(images/allBrawls.png);
+  }
+  &[no-limits] {
+    background-image: url(images/noLimits.png);
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 calc(8.5/1.1/25.6*1vw) #FFFFFF;
+    transform: scale(1.1);
+    z-index: 2;
+  }
+
+  &[popularity="1"] .content .popularity {
+      background: linear-gradient(to right,  #1C75BC 0, #1C75BC 17.2%,
+                                  transparent 17.2%, transparent 20.7%,
+                                  #BDBFC7 20.7%, #BDBFC7 37.9%,
+                                  transparent 37.9%, transparent 41.4%,
+                                  #BDBFC7 41.4%, #BDBFC7 58.6%,
+                                  transparent 58.6%, transparent 62.1%,
+                                  #BDBFC7 62.1%, #BDBFC7 79.3%,
+                                  transparent 79.3%, transparent 82.8%,
+                                  #BDBFC7 82.8%, #BDBFC7 100%);
+  }
+  &[popularity="2"] .content .popularity {
+      background: linear-gradient(to right,  #1C75BC 0, #1C75BC 17.2%,
+                                  transparent 17.2%, transparent 20.7%,
+                                  #1C75BC 20.7%, #1C75BC 37.9%,
+                                  transparent 37.9%, transparent 41.4%,
+                                  #BDBFC7 41.4%, #BDBFC7 58.6%,
+                                  transparent 58.6%, transparent 62.1%,
+                                  #BDBFC7 62.1%, #BDBFC7 79.3%,
+                                  transparent 79.3%, transparent 82.8%,
+                                  #BDBFC7 82.8%, #BDBFC7 100%);
+  }
+  &[popularity="3"] .content .popularity {
+      background: linear-gradient(to right,  #1C75BC 0, #1C75BC 17.2%,
+                                  transparent 17.2%, transparent 20.7%,
+                                  #1C75BC 20.7%, #1C75BC 37.9%,
+                                  transparent 37.9%, transparent 41.4%,
+                                  #1C75BC 41.4%, #1C75BC 58.6%,
+                                  transparent 58.6%, transparent 62.1%,
+                                  #BDBFC7 62.1%, #BDBFC7 79.3%,
+                                  transparent 79.3%, transparent 82.8%,
+                                  #BDBFC7 82.8%, #BDBFC7 100%);
+  }
+  &[popularity="4"] .content .popularity {
+      background: linear-gradient(to right,  #1C75BC 0, #1C75BC 17.2%,
+                                  transparent 17.2%, transparent 20.7%,
+                                  #1C75BC 20.7%, #1C75BC 37.9%,
+                                  transparent 37.9%, transparent 41.4%,
+                                  #1C75BC 41.4%, #1C75BC 58.6%,
+                                  transparent 58.6%, transparent 62.1%,
+                                  #1C75BC 62.1%, #1C75BC 79.3%,
+                                  transparent 79.3%, transparent 82.8%,
+                                  #BDBFC7 82.8%, #BDBFC7 100%);
+  }
+  &[popularity="5"] .content .popularity {
+    background: #1C75BC;
+    .most {
+      display: inline;
+    }
+  }
+}
+
+.content {
+  position: relative;
+  height: calc(196/25.6*1vw);
+  padding-left: calc(20/25.6*1vw);
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  background: radial-gradient(ellipse farthest-corner at 50% -15%, #EBEBEE, #E4E4E8 50%, #D6D5DD);
+
+  ::slotted([slot="size"]) {
+    font-family: arcade-tile-noodle;
+    color: #1C75BC;
+    line-height: 1;
+    font-size: calc(48/25.6*1vw);
+    text-transform: uppercase;
+    margin-top: calc(58/25.6*1vw);
+  }
+
+  ::slotted([slot="title"]) {
+    font-family: arcade-tile-noodle;
+    color: #28354F;
+    line-height: 1;
+    font-size: calc(78/25.6*1vw);
+    text-transform: uppercase;
+  }
+  .hotkey {
+    position: absolute;
+    bottom: 0;
+    right: calc(20/25.6*1vw);
+    height: calc(46/25.6*1vw);
+    width: calc(50/25.6*1vw);
+    background: #323E57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .rmb {
+      width: calc(26/25.6*1vw);
+      height: calc(37/25.6*1vw);
+      background: url("images/rmb.png") center center no-repeat;
+      background-size: contain;
+    }
+  }
+
+  .info {
+    position: absolute;
+    bottom: 0;
+    right: calc(73/25.6*1vw);
+    height: calc(46/25.6*1vw);
+    width: calc(50/25.6*1vw);
+    background: #323E57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .i {
+      width: calc(34/25.6*1vw);
+      height: calc(34/25.6*1vw);
+      line-height: calc(34/25.6*1vw);
+      font-size: calc(30/25.6*1vw);
+      font-family: arcade-tile-futura;
+      color: #28354F;
+      text-align: center;
+      background: white;
+      border-radius: 100%;
+    }
+  }
+  .popularity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(34/25.6*1vw);
+    min-width: calc(40/25.6*1vw);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: calc(14/25.6*1vw);
+    padding-right: calc(17/25.6*1vw);
+    background: linear-gradient(to right,  #BDBFC7 0, #BDBFC7 17.2%,
+                                transparent 17.2%, transparent 20.7%,
+                                #BDBFC7 20.7%, #BDBFC7 37.9%,
+                                transparent 37.9%, transparent 41.4%,
+                                #BDBFC7 41.4%, #BDBFC7 58.6%,
+                                transparent 58.6%, transparent 62.1%,
+                                #BDBFC7 62.1%, #BDBFC7 79.3%,
+                                transparent 79.3%, transparent 82.8%,
+                                #BDBFC7 82.8%, #BDBFC7 100%);
+    .most {
+      color: #FFFFFF;
+      font-family: arcade-tile-futura;
+      text-transform: uppercase;
+      font-size: calc(18/25.6*1vw);
+      display: none;
+    }
+  }
+}

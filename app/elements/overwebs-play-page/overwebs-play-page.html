@@ -41,10 +41,12 @@
         <div slot="title">Quick Play</div>
         <div slot="description">Jump into a game against other players of your skill level.</div>
       </overwebs-play-tile>
-      <overwebs-play-tile arcade>
-        <div slot="title">Arcade</div>
-        <div slot="description">New game modes! New Rules! New maps! Enter the arcade.</div>
-      </overwebs-play-tile>
+      <a href="/arcade">
+        <overwebs-play-tile arcade>
+          <div slot="title">Arcade</div>
+          <div slot="description">New game modes! New Rules! New maps! Enter the arcade.</div>
+        </overwebs-play-tile>
+      </a>
       <a href="/competitive">
         <overwebs-play-tile competitive-play info>
           <div slot="title">Competitive Play</div>
@@ -53,7 +55,6 @@
       </a>
       <a href="/vs-ai">
         <overwebs-play-tile play-vs-ai>
-          <div slot="icon" class="play-vs-ai-icon"></div>
           <div slot="title">Play vs. AI</div>
           <div slot="description">Hone your skills against a team of AI-controlled heroes.</div>
         </overwebs-play-tile>

@@ -35,9 +35,9 @@
     <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
     <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <div class="hero-gallery">
-      <template is="dom-repeat" items="[[heroes]]">
+      <template is="dom-repeat" items="[[_heroes(heroData)]]">
         <a class="hero" href="[[_backgroundRef(item)]]">
-          <overwebs-gallery-hero hero="[[item]]" player-unlocks="[[unlocks]]"></overwebs-gallery-hero>
+          <overwebs-gallery-hero hero="[[item]]" player-unlocks="[[_unlocks(playerData)]]"></overwebs-gallery-hero>
         </a>
       </template>
     </div>

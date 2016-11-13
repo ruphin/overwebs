@@ -1,25 +1,13 @@
 Polymer({
   is: 'overwebs-gallery-page',
-  properties: {
-    visible: {
-      type: Boolean
-    },
-    heroData: {
-      type: Object
-    },
-    heroes: {
-      type: Array,
-      computed: '_heroes(heroData)'
-    },
-    playerData: {
-      type: Object
-    },
-    unlocks: {
-      type: Object,
-      computed: '_unlocks(playerData)'
+
+  ready: function() {
+    this.$.backButton.onclick = (event) => {
+      event.stopPropagation();
+      history.back();
     }
   },
-
+  
   _heroes: function(heroData) {
     return Object.keys(heroData).map(key => heroData[key])
   },
@@ -36,10 +24,4 @@ Polymer({
     }
   },
 
-  ready: function() {
-    this.$.backButton.onclick = (event) => {
-      event.stopPropagation();
-      history.back();
-    }
-  }
 });

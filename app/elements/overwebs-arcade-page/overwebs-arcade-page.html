@@ -1,0 +1,67 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
+<link rel="import" href="../overwebs-arcade-tile/overwebs-arcade-tile.html">
+<link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
+<link rel="import" href="overwebs-arcade-page-style.html">
+
+<style media="screen">
+  @font-face {
+    font-family: arcade-page-noodle;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+
+  @font-face {
+    font-family: arcade-page-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+</style>
+
+<dom-module id="overwebs-arcade-page">
+  <template>
+    <style include="overwebs-arcade-page-style"></style>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
+    <svg class="header" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fillgradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#ffffff" offset="0" stop-opacity=".9"/>
+          <stop stop-color="#ffffff" offset="1" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="outlinegradient" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="#4C5C76" offset="0" stop-opacity="0.6"/>
+          <stop stop-color="#4C5C76" offset="1" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+      <g>
+        <text id="text" x="0" y="95%" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">Arcade</text>
+      </g>
+    </svg>
+    <div class="thingy">
+
+    </div>
+    <div class="modes">
+      <overwebs-arcade-tile big mystery-duel popularity="1">
+        <div slot="size">1v1</div>
+        <div slot="title">Mystery Duel</div>
+      </overwebs-arcade-tile>
+      <overwebs-arcade-tile elimination popularity="5">
+        <div slot="size">3v3</div>
+        <div slot="title">Elimination</div>
+      </overwebs-arcade-tile>
+      <overwebs-arcade-tile mystery-heroes popularity="0">
+        <div slot="size">6v6</div>
+        <div slot="title">Mystery Heroes</div>
+      </overwebs-arcade-tile>
+      <overwebs-arcade-tile all-brawls popularity="2">
+        <div slot="size">6v6</div>
+        <div slot="title">All Brawls!</div>
+      </overwebs-arcade-tile>
+      <overwebs-arcade-tile no-limits popularity="2">
+        <div slot="size">6v6</div>
+        <div slot="title">No Limits</div>
+      </overwebs-arcade-tile>
+    </div>
+    <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
+  </template>
+  <script type="text/javascript" src="overwebs-arcade-page.js"></script>
+</dom-module>
