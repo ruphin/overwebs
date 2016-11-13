@@ -193,6 +193,18 @@ let backgroundSets = {
       'hero-gallery_to_main': {
         transition: 'main',
       },
+      'to_vs-ai': {
+        mirror: 'to_competitive'
+      },
+      'vs-ai': {
+        mirror: 'competitive'
+      },
+      'vs-ai_to_play': {
+        mirror: 'competitive_to_play'
+      },
+      'vs-ai_to_training': {
+        mirror: 'competitive_to_play'
+      },
     },
   },
   volskaya: {
@@ -295,6 +307,18 @@ let backgroundSets = {
       'hero-gallery_to_main': {
         transition: 'main',
       },
+      'to_vs-ai': {
+        mirror: 'to_competitive'
+      },
+      'vs-ai': {
+        mirror: 'competitive'
+      },
+      'vs-ai_to_play': {
+        mirror: 'competitive_to_play'
+      },
+      'vs-ai_to_training': {
+        mirror: 'competitive_to_play'
+      },
     },
     genji: {
       'to_main': {
@@ -356,6 +380,18 @@ let backgroundSets = {
       },
       'hero-gallery_to_main': {
         transition: 'main',
+      },
+      'to_vs-ai': {
+        mirror: 'to_competitive'
+      },
+      'vs-ai': {
+        mirror: 'competitive'
+      },
+      'vs-ai_to_play': {
+        mirror: 'competitive_to_play'
+      },
+      'vs-ai_to_training': {
+        mirror: 'competitive_to_play'
       },
     },
   },
@@ -458,6 +494,18 @@ let backgroundSets = {
       },
       'hero-gallery_to_main': {
         transition: 'main',
+      },
+      'to_vs-ai': {
+        mirror: 'to_competitive'
+      },
+      'vs-ai': {
+        mirror: 'competitive'
+      },
+      'vs-ai_to_play': {
+        mirror: 'competitive_to_play'
+      },
+      'vs-ai_to_training': {
+        mirror: 'competitive_to_play'
       },
     },
   },

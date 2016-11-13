@@ -61,6 +61,15 @@
       background-image: url(images/icon-practiceRange.png);
     }
   }
+  &[easy-ai] {
+    background-image: url(images/easyAI.png);
+  }
+  &[medium-ai] {
+    background-image: url(images/mediumAI.png);
+  }
+  &[hard-ai] {
+    background-image: url(images/hardAI.png);
+  }
 
   &:hover {
     box-shadow: 0 0 0 calc(8.5/1.1/25.6*1vw) #FFFFFF;

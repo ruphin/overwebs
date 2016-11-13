@@ -1,8 +1,9 @@
 <link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-widget/overwebs-player-data.html">
 <link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
 <link rel="import" href="../overwebs-play-tile/overwebs-play-tile.html">
 <link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
-<link rel="import" href="overwebs-training-page-style.html">
+<link rel="import" href="overwebs-vs-ai-page-style.html">
 
 <style>
   @font-face {
@@ -16,9 +17,9 @@
   }
 </style>
 
-<dom-module id="overwebs-training-page">
+<dom-module id="overwebs-vs-ai-page">
   <template>
-    <style include="overwebs-training-page-style"></style>
+    <style include="overwebs-vs-ai-page-style"></style>
     <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
     <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
     <svg class="header" xmlns="http://www.w3.org/2000/svg">
@@ -33,26 +34,24 @@
         </linearGradient>
       </defs>
       <g>
-        <text id="text" x="0" y="95%" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">Training</text>
+        <text id="text" x="0" y="95%" stroke-width="0.12625vw" stroke-linejoin="round" stroke-alignment="outside" stroke="url(#outlinegradient)" fill="url(#fillgradient)">VS. AI</text>
       </g>
     </svg>
     <div class="modes">
-      <overwebs-play-tile tutorial>
-        <div slot="title">Tutorial</div>
-        <div slot="description">Learn the basics of Overwatch.</div>
+      <overwebs-play-tile easy-ai>
+        <div slot="title">Easy</div>
+        <div slot="description">Play against easy difficulty AI-controlled heroes.</div>
       </overwebs-play-tile>
-      <overwebs-play-tile arcade>
-        <div slot="title">Practice Range</div>
-        <div slot="description">Practice using your weapons and abilities.</div>
+      <overwebs-play-tile medium-ai>
+        <div slot="title">Medium</div>
+        <div slot="description">Play against medium difficulty AI-controlled heroes.</div>
       </overwebs-play-tile>
-      <a href="/vs-ai">
-        <overwebs-play-tile play-vs-ai>
-          <div slot="title">Practice vs. AI</div>
-          <div slot="description">Hone your skill by playing against AI-controlled heroes.</div>
-        </overwebs-play-tile>
-      </a>
+      <overwebs-play-tile hard-ai>
+        <div slot="title">Hard</div>
+        <div slot="description">Play against hard difficulty AI-controlled heroes.</div>
+      </overwebs-play-tile>
     </div>
     <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
   </template>
-  <script type="text/javascript" src="overwebs-training-page.js"></script>
+  <script type="text/javascript" src="overwebs-vs-ai-page.js"></script>
 </dom-module>

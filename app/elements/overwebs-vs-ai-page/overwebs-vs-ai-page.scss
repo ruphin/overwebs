@@ -19,6 +19,7 @@
   animation-duration: 0.6s;
   animation-name: headermove;
   animation-iteration-count: 1;
+  // animation-timing-function: cubic-bezier(.3,.87,.13,.99);
   animation-timing-function: ease-out;
   animation-direction: normal;
 }
@@ -28,9 +29,6 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  a {
-    text-decoration: none;
-  }
   > * {
     animation-duration: 0.2s;
     animation-name: fadein;
@@ -62,6 +60,8 @@
     }
   }
 }
+
+
 
 .overlay {
   opacity: 0;
@@ -131,7 +131,8 @@
 @keyframes fadein {
   0% {
     opacity: 0;
-  },
+  }
+
   100% {
     opacity: 1;
   }
