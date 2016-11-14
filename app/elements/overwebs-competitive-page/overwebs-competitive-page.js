@@ -6,9 +6,12 @@ Polymer({
     },
   },
   ready: function() {
-    this.$.backButton.onclick = (event) => {
+    this.$.return.onclick = this.$.backButton.onclick = (event) => {
       event.stopPropagation();
       history.back();
     }
+  },
+  _svgPath: function(fileName) {
+    return this.resolveUrl(`images/${fileName}.svg#main`);
   }
 });

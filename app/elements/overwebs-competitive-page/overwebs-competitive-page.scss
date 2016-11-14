@@ -18,15 +18,27 @@
   }
 }
 
+.header.background {
+  position: absolute;
+  top: calc(-50/25.6*1vw);
+  left: calc(500/25.6*1vw);
+  width: calc(600/25.6*1vw);
+  height: calc(600/25.6*1vw);
+  fill: rgba(250,250,250,0.2);
+}
+
 .container {
   display: flex;
   height: calc(800/25.6*1vw);
   margin-top: calc(320/25.6*1vw);
   margin-left: calc(320/25.6*1vw);
 
-  .back {
+  #return {
     background: rgba(255,255,255,0.2);
     width: calc(113/25.6*1vw);
+    &:hover {
+      box-shadow: inset 0 0 0 calc(3/25.6*1vw) #FFFFFF;
+    }
   }
 
   .competitive {
@@ -78,6 +90,8 @@
     display: flex;
     flex-flow: column;
     .header {
+      display: flex;
+      align-items: center;
       font-family: competitive-page-futura;
       font-size: calc(52/25.6*1vw);
       text-transform: uppercase;
@@ -87,12 +101,7 @@
         height: calc(46/25.6*1vw);
         width: calc(46/25.6*1vw);
         display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-        background: #FFFFFF;
-        color: red;
-        text-transform: none;
+        fill: #FFFFFF;
         margin-right: calc(20/25.6*1vw);
       }
     }
@@ -175,33 +184,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: calc(22/25.6*1vw);
+    font-size: calc(24/25.6*1vw);
     text-transform: uppercase;
     border: none;
     .i {
-      display: inline-flex;
+      display: inline-block;
       height: calc(28/25.6*1vw);
       width: calc(28/25.6*1vw);
-      border-radius: 100%;
-      justify-content: center;
-      align-items: center;
-      background: white;
-      text-transform: none;
-      font-size: calc(26/25.6*1vw);
-      margin-right: calc(8/25.6*1vw);
+      fill: #FFFFFF;
+      margin-right: calc(6/25.6*1vw);
     }
     &:focus { // TODO: Merge this with the :hover style once buttons actually link to stuff
       outline: none;
     }
     &.blue {
       background: #1C75BC;
-      .i {
-        color: #1C75BC;
-      }
       &:hover {
-        .i {
-          color: #245D85;
-        }
         background: rgba(36,93,133,0.95);
         box-shadow: inset 0 0 0 calc(3/25.6*1vw) #FFFFFF;
       }
@@ -209,13 +207,7 @@
 
     &.yellow {
       background: rgba(190,123,40,0.95);
-      .i {
-        color: rgba(190,123,40,0.95);
-      }
       &:hover {
-        .i {
-          color: #74582E;
-        }
         background: rgba(116,88,46,0.95);
         box-shadow: inset 0 0 0 calc(3/25.6*1vw) #FFFFFF;
       }
