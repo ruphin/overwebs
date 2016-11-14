@@ -93,10 +93,10 @@ Polymer({
       return;
     }
     //this.postMessage(this.player.name, this._channel, message);
-    this.postMessage('You', this._channel, message);
+    this.postMessage(this.player.name, this._channel, message);
     this.$.input.value = "";
     // Let the chatInteraction element know a message has been posted
-    this.$.chatInteraction.messagePosted()
+    this.$.chatInteraction.messagePosted();
     // Push any messages posted to firebase
     this.firebase.database().ref(`messages/${this.firebaseUser}`).push(message);
 

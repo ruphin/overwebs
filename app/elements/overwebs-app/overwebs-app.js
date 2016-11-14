@@ -75,7 +75,7 @@ Polymer({
     this.$.background.page = newRoute
 
     // Lazy load any new pages we are visiting that haven't been loaded yet
-    if (newRoute != 'main' && this._routes[newRoute] && newRoute != 'secret') {
+    if (newRoute != 'main' && this._routes[newRoute] && newRoute != 'exit') {
       let newRouteElement = this._routes[newRoute].tagName.toLowerCase()
       newPage = this.resolveUrl('../' + newRouteElement + '/' + newRouteElement + '.html')
       this.importHref(newPage, null, function() {
