@@ -205,6 +205,7 @@ gulp.task('serve', ['scss', 'elementScss', 'js', 'fonts'], function() {
   browserSync({
     port: 5000,
     notify: false,
+    online: false,
     logPrefix: 'APP',
     snippetOptions: {
       rule: {
