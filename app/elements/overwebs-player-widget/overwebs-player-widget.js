@@ -19,7 +19,7 @@ Polymer({
       return;
     }
     if (player.avatar) {
-      this.$.avatar.style.backgroundImage = 'url(https://blzgdapipro-a.akamaihd.net/game/unlocks/' + player.avatar + '.png)';
+      this.$.avatar.style.backgroundImage = 'url(' + this.resolveUrl(`avatars/${player.avatar}.png`) + ')';
     }
     this.$.levelBox.classList.remove(prestige);
     this.$.levelBox.classList.add(prestige[Math.trunc(player.level / 600)]);
