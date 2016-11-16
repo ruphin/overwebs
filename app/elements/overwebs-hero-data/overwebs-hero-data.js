@@ -55,6 +55,7 @@ Polymer({
           name: 'McCree',
           unlockable: 63,
           color: '#640607',
+          background: true,
         },
         mei: {
           id: 'mei',
