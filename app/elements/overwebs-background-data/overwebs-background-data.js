@@ -545,7 +545,90 @@ let backgroundSets = {
       },
     },
   },
-  // eichenwalde: {
+  eichenwalde: {
+    mccree: {
+      'to_main': {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'main': {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+        video: 'eichenwalde/shared/to_play.mp4',
+        image: 'eichenwalde/shared/to_play.jpg',
+      },
+      'play': {
+        preload: ['play_to_main'],
+        video: 'eichenwalde/shared/play.mp4',
+        image: 'eichenwalde/shared/play.jpg',
+      },
+      'to_competitive': {
+        transition: 'competitive',
+        preload: ['competitive_to_play'],
+        video: 'eichenwalde/shared/to_competitive.mp4',
+        image: 'eichenwalde/shared/to_competitive.jpg',
+      },
+      'competitive': {
+        preload: ['competitive_to_play'],
+        video: 'eichenwalde/shared/competitive.mp4',
+        image: 'eichenwalde/shared/competitive.jpg',
+      },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'eichenwalde/shared/competitive_to_play.mp4',
+        image: 'eichenwalde/shared/competitive_to_play.jpg',
+      },
+      'play_to_main': {
+        transition: 'main',
+      },
+      'to_training': {
+        mirror: 'to_play'
+      },
+      'training': {
+        mirror: 'training'
+      },
+      'training_to_main': {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+        video: 'eichenwalde/shared/to_hero-gallery.mp4',
+        image: 'eichenwalde/shared/to_hero-gallery.jpg',
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+        video: 'eichenwalde/shared/hero-gallery.mp4',
+        image: 'eichenwalde/shared/hero-gallery.jpg',
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+      'to_vs-ai': {
+        mirror: 'to_competitive'
+      },
+      'vs-ai': {
+        mirror: 'competitive'
+      },
+      'vs-ai_to_play': {
+        mirror: 'competitive_to_play'
+      },
+      'vs-ai_to_training': {
+        mirror: 'competitive_to_play'
+      },
+      'to_arcade': {
+        mirror: 'to_competitive'
+      },
+      'arcade': {
+        mirror: 'competitive'
+      },
+      'arcade_to_play': {
+        mirror: 'competitive_to_play'
+      },
+    },
   //   roadhog: {
   //     'to_main': {
   //       transition: 'main',
@@ -584,8 +667,91 @@ let backgroundSets = {
   //       transition: 'main',
   //     },
   //   }
-  // },
-  // hanamura: {
+  },
+  hanamura: {
+    sombra: {
+      'to_main': {
+        transition: 'main',
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'main': {
+        preload: ['to_play', 'to_hero-gallery'],
+      },
+      'to_play': {
+        transition: 'play',
+        preload: ['play_to_main'],
+        video: 'hanamura/shared/to_play.mp4',
+        image: 'hanamura/shared/to_play.jpg',
+      },
+      'play': {
+        preload: ['play_to_main'],
+        video: 'hanamura/shared/play.mp4',
+        image: 'hanamura/shared/play.jpg',
+      },
+      'to_competitive': {
+        transition: 'competitive',
+        preload: ['competitive_to_play'],
+        video: 'hanamura/shared/to_competitive.mp4',
+        image: 'hanamura/shared/to_competitive.jpg',
+      },
+      'competitive': {
+        preload: ['competitive_to_play'],
+        video: 'hanamura/shared/competitive.mp4',
+        image: 'hanamura/shared/competitive.jpg',
+      },
+      'competitive_to_play': {
+        transition: ['play'],
+        video: 'hanamura/shared/competitive_to_play.mp4',
+        image: 'hanamura/shared/competitive_to_play.jpg',
+      },
+      'play_to_main': {
+        transition: 'main',
+      },
+      'to_training': {
+        mirror: 'to_play'
+      },
+      'training': {
+        mirror: 'training'
+      },
+      'training_to_main': {
+        mirror: 'play_to_main'
+      },
+      'to_hero-gallery': {
+        transition: 'hero-gallery',
+        preload: ['hero-gallery_to_main'],
+        video: 'hanamura/shared/to_hero-gallery.mp4',
+        image: 'hanamura/shared/to_hero-gallery.jpg',
+      },
+      'hero-gallery': {
+        preload: ['hero-gallery_to_main'],
+        video: 'hanamura/shared/hero-gallery.mp4',
+        image: 'hanamura/shared/hero-gallery.jpg',
+      },
+      'hero-gallery_to_main': {
+        transition: 'main',
+      },
+      'to_vs-ai': {
+        mirror: 'to_competitive'
+      },
+      'vs-ai': {
+        mirror: 'competitive'
+      },
+      'vs-ai_to_play': {
+        mirror: 'competitive_to_play'
+      },
+      'vs-ai_to_training': {
+        mirror: 'competitive_to_play'
+      },
+      'to_arcade': {
+        mirror: 'to_competitive'
+      },
+      'arcade': {
+        mirror: 'competitive'
+      },
+      'arcade_to_play': {
+        mirror: 'competitive_to_play'
+      },
+    },
   //   reaper: {
   //     'to_main': {
   //       transition: 'main',
@@ -624,7 +790,7 @@ let backgroundSets = {
   //       transition: 'main',
   //     },
   //   }
-  // },
+  },
   // kings_row: {
   //   reinhardt: {
   //     'to_main': {
