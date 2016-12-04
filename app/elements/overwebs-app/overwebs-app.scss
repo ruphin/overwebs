@@ -4,12 +4,12 @@
   background: black;
 }
 
-#pages > * {
+#chat[hidden] {
   display: none;
 }
 
-#pages > .visible {
-  display: block;
+#pages > *:not(.visible) {
+  display: none;
 }
 
 #exit {

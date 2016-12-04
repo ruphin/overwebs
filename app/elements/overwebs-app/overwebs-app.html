@@ -20,6 +20,7 @@
 
     <div id="pages">
       <a href="/" route="exit" id="exit"></a>
+      <overwebs-login-page route="login"></overwebs-login-page>
       <overwebs-main-page route="main" background-selection="[[backgroundSelection]]"></overwebs-main-page>
       <overwebs-gallery-page route="hero-gallery"></overwebs-gallery-page>
       <overwebs-play-page route="play"></overwebs-play-page>
@@ -30,7 +31,7 @@
     </div>
 
     <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
-    <overwebs-chat-widget tabindex="-1" player="[[playerData]]"></overwebs-chat-widget>
+    <overwebs-chat-widget id="chat" tabindex="-1" player="[[playerData]]"></overwebs-chat-widget>
 
   </template>
   <script type="text/javascript" src="overwebs-app.js"></script>

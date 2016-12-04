@@ -12,21 +12,21 @@
       name: 'Bastion',
       unlockable: 65,
       color: '#1D2B14',
-      background: false,
+      background: true,
     },
     dva: {
       id: 'dva',
       name: 'D.Va',
       unlockable: 63,
       color: '#F93080',
-      background: false,
+      background: true,
     },
     genji: {
       id: 'genji',
       name: 'Genji',
       unlockable: 64,
       color: '#32F600',
-      background: false,
+      background: true,
     },
     hanzo: {
       id: 'hanzo',
@@ -54,7 +54,7 @@
       name: 'McCree',
       unlockable: 63,
       color: '#640607',
-      background: false,
+      background: true,
     },
     mei: {
       id: 'mei',
@@ -75,14 +75,14 @@
       name: 'Pharah',
       unlockable: 65,
       color: '#001984',
-      background: false,
+      background: true,
     },
     reaper: {
       id: 'reaper',
       name: 'Reaper',
       unlockable: 66,
       color: '#1D0002',
-      background: false,
+      background: true,
     },
     reinhardt: {
       id: 'reinhardt',
@@ -97,7 +97,7 @@
       name: 'Roadhog',
       unlockable: 64,
       color: '#6C2803',
-      background: false,
+      background: true,
     },
     soldier76: {
       id: 'soldier76',
@@ -105,14 +105,14 @@
       unlockable: 65,
       color: '#0F132E',
       scaling: 0.8,
-      background: false,
+      background: true,
     },
     sombra: {
       id: 'sombra',
       name: 'Sombra',
       unlockable: 58,
       color: '#75317E',
-      background: false,
+      background: true,
     },
     symmetra: {
       id: 'symmetra',
@@ -135,7 +135,7 @@
       name: 'Tracer',
       unlockable: 62,
       color: '#BA3202',
-      background: false,
+      background: true,
     },
     widowmaker: {
       id: 'widowmaker',
@@ -143,14 +143,14 @@
       unlockable: 65,
       color: '#410B45',
       scaling: 0.7,
-      background: false,
+      background: true,
     },
     winston: {
       id: 'winston',
       name: 'Winston',
       unlockable: 64,
       color: '#46496A',
-      background: false,
+      background: true,
     },
     zarya: {
       id: 'zarya',
@@ -188,22 +188,22 @@
 
     ready: function () {
       elements.push(this);
-      this.$.haxxOn.onclick = () => {
-        this.debounce('haxxOn', _ => {
-          for (hero in heroData) {
-            heroData[hero].background = true;
-          }
-          elements.forEach((e) => { e._notify() });
-        });
-      }
-      this.$.haxxOff.onclick = () => {
-        this.debounce('haxxOff', _ => {
-          for (hero in heroData) {
-            heroData[hero].background = false;
-          }
-          elements.forEach((e) => { e._notify() });
-        });
-      }
+      // this.$.haxxOn.onclick = () => {
+      //   this.debounce('haxxOn', _ => {
+      //     for (hero in heroData) {
+      //       heroData[hero].background = true;
+      //     }
+      //     elements.forEach((e) => { e._notify() });
+      //   });
+      // }
+      // this.$.haxxOff.onclick = () => {
+      //   this.debounce('haxxOff', _ => {
+      //     for (hero in heroData) {
+      //       heroData[hero].background = false;
+      //     }
+      //     elements.forEach((e) => { e._notify() });
+      //   });
+      // }
     }
   });
 }

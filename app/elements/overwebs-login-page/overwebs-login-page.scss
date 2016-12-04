@@ -1,0 +1,68 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+form#loginform {
+  width: calc(400/25.6*1vw);
+  display: flex;
+  flex-flow: column;
+}
+label {
+  margin-bottom: calc(14/25.6*1vw);
+  font-family: login-page-futura;
+  font-size: calc(24/25.6*1vw);
+  color: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+#username {
+  height: calc(66/25.6*1vw);
+  margin-bottom: calc(47/25.6*1vw);
+  background: #D1D1D4;
+  border-radius: calc(9/25.6*1vw);
+  border: none;
+  text-align: center;
+  font-family: login-page-futura;
+  font-size: calc(28/25.6*1vw);
+  transition: background-color linear 0.08s;
+  box-shadow: inset 0 0 calc(1/25.6*1vw) calc(2/25.6*1vw) #FFFFFF;
+  &:hover {
+    background: #FFFFFF;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 calc(1/25.6*1vw) calc(2/25.6*1vw) #FFFFFF, 0 0 0 calc(1/25.6*1vw) #FFFFFF;
+  }
+}
+
+#loginbutton {
+  height: calc(76/25.6*1vw);
+  margin-bottom: calc(135/25.6*1vw);
+  background: transparent;
+  border: none;
+  border-radius: calc(4/25.6*1vw);
+  box-shadow: inset 0 0 calc(1/25.6*2vw) calc(2/25.6*1vw) rgba(141, 166, 171, 0.8), 0 0 calc(3/25.6*1vw) rgba(141, 166, 171, 0.8);
+  color: rgba(141, 166, 171, 0.8);
+  font-family: login-page-futura;
+  font-size: calc(46/25.6*1vw);
+  text-shadow: 0 0 calc(2/25.6*1vw) rgba(141, 166, 171, 0.8);
+  text-transform: uppercase;
+  &:focus {
+    outline: none;
+  }
+  &[active] {
+    color: #FFFFFF;
+    text-shadow: 0 0 calc(2/25.6*1vw) #FFFFFF;
+    background: #E6AE35;
+    box-shadow: 0 0 calc(5/25.6*1vw) #E6AE35;
+  }
+}

@@ -1,0 +1,27 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
+<link rel="import" href="overwebs-login-page-style.html">
+
+<style>
+  @font-face {
+    font-family: login-page-noodle;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+  @font-face {
+    font-family: login-page-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+</style>
+
+<dom-module id="overwebs-login-page">
+  <template>
+    <style include="overwebs-login-page-style"></style>
+    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <form id="loginform" on-submit="_login">
+      <label for="username">Username</label>
+      <input type="text" id="username" value="{{username::value}}" required></input>
+      <button id="loginbutton" tabindex$="[[loginValid]]" active$="[[loginValid]]">Login</button>
+    </form>
+  </template>
+  <script type="text/javascript" src="overwebs-login-page.js"></script>
+</dom-module>

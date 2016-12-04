@@ -68,8 +68,14 @@ Polymer({
       return;
     }
 
-    // TODO: Enable or disable or move the chat widget depending on the page.
+    // Enable or disable or move the chat widget depending on the page.
     // Should this be responsibility of the app? I don't know.
+    if (newRoute === 'login') {
+      this.$.chat.setAttribute('hidden', '');
+    } else {
+      this.$.chat.removeAttribute('hidden');
+    }
+
 
     // Notify the background element that we changed route
     this.$.background.page = newRoute

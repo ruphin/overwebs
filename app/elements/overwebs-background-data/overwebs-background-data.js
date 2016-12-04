@@ -66,6 +66,10 @@
         video: `${map}/shared/hero-gallery.mp4`,
         image: `${map}/shared/hero-gallery.jpg`,
       },
+      'login': {
+        preload: ['to_main'],
+        image: 'shared/login.jpg',
+      },
       // Hero specific backgrounds
       'to_main': {
         transition: 'main',
