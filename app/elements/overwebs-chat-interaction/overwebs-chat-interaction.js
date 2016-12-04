@@ -1,27 +1,22 @@
 let messages = {
-  one: {
-    author: 'Oxmaster',
-    message: 'dicks out for sombra',
-    channel: 'General',
-  },
-  two: {
-    author: 'Trollmaster',
-    message: 'this patch so lame, 3v3 is unbalanced af',
-    channel: 'General',
-  },
-  three: {
+  introduction: {
     author: 'Ruphin',
-    message: 'Zenyatta gets nerfed so hard by sombra ult :<',
+    message: 'Welcome to Overwebs! Enable fullscreen with F11 for the best experience',
+    channel: 'General',
+  },
+  leaveMessage: {
+    author: 'Ruphin',
+    message: 'You can leave me a message by posting in this chat',
     channel: 'General',
   },
   postedMessage: {
     author: 'Ruphin',
-    message: 'Oh hey',
+    message: 'Thanks for leaving a message, I\'ll be sure to read it later',
     channel: 'General',
   },
   leaveEmail: {
     author: 'Ruphin',
-    message: "Aren't you a pro player?",
+    message: 'If you leave your email address I\'ll get back to you!',
     channel: 'General',
   }
 }
@@ -30,15 +25,15 @@ Polymer({
   is: 'overwebs-chat-interaction',
 
   ready: function () {
+    // Leave a message to tell users to F11
     window.setTimeout(() => {
-      this.fire('post-message', messages.one);
-    }, 1000);
+      this.fire('post-message', messages.introduction);
+    }, 10000);
+
+    // If they didn't post anything, let them know they can post
     this._queuedMessage = setTimeout( _ => {
-      this.fire('post-message', messages.two);
-    }, 1500);
-    this._queuedMessage = setTimeout( _ => {
-      this.fire('post-message', messages.three);
-    }, 26000);
+      this.fire('post-message', messages.leaveMessage);
+    }, 20000);
   },
 
   messagePosted: function() {

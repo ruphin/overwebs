@@ -25,7 +25,7 @@
     overflow-y: scroll;
     color: #FFFFFF;
     line-height: 1.4;
-    text-shadow: calc(.6 / 25.6 * 1vw) calc(.8 / 25.6 * 1vw) #000;
+    text-shadow: calc(.6 / 25.6 * 1vw) calc(.8 / 25.6 * 1vw) rgba(0,0,0,.65);
     &::-webkit-scrollbar {
       position: absolute;
       margin-right: 100px;
@@ -102,7 +102,7 @@
     overflow: hidden;
     color: #FFFFFF;
     line-height: 1.4;
-    text-shadow: calc(.5 / 25.6 * 1vw) calc(.5 / 25.6 * 1vw) 0 #000;
+    text-shadow: calc(.5 / 25.6 * 1vw) calc(.5 / 25.6 * 1vw) 0 rgba(0,0,0,.65);
   }
 
   .input {

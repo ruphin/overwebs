@@ -4,6 +4,9 @@
 <link rel="import" href="../overwebs-background/overwebs-background.html">
 <link rel="import" href="../overwebs-chat-widget/overwebs-chat-widget.html">
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
+<link rel="import" href="../../vendor/polymerfire/firebase-app.html">
+<link rel="import" href="../../vendor/polymerfire/firebase-auth.html">
+<link rel="import" href="../../vendor/polymerfire/firebase-document.html">
 <!-- Eager load the home page -->
 <link rel="import" href="../overwebs-main-page/overwebs-main-page.html">
 <link rel="import" href="overwebs-app-style.html">
@@ -28,11 +31,18 @@
       <overwebs-arcade-page route="arcade"></overwebs-arcade-page>
       <overwebs-training-page route="training"></overwebs-training-page>
       <overwebs-vs-ai-page route="vs-ai"></overwebs-vs-ai-page>
+      <div class="loading" route="loading"></div>
     </div>
 
-    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-data id="playerdata" player="{{playerData}}"></overwebs-player-data>
     <overwebs-chat-widget id="chat" tabindex="-1" player="[[playerData]]"></overwebs-chat-widget>
 
+    <firebase-app
+      app="{{firebase}}"
+      auth-domain="overwebs-86c53.firebaseapp.com"
+      database-url="https://overwebs-86c53.firebaseio.com"
+      api-key="AIzaSyD-FCqLAtCYYCitKmErFWT2xEQyHk7fhBU">
+    </firebase-app>
   </template>
   <script type="text/javascript" src="overwebs-app.js"></script>
 </dom-module>

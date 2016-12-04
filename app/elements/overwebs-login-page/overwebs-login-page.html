@@ -16,11 +16,12 @@
 <dom-module id="overwebs-login-page">
   <template>
     <style include="overwebs-login-page-style"></style>
-    <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
+    <overwebs-player-data id="playerdata"></overwebs-player-data>
     <form id="loginform" on-submit="_login">
       <label for="username">Username</label>
-      <input type="text" id="username" value="{{username::value}}" required></input>
-      <button id="loginbutton" tabindex$="[[loginValid]]" active$="[[loginValid]]">Login</button>
+      <input type="text" id="login" value="{{login::input}}" pattern="^([a-zA-Z]+(#[0-9]+)?)?$"></input>
+      <button id="loginbutton" tabindex$="[[loginValid]]" disabled$="[[!loginValid]]">Login</button>
+      <button id="loginbutton" disabled$="[[loginValid]]">Anonymous</button>
     </form>
   </template>
   <script type="text/javascript" src="overwebs-login-page.js"></script>

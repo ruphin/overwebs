@@ -21,7 +21,7 @@ Polymer({
     if (!hero.background) {
       return "javascript:;";
     } else {
-      return `/?background=./${hero.id}`;
+      return `/main?background=./${hero.id}`;
     }
   },
 

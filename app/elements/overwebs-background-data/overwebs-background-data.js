@@ -68,6 +68,7 @@
       },
       'login': {
         preload: ['to_main'],
+        video: false,
         image: 'shared/login.jpg',
       },
       // Hero specific backgrounds
@@ -186,7 +187,10 @@
           // Use the given sources if they are defined, otherwise infer the source
           let backgroundVideo = backgroundData[background].video || `${this.backgroundSelection}${background}.mp4`;
           let backgroundImage = backgroundData[background].image || `${this.backgroundSelection}${background}.jpg`;
-          backgroundData[background].video = this.resolveUrl(backgroundVideo);
+
+          if (backgroundData[background].video !== false) {
+            backgroundData[background].video = this.resolveUrl(backgroundVideo);
+          }
           backgroundData[background].image = this.resolveUrl(backgroundImage);
         }
       }

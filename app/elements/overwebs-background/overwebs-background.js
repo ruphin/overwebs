@@ -30,7 +30,7 @@ Polymer({
     for (let section in backgrounds) {
       if (!backgrounds[section].mirror) {
         let video = document.createElement('video');
-        video.videoSource = backgrounds[section].video;
+        video.videoSource = backgrounds[section].video || undefined;
         video.posterSource = backgrounds[section].image;
         video.playsInline = true;
         video.preload = "none";
@@ -54,6 +54,10 @@ Polymer({
   _pageChanged: function (newPage, oldPage) {
     if (!this.backgrounds) {
       console.warn("Attempting to load page background, but background data is not loaded");
+      return;
+    }
+
+    if (!newPage) {
       return;
     }
 
@@ -105,7 +109,7 @@ Polymer({
     }
 
     // If we're not low bandwidth mode, start playing
-    if (!this.lowBandwidth) {
+    if (!this.lowBandwidth && target.videoSource !== undefined) {
       // Start loading the video immediately if it wasn't already loading
       if (target.preload !== "auto") {
         target.src = target.videoSource;
@@ -141,9 +145,10 @@ Polymer({
           target.src = target.videoSource;
           target.preload = "auto";
         }
-        // This is required for looping. If a video ends,
-        // the 'src' attribute is cleared
-        target.src = target.videoSource
+        // I don't know why this was here, it doesn't make any sense to me:
+        // // This is required for looping. If a video ends,
+        // // the 'src' attribute is cleared
+        // target.src = target.videoSource
       }
 
       if (target.posterSource) {

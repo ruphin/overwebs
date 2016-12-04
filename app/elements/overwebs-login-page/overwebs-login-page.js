@@ -1,24 +1,41 @@
 Polymer({
   is: 'overwebs-login-page',
   properties: {
-    username: {
+    login: {
       type: String,
-      observer: '_usernameChanged'
+      observer: '_loginChanged'
     },
   },
+
+  ready: function () {
+    this.loginValid = false;
+  },
+
   _login: function (e) {
     e.preventDefault();
-    console.log(`Logging in as ${username}`)
-    console.log(this.playerData)
-    // Use the username and change playerData
-    // Go to main page
-  },
-  _usernameChanged: function(username) {
-    if (username) {
-      this.loginValid = "-1";
+    if (!this.login) {
+      this.dispatchEvent(new CustomEvent('login', {
+        'detail': { anonymous: true }
+      }));
     } else {
-      this.loginValid = false;
+      let [username, battleTag] = this.login.split('#');
+      this.dispatchEvent(new CustomEvent('login', {
+        detail: { username: username, battleTag: battleTag }
+      }));
     }
+
+
+  },
+
+  _loginChanged: function(username) {
+    this.debounce('loginChanged', _ => {
+      if (username) {
+        this.loginValid = "-1";
+      } else {
+        this.loginValid = false;
+      }
+    }, 100);
+
   }
 
 });

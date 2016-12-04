@@ -28,8 +28,9 @@
       zenyatta: 51,
       sombra: 37,
     }
-  }
+  };
 
+  let login = {};
   let elements = [];
 
   Polymer({
@@ -37,15 +38,27 @@
     properties: {
       player: {
         type: Object,
-        notify: true,
         readOnly: true,
+        notify: true,
         value: playerData,
       },
+      login: {
+        type: Object,
+        value: login,
+        observer: '_loginChanged'
+      }
     },
 
     _notify: function() {
       this._setPlayer({});
       this._setPlayer(playerData);
+    },
+
+    _loginChanged: function(newLogin) {
+      if (newLogin && newLogin.username) {
+        playerData.name = newLogin.username;
+        elements.forEach((e) => { e._notify() })
+      }
     },
 
     ready: function () {

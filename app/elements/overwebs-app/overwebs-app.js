@@ -7,7 +7,6 @@ Polymer({
       reflectToAttribute: true,
       observer: '_routeChanged'
     },
-
     _routes: {
       type: Object,
       value: {}
@@ -15,6 +14,10 @@ Polymer({
   },
 
   ready: function() {
+    // At initial boot, redirect to loading screen
+    window.history.replaceState({}, null, '/loading');
+    window.dispatchEvent(new CustomEvent('location-changed'));
+
     Array.prototype.map.call(this.$.pages.children, (page) => {
       this._routes[page.getAttribute("route")] = page;
     });
@@ -23,6 +26,63 @@ Polymer({
     if (mobile) {
       this.$.background.lowBandwidth = true;
     }
+
+    // Check if this user has previously logged in by checking firebaseID in the cookie.
+    let userID = document.cookie.replace(/(?:(?:^|.*;\s*)userID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    if (userID) {
+      // This user already has a login. Signin with this existing login.
+      let password = userID + "000000".slice(userID.length);
+      this.firebase.auth().signInWithEmailAndPassword(`${userID}@ruph.in`, password)
+      .then((e) => {
+
+        // Setup playerData
+        let userName = userID.split('-')[0];
+        this.$.playerdata.login = { username: userName };
+
+        this.loggedIn = true;
+        window.history.replaceState({}, null, '/main');
+        window.dispatchEvent(new CustomEvent('location-changed'));
+      }).catch((e) => { console.log(e); }); // Log error
+    } else {
+      // Redirect to login page
+      window.history.replaceState({}, null, '/login');
+      window.dispatchEvent(new CustomEvent('location-changed'));
+    }
+
+    this.addEventListener('login', (e) => this._login(e), true);
+  },
+
+  _login: function(e) {
+    e.preventDefault();
+
+    let userID;
+    if (e.detail.anonymous) {
+      // Append some random alphanumerics for anonymous ID
+      userID = `Anonymous-${Math.random().toString(36).slice(2,-20)}`;
+    } else if (e.detail.battleTag) {
+      userID = `${e.detail.username}-${e.detail.battleTag}`;
+    } else {
+      userID = `${e.detail.username}`;
+    }
+
+    // Pad the password with 0s
+    let password = userID + "000000".slice(userID.length);
+
+    this.firebase.auth().createUserWithEmailAndPassword(`${userID}@ruph.in`, password)
+    .catch((e) => {
+      // If the user already logged in before, just log in directly
+      if (e.code == "auth/email-already-in-use") {
+        return this.firebase.auth().signInWithEmailAndPassword(`${userID}@ruph.in`, password)
+      }
+    }).then((e) => {
+      document.cookie = `userID=${userID}`
+      // Setup playerData
+      let userName = userID.split('-')[0];
+      this.$.playerdata.login = { username: userName };
+      this.loggedIn = true;
+      window.history.replaceState({}, null, '/main');
+      window.dispatchEvent(new CustomEvent('location-changed'));
+    });
   },
 
   _routeChanged: function(newRoute, oldRoute) {
@@ -37,18 +97,19 @@ Polymer({
     // I'm not sure if this belongs here. Maybe I need to extract the logic for this somehow and expose an API
     if (newRoute.__queryParams && newRoute.__queryParams.background) {
       this.$.backgroundData.select = newRoute.__queryParams.background;
+      window.history.replaceState({}, null, '/main');
+      window.dispatchEvent(new CustomEvent('location-changed'));
     }
 
     // Remove initial '/' in the route path
     oldRoute = oldRoute && oldRoute.path.slice(1)
     newRoute = newRoute && newRoute.path.slice(1)
 
-    // TODO: Find a better solution for this.
-    if (newRoute === '') {
-      newRoute = 'main'
-    }
-    if (oldRoute === '') {
-      oldRoute = 'main'
+    // Wait for the login to resolve
+    if (!this.loggedIn && newRoute != 'login') {
+      // Show the loading background? Maybe this needs to be done elsewhere
+      this.$.background.page = 'login'
+      return
     }
 
     // Hide the old page
