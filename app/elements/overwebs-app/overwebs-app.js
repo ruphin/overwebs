@@ -34,11 +34,7 @@ Polymer({
       let password = userID + "000000".slice(userID.length);
       this.firebase.auth().signInWithEmailAndPassword(`${userID}@ruph.in`, password)
       .then((e) => {
-
-        // Setup playerData
-        let userName = userID.split('-')[0];
-        this.$.playerdata.login = { username: userName };
-
+        this.$.playerdata.login = { userID: userID, uid: e.uid };
         this.loggedIn = true;
         window.history.replaceState({}, null, '/main');
         window.dispatchEvent(new CustomEvent('location-changed'));
@@ -69,16 +65,22 @@ Polymer({
     let password = userID + "000000".slice(userID.length);
 
     this.firebase.auth().createUserWithEmailAndPassword(`${userID}@ruph.in`, password)
-    .catch((e) => {
+    .then((e) => {
+      // If a new user is created, push the userID
+      // onto the database message list so we know who's who
+      this.firebase.database().ref(`messages/${e.uid}`).push(userID);
+      return e
+    }).catch((e) => {
       // If the user already logged in before, just log in directly
       if (e.code == "auth/email-already-in-use") {
         return this.firebase.auth().signInWithEmailAndPassword(`${userID}@ruph.in`, password)
       }
     }).then((e) => {
+      e.updateProfile({ displayName: userID }).catch((e) => {
+        console.warn("Failed to add DisplayName")
+      });
       document.cookie = `userID=${userID}`
-      // Setup playerData
-      let userName = userID.split('-')[0];
-      this.$.playerdata.login = { username: userName };
+      this.$.playerdata.login = { userID: userID, uid: e.uid };
       this.loggedIn = true;
       window.history.replaceState({}, null, '/main');
       window.dispatchEvent(new CustomEvent('location-changed'));

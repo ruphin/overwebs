@@ -19,7 +19,7 @@
     <overwebs-player-data id="playerdata"></overwebs-player-data>
     <form id="loginform" on-submit="_login">
       <label for="username">Username</label>
-      <input type="text" id="login" value="{{login::input}}" pattern="^([a-zA-Z]+(#[0-9]+)?)?$"></input>
+      <input type="text" id="login" value="{{login::input}}" pattern="^([a-zA-Z]+(#[0-9]+)?)?$" autofocus></input>
       <button id="loginbutton" tabindex$="[[loginValid]]" disabled$="[[!loginValid]]">Login</button>
       <button id="loginbutton" disabled$="[[loginValid]]">Anonymous</button>
     </form>

@@ -55,8 +55,10 @@
     },
 
     _loginChanged: function(newLogin) {
-      if (newLogin && newLogin.username) {
-        playerData.name = newLogin.username;
+      if (newLogin && newLogin.userID) {
+        playerData.userID = newLogin.userID
+        playerData.name = newLogin.userID.split('-')[0];
+        playerData.uid = newLogin.uid;
         elements.forEach((e) => { e._notify() })
       }
     },

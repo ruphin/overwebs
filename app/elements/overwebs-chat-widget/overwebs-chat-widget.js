@@ -3,15 +3,20 @@ let nonPrintable = /^[\x00-\x20]*$/;
 Polymer({
   is: 'overwebs-chat-widget',
   properties: {
-    player: {
+    playerData: {
       type: Object,
-      value: {name: 'SomeGuy'},
+    },
+    firebase: {
+      type: Object,
     },
     _history: {
       type: Array,
       value: [],
     },
   },
+  observers: [
+    '_firebaseConnected(firebase, playerData)'
+  ],
 
 
   ready: function () {
@@ -74,14 +79,14 @@ Polymer({
       document.activeElement.blur();
       return;
     }
-    //this.postMessage(this.player.name, this._channel, message);
-    this.postMessage(this.player.name, this._channel, message);
+    this.postMessage(this.playerData.name, this._channel, message);
     this.$.input.value = "";
     // Let the chatInteraction element know a message has been posted
     this.$.chatInteraction.messagePosted();
     // Push any messages posted to firebase
-    this.firebase.database().ref(`messages/${this.firebaseUser}`).push(message);
-
+    if (this.chatData) {
+      this.chatData.push(message);
+    }
   },
 
   _scrollToBottom: function() {
@@ -95,5 +100,11 @@ Polymer({
   _hideMessages: function() {
     // Check if messages need to be hidden
     // This will be so annoying ..
+  },
+
+  _firebaseConnected: function(firebase, playerData) {
+    if (firebase && playerData && playerData.uid) {
+      this.chatData = firebase.database().ref(`messages/${this.playerData.uid}`);
+    }
   }
 });
