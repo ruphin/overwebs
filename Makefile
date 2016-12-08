@@ -1,5 +1,5 @@
-development:
-	docker run -it --rm -v $$PWD:/app -p 5000:5000 ruphin/webdev serve
+dev:
+	docker run -it --rm -v $$PWD:/app -p 5000:5000 ruphin/webdev gulp serve
 .PHONY: development
 
 production:
