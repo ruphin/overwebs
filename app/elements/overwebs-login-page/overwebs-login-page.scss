@@ -7,6 +7,7 @@
   height: 100vh;
   align-items: center;
   justify-content: flex-end;
+  letter-spacing: calc(1/25.6*1vw);
 }
 
 form#loginform {
@@ -46,24 +47,5 @@ label {
 }
 
 #loginbutton {
-  height: calc(76/25.6*1vw);
   margin-bottom: calc(47/25.6*1vw);
-  background: transparent;
-  border: none;
-  border-radius: calc(4/25.6*1vw);
-  box-shadow: inset 0 0 calc(1/25.6*2vw) calc(2/25.6*1vw) rgba(141, 166, 171, 0.8), 0 0 calc(3/25.6*1vw) rgba(141, 166, 171, 0.8);
-  color: rgba(141, 166, 171, 0.8);
-  font-family: login-page-futura;
-  font-size: calc(46/25.6*1vw);
-  text-shadow: 0 0 calc(2/25.6*1vw) rgba(141, 166, 171, 0.8);
-  text-transform: uppercase;
-  &:focus {
-    outline: none;
-  }
-  &:not([disabled]) {
-    color: #FFFFFF;
-    text-shadow: 0 0 calc(2/25.6*1vw) #FFFFFF;
-    background: #E6AE35;
-    box-shadow: 0 0 calc(5/25.6*1vw) #E6AE35;
-  }
 }

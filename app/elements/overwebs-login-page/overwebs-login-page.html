@@ -1,5 +1,6 @@
 <link rel="import" href="../../vendor/polymer/polymer.html">
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
+<link rel="import" href="../overwebs-button/overwebs-button.html">
 <link rel="import" href="overwebs-login-page-style.html">
 
 <style>
@@ -20,8 +21,8 @@
     <form id="loginform" on-submit="_login">
       <label for="username">Username</label>
       <input type="text" id="login" value="{{login::input}}" pattern="^([a-zA-Z]+(#[0-9]+)?)?$" autofocus></input>
-      <button id="loginbutton" tabindex$="[[loginValid]]" disabled$="[[!loginValid]]">Login</button>
-      <button id="loginbutton" disabled$="[[loginValid]]">Anonymous</button>
+      <overwebs-button yellow id="loginbutton" tabindex$="[[loginValid]]" disabled$="[[!loginValid]]">Login</overwebs-button>
+      <overwebs-button yellow id="loginbutton" disabled$="[[loginValid]]">Anonymous</overwebs-button>
     </form>
   </template>
   <script type="text/javascript" src="overwebs-login-page.js"></script>
