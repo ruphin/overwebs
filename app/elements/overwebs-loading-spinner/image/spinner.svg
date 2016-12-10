@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="576" height="576">
 <g transform="translate(189.5 119)">
-  <path id="one" stroke="none"
+  <path id="one"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
@@ -16,7 +16,7 @@
   </path>
 </g>
 <g transform="translate(386.5 119)">
-  <path id="two" stroke="none"
+  <path id="two"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
@@ -32,7 +32,7 @@
   </path>
 </g>
 <g transform="translate(485 288)">
-  <path id="three" stroke="none"
+  <path id="three"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
@@ -48,7 +48,7 @@
   </path>
 </g>
 <g transform="translate(386.5 457)">
-  <path id="four" stroke="none"
+  <path id="four"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
@@ -64,7 +64,7 @@
   </path>
 </g>
 <g transform="translate(189.5 457)">
-  <path id="five" stroke="none"
+  <path id="five"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
@@ -80,7 +80,7 @@
   </path>
 </g>
 <g transform="translate(91 288)">
-  <path id="six" stroke="none"
+  <path id="six"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
@@ -96,7 +96,7 @@
   </path>
 </g>
 <g transform="translate(288 288)">
-  <path id="seven" stroke="none"
+  <path id="seven"
   d="M-14.5 -95.6215
   a29 29 0 0 1 29 0
   l61.066641993582 35.256842193501
