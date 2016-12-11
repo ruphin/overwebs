@@ -7,5 +7,5 @@ production:
 .PHONY: production
 
 shell:
-	docker run -it --rm -v $$PWD:/app ruphin/webdev shell
+	docker run -it --rm -v $$PWD:/app ruphin/webdev bash
 .PHONY: shell
