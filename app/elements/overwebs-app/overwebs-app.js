@@ -46,6 +46,30 @@ Polymer({
     }
 
     this.addEventListener('login', (e) => this._login(e), true);
+
+    this.addEventListener('notification', (e) => this._notification(e), true);
+
+    this.addEventListener('queue', (e) => this._queue(e.detail.queueType), true);
+  },
+
+
+  _queue: function(queueType) {
+    console.log(this.$['queue-manager'])
+    this.$['queue-manager'].queue(queueType);
+  },
+
+  _notification: function(e) {
+    this.$.notification.removeAttribute('hidden')
+    console.log(e.detail)
+    if (e.detail['title']) {
+      Polymer.dom(this.$['notification-title']).appendChild(e.detail['title'])
+    }
+    if (e.detail['message']) {
+      Polymer.dom(this.$['notification-message']).appendChild(e.detail['message'])
+    }
+    if (e.detail['button']) {
+      Polymer.dom(this.$['notification-button']).appendChild(e.detail['button'])
+    }
   },
 
   _login: function(e) {

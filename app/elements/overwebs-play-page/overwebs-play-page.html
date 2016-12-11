@@ -4,6 +4,12 @@
 <link rel="import" href="../overwebs-global-button/overwebs-global-button.html">
 <link rel="import" href="overwebs-play-page-style.html">
 
+
+
+<link rel="import" href="../overwebs-game-state/overwebs-game-state.html">
+
+
+
 <style media="screen">
   @font-face {
     font-family: play-page-noodle;
@@ -37,7 +43,7 @@
       </g>
     </svg>
     <div class="modes">
-      <overwebs-play-tile quick-play>
+      <overwebs-play-tile id="quick-play" quick-play>
         <div slot="title">Quick Play</div>
         <div slot="description">Jump into a game against other players of your skill level.</div>
       </overwebs-play-tile>
@@ -64,7 +70,9 @@
         <div slot="description">Change the rules and play a game with your friends or AI.</div>
       </overwebs-play-tile>
     </div>
+    <overwebs-game-state id='game-state'></overwebs-game-state>
     <overwebs-global-button id="backButton" action="back"></overwebs-global-button>
   </template>
+
   <script type="text/javascript" src="overwebs-play-page.js"></script>
 </dom-module>

@@ -1,0 +1,26 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="overwebs-notification-style.html">
+<link rel="import" href="../overwebs-button/overwebs-button.html">
+
+<style media="screen">
+  @font-face {
+    font-family: notification-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+</style>
+
+<dom-module id="overwebs-notification">
+  <template>
+    <style include="overwebs-notification-style"></style>
+    <div class="notification">
+      <overwebs-loading-spinner class="spinner" white size="50"></overwebs-loading-spinner>
+      <div class="divider"></div>
+      <div class="textcontent">
+        <slot name="title"></slot>
+        <slot name="message"></slot>
+      </div>
+    </div>
+    <overwebs-button blue><slot name="button"></slot></overwebs-button>
+  </template>
+  <script type="text/javascript" src="overwebs-notification.js"></script>
+</dom-module>

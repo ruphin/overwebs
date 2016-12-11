@@ -1,0 +1,61 @@
+:host {
+  &[hidden] {
+    display: none;
+  }
+  position: absolute;
+  z-index: 10;
+  top: calc(42 / 25.6 * 1vw);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-flow: column;
+  justify-content: space-between;
+  .spinner, .divider {
+    display: none;
+    flex-shrink: 0;
+    margin-top: calc(4 / 25.6 * 1vw);
+  }
+   &[spinner] {
+     .spinner, .divider {
+       display: block;
+     }
+   }
+  .notification {
+    min-height: calc(62 / 25.6 * 1vw);
+    display: flex;
+    flex-flow: row;
+    padding: calc(8 / 25.6 * 1vw) calc(20/ 25.6 * 1vw) calc(7/ 25.6 * 1vw) calc(14/ 25.6 * 1vw);
+    margin-bottom: calc(3 / 25.6 * 1vw);
+    background: rgba(41, 54, 75, 0.9);
+    align-items: stretch;
+    .spinner {
+      align-self: center;
+    }
+    .divider {
+      width: calc(3 / 25.6 * 1vw);
+      margin-top: calc(6 / 25.6 * 1vw);
+      margin-bottom: calc(7 / 25.6 * 1vw);
+      margin-right: calc(14 / 25.6 * 1vw);
+      margin-left: calc(14 / 25.6 * 1vw);
+      background: #B200FF;
+    }
+    .textcontent {
+      display: flex;
+      flex-flow: column;
+      color: white;
+      font-family: notification-futura;
+      text-transform: uppercase;
+      ::slotted([slot="title"]) {
+        color: #FFFFFF;
+        font-size: calc(30 / 25.6 * 1vw);
+        letter-spacing: calc(1.3 / 25.6 * 1vw);
+      }
+      ::slotted([slot="message"]) {
+        color: #D0D0DC;
+        font-size: calc(24 / 25.6 * 1vw);
+        line-height: calc(26 / 25.6 * 1vw);
+        margin-bottom: calc(1 / 25.6 * 1vw);
+      }
+    }
+  }
+}

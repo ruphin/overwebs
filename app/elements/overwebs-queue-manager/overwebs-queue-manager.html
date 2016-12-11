@@ -1,0 +1,23 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-game-state/overwebs-game-state.html">
+
+<dom-module id="overwebs-queue-manager">
+  <template>
+    <overwebs-game-state id="game-state"></overwebs-game-state>
+    <div id="notification-title">Searching for game</div>
+    <div id="notification-message">
+      <div>Estimated time: 1:42</div>
+      <div>Elapsed time: [[elapsedTime]]</div>
+    </div>
+    <div id="notification-button">Cancel Search</div>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+  </template>
+  <script src="../../vendor/moment/moment.js"></script>
+  <script type="text/javascript" src="overwebs-queue-manager.js"></script>
+</dom-module>
+
+<!-- https://www.polymer-project.org/1.0/docs/api/Polymer.Templatizer -->
