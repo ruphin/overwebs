@@ -113,102 +113,129 @@
   justify-content: flex-end;
   transition: transform 0.15s ease-in-out;
   text-align: center;
-  &:hover {
-    box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF;
-    transform: scale(1.2,1.2);
-    transition: transform 0.08s ease-out;
-  }
-  &[new] {
-    .glow {
-      display: block;
-    }
-    .new{
-      display: flex;
-    }
-    &:hover .glow {
-      animation-name: hoverglow;
-    }
-  }
+  cursor: url(/images/overwatch.cur), auto;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top;
-  &.ana {
-    background-image: url('images/ana.jpg')
-  }
-  &.bastion {
-    background-image: url('images/bastion.jpg')
-  }
-  &.dva {
-    background-image: url('images/dva.jpg')
-  }
-  &.genji {
-    background-image: url('images/genji.jpg')
-  }
-  &.hanzo {
-    background-image: url('images/hanzo.jpg')
-  }
-  &.junkrat {
-    background-image: url('images/junkrat.jpg')
-  }
-  &.lucio {
-    background-image: url('images/lucio.jpg')
-  }
-  &.mccree {
-    background-image: url('images/mccree.jpg')
-  }
-  &.mei {
-    background-image: url('images/mei.jpg')
-  }
-  &.mercy {
-    background-image: url('images/mercy.jpg')
-  }
-  &.pharah {
-    background-image: url('images/pharah.jpg')
-  }
-  &.reaper {
-    background-image: url('images/reaper.jpg')
-  }
-  &.reinhardt {
-    background-image: url('images/reinhardt.jpg')
-  }
-  &.roadhog {
-    background-image: url('images/roadhog.jpg')
-  }
-  &.soldier76 {
-    background-image: url('images/soldier76.jpg')
-  }
-  &.symmetra {
-    background-image: url('images/symmetra.jpg')
-  }
-  &.torbjorn {
-    background-image: url('images/torbjorn.jpg')
-  }
-  &.tracer {
-    background-image: url('images/tracer.jpg')
-  }
-  &.widowmaker {
-    background-image: url('images/widowmaker.jpg')
-  }
-  &.winston {
-    background-image: url('images/winston.jpg')
-  }
-  &.zarya {
-    background-image: url('images/zarya.jpg')
-  }
-  &.zenyatta {
-    background-image: url('images/zenyatta.jpg')
-  }
-  &.sombra {
-    background-image: url('images/sombra.jpg')
-  }
+}
 
-  .content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: calc(168/25.6*1vw);
-    background: radial-gradient(ellipse farthest-corner at 50% -15%, #DADCE5, #D2D1D6 50%, #ADABBB);
+:host([new]) {
+  .glow {
+    display: block;
   }
+  .new{
+    display: flex;
+  }
+}
+
+:host(:hover) {
+  box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF;
+  transform: scale(1.2,1.2);
+  transition: transform 0.08s ease-out;
+  .glow {
+    animation-name: hoverglow;
+  }
+}
+
+
+:host([ana]) {
+  background-image: url('images/ana.jpg')
+}
+
+:host([bastion]) {
+  background-image: url('images/bastion.jpg')
+}
+
+:host([dva]) {
+  background-image: url('images/dva.jpg')
+}
+
+:host([genji]) {
+  background-image: url('images/genji.jpg')
+}
+
+:host([hanzo]) {
+  background-image: url('images/hanzo.jpg')
+}
+
+:host([junkrat]) {
+  background-image: url('images/junkrat.jpg')
+}
+
+:host([lucio]) {
+  background-image: url('images/lucio.jpg')
+}
+
+:host([mccree]) {
+  background-image: url('images/mccree.jpg')
+}
+
+:host([mei]) {
+  background-image: url('images/mei.jpg')
+}
+
+:host([mercy]) {
+  background-image: url('images/mercy.jpg')
+}
+
+:host([pharah]) {
+  background-image: url('images/pharah.jpg')
+}
+
+:host([reaper]) {
+  background-image: url('images/reaper.jpg')
+}
+
+:host([reinhardt]) {
+  background-image: url('images/reinhardt.jpg')
+}
+
+:host([roadhog]) {
+  background-image: url('images/roadhog.jpg')
+}
+
+:host([soldier76]) {
+  background-image: url('images/soldier76.jpg')
+}
+
+:host([symmetra]) {
+  background-image: url('images/symmetra.jpg')
+}
+
+:host([torbjorn]) {
+  background-image: url('images/torbjorn.jpg')
+}
+
+:host([tracer]) {
+  background-image: url('images/tracer.jpg')
+}
+
+:host([widowmaker]) {
+  background-image: url('images/widowmaker.jpg')
+}
+
+:host([winston]) {
+  background-image: url('images/winston.jpg')
+}
+
+:host([zarya]) {
+  background-image: url('images/zarya.jpg')
+}
+
+:host([zenyatta]) {
+  background-image: url('images/zenyatta.jpg')
+}
+
+:host([sombra]) {
+  background-image: url('images/sombra.jpg')
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(168/25.6*1vw);
+  background: radial-gradient(ellipse farthest-corner at 50% -15%, #DADCE5, #D2D1D6 50%, #ADABBB);
 }
 
 .new {

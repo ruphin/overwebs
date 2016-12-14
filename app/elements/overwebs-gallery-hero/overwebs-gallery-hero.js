@@ -24,7 +24,7 @@ Polymer({
   },
 
   _heroChanged: function(hero, unlocked) {
-    this.classList.add(hero.id);
+    this.setAttribute(hero.id, '');
     this.$.name.style.fontSize = ((hero.scaling || 1) * 2.0833) + 'vw';
     this.$.completion.style.background = hero.color || 'white';
     this.$.completion.style.width = (unlocked / (hero.unlockable || 1) * 6.5625) + "vw";
