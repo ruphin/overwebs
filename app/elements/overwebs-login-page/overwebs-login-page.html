@@ -21,8 +21,8 @@
     <form id="loginform" on-submit="_login">
       <label for="username">Username</label>
       <input type="text" id="login" value="{{login::input}}" pattern="^([a-zA-Z]+(#[0-9]+)?)?$" autofocus></input>
-      <overwebs-button yellow id="loginbutton" tabindex$="[[loginValid]]" disabled$="[[!loginValid]]">Login</overwebs-button>
-      <overwebs-button yellow id="loginbutton" disabled$="[[loginValid]]">Anonymous</overwebs-button>
+      <overwebs-button yellow id="loginbutton" on-click="_login" disabled$="[[!loginValid]]" tabindex$="[[loginValid]]">Login</overwebs-button>
+      <overwebs-button yellow id="loginbutton" on-click="_login" disabled$="[[loginValid]]">Anonymous</overwebs-button>
     </form>
   </template>
   <script type="text/javascript" src="overwebs-login-page.js"></script>
