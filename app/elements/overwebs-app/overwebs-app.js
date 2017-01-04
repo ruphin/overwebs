@@ -50,8 +50,12 @@ Polymer({
     this.addEventListener('notification', (e) => this._notification(e), true);
 
     this.addEventListener('queue', (e) => this._queue(e.detail.queueType), true);
-  },
 
+    this.$.exit.onclick = () => {
+      window.history.replaceState({}, null, '/main');
+      window.dispatchEvent(new CustomEvent('location-changed'));
+    }
+  },
 
   _queue: function(queueType) {
     console.log(this.$['queue-manager'])
@@ -157,7 +161,7 @@ Polymer({
 
     // Enable or disable or move the chat widget depending on the page.
     // Should this be responsibility of the app? I don't know.
-    if (newRoute === 'login') {
+    if (newRoute === 'login' || newRoute == 'exit') {
       this.$.chat.setAttribute('hidden', '');
     } else {
       this.$.chat.removeAttribute('hidden');
