@@ -21,9 +21,9 @@
 a.hero {
   z-index: 1;
   text-decoration: none;
-  margin-left: 0.3125vw;
-  margin-right: 0.3125vw;
-  margin-bottom: 0.625vw;
+  margin-left: calc(5/25.6*1vw);
+  margin-right: calc(5/25.6*1vw);
+  margin-bottom: calc(10/25.6*1vw);
 
   animation-duration: 0.2s;
   animation-name: fadein;
@@ -116,11 +116,13 @@ a.hero {
 }
 
 .hero-gallery {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
+  width: 92%;
   justify-content: center;
-  margin-left: 6.875vw;
-  width: 86.25vw;
+  align-items: center;
+  margin-left: 4%;
+  margin-right: -4%;
 }
 
 @keyframes fadein {

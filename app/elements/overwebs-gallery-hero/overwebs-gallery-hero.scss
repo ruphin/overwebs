@@ -1,47 +1,17 @@
 @keyframes glow {
   0% {
-    box-shadow: 0 0 0 calc(1/25.6*1vw) rgba(255, 255, 76, .9),
-                0 0 0 calc(2/25.6*1vw) rgba(255, 255, 76, .7),
-                0 0 0 calc(3/25.6*1vw) rgba(255, 255, 76, .1),
-                0 0 0 calc(4/25.6*1vw) rgba(255, 255, 76, .075),
-                0 0 0 calc(5/25.6*1vw) rgba(255, 255, 76, .05),
-                0 0 0 calc(6/25.6*1vw) rgba(255, 255, 76, .025),
-                inset 0 0 0 calc(1/25.6*1vw) rgba(255, 255, 192, .9),
-                inset 0 0 0 calc(2/25.6*1vw) rgba(255, 255, 192, .7),
-                inset 0 0 0 calc(3/25.6*1vw) rgba(255, 255, 192, .1),
-                inset 0 0 0 calc(4/25.6*1vw) rgba(255, 255, 192, .075),
-                inset 0 0 0 calc(5/25.6*1vw) rgba(255, 255, 192, .05),
-                inset 0 0 0 calc(6/25.6*1vw) rgba(255, 255, 192, .025);
+    box-shadow: 0 0 0 calc(5/25.6*1vw) rgba(255, 255, 192, .8),
+                inset 0 0 0 calc(0/25.6*1vw) rgba(255, 255, 192, .8);
   }
 
   5% {
-    box-shadow: 0 0 0 calc(1/25.6*1vw) rgba(255, 255, 76, .9),
-              0 0 0 calc(2/25.6*1vw) rgba(255, 255, 76, .7),
-              0 0 0 calc(3/25.6*1vw) rgba(255, 255, 76, .1),
-              0 0 0 calc(4/25.6*1vw) rgba(255, 255, 76, .075),
-              0 0 0 calc(5/25.6*1vw) rgba(255, 255, 76, .05),
-              0 0 0 calc(6/25.6*1vw) rgba(255, 255, 76, .025),
-              inset 0 0 0 calc(1/25.6*1vw) rgba(255, 255, 192, .9),
-              inset 0 0 0 calc(2/25.6*1vw) rgba(255, 255, 192, .7),
-              inset 0 0 0 calc(3/25.6*1vw) rgba(255, 255, 192, .1),
-              inset 0 0 0 calc(4/25.6*1vw) rgba(255, 255, 192, .075),
-              inset 0 0 0 calc(5/25.6*1vw) rgba(255, 255, 192, .05),
-              inset 0 0 0 calc(6/25.6*1vw) rgba(255, 255, 192, .025);
+    box-shadow: 0 0 0 calc(5/25.6*1vw) rgba(255, 255, 192, .8),
+                inset 0 0 0 calc(0/25.6*1vw) rgba(255, 255, 192, .8);
   }
 
   100% {
-    box-shadow: 0 0 0 calc(1/25.6*1vw) rgba(236, 189, 75, .9),
-                0 0 0 calc(2/25.6*1vw) rgba(236, 189, 75, .7),
-                0 0 0 calc(3/25.6*1vw) rgba(236, 189, 75, .1),
-                0 0 0 calc(4/25.6*1vw) rgba(236, 189, 75, .075),
-                0 0 0 calc(5/25.6*1vw) rgba(236, 189, 75, .05),
-                0 0 0 calc(6/25.6*1vw) rgba(236, 189, 75, .025),
-                inset 0 0 0 calc(1/25.6*1vw) rgba(255, 246, 181, .9),
-                inset 0 0 0 calc(2/25.6*1vw) rgba(255, 246, 181, .7),
-                inset 0 0 0 calc(3/25.6*1vw) rgba(255, 246, 181, .1),
-                inset 0 0 0 calc(4/25.6*1vw) rgba(255, 246, 181, .075),
-                inset 0 0 0 calc(5/25.6*1vw) rgba(255, 246, 181, .05),
-                inset 0 0 0 calc(6/25.6*1vw) rgba(255, 246, 181, .025);
+    box-shadow: 0 0 0 calc(5/25.6*1vw) rgba(255, 255, 192, .8),
+                inset 0 0 0 calc(5/25.6*1vw) rgba(255, 255, 192, .8);
   }
 }
 
@@ -104,8 +74,8 @@
 
 :host {
   position: relative;
-  width: calc(168/25.6*1vw);
-  height: calc(380/25.6*1vw);
+  width: calc(186/25.6*1vw);
+  height: calc(263/25.6*1vw);
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
@@ -114,9 +84,13 @@
   transition: transform 0.15s ease-in-out;
   text-align: center;
   cursor: url(/images/overwatch.cur), auto;
+  border: calc(5/25.6*1vw) solid #DDDDE3;
+  border-radius: calc(5/25.6*1vw);
+  box-sizing: border-box;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top;
+  transform: skewX(-15deg);
 }
 
 :host([new]) {
@@ -129,8 +103,9 @@
 }
 
 :host(:hover) {
-  box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF;
-  transform: scale(1.2,1.2);
+  border: calc(5/25.6*1vw) solid #FFFFFF;
+  // box-shadow: 0 0 0 calc(4/25.6*1vw) #FFFFFF;
+  transform: skewX(-15deg) scale(1.2,1.2);
   transition: transform 0.08s ease-out;
   .glow {
     animation-name: hoverglow;
@@ -234,8 +209,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: calc(168/25.6*1vw);
-  background: radial-gradient(ellipse farthest-corner at 50% -15%, #DADCE5, #D2D1D6 50%, #ADABBB);
+  height: calc(85/25.6*1vw);
+  background: #E3E3E7;
 }
 
 .new {
@@ -266,10 +241,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: calc(200/25.6*1vw);
-    width: calc(200/25.6*1vw);
+    height: calc(100/25.6*1vw);
+    width: calc(100/25.6*1vw);
     background: url('images/newFlare.png') center no-repeat;
-    background-size: contain;
+    background-size: 128%;
     animation-duration: 4s;
     animation-name: newshine;
     animation-iteration-count: infinite;
@@ -284,6 +259,8 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
+  border-radius: calc(5/25.6*1vw);
   animation-duration: 1.5s;
   animation-name: glow;
   animation-iteration-count: infinite;
@@ -292,31 +269,36 @@
 }
 
 #name {
-  transform: translate(-0.234375vw, 0);
-  line-height: 2.734375vw;
+  padding-top: calc(10/25.6*1vw);
+  line-height: calc(44/25.6*1vw);
   color: #28354F;
-  font-size: 2.0833vw;
+  transform: skewX(15deg) translate(-0.234375vw, 0);
+  font-size: calc(36/25.6*1vw);
+  letter-spacing: calc(1/25.6*1vw);
   font-family: gallery-hero-noodle;
   text-transform: uppercase;
 }
 
 .unlocked {
-  color: #28354F;
-  font-size: 2.1875vw;
+  color: #FFFFFF;
+  -webkit-text-stroke:calc(1/25.6*1vw) rgba(0,0,0,.35);
+  transform: skewX(15deg);
+  font-size: calc(25/25.6*1vw);
   font-family: gallery-hero-futura;
-}
-.unlockable {
-  color: #1C75BC;
-  font-size: 1.04166vw;
-  font-family: gallery-hero-futura;
-  vertical-align: -10%;
-}
-
-.progress {
-  margin-bottom: 0.52083vw;
+  position: absolute;
   display: flex;
-  height: 0.3125vw;
-  background: rgba(176, 195, 212, 0.9);
+  width: 100%;
+  top: calc(2/25.6*1vw);
+  height: calc(30/25.6*1vw);
+  align-items: center;
+  justify-content: center;
+
+}
+.progress {
+  position: relative;
+  display: flex;
+  height: calc(32/25.6*1vw);
+  background: #D2DBE6;
 
   #completion {
     height: inherit;
