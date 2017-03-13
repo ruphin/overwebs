@@ -1,21 +1,25 @@
-Polymer({
-  is: 'overwebs-background',
-  properties: {
-    backgrounds: {
-      type: Object,
-      observer: '_setBackgrounds'
-    },
-    lowBandwidth: {
-      type: Boolean,
-      value: false,
-    },
-    page: {
-      type: String,
-      observer: "_pageChanged",
-    }
-  },
+class OverwebsBackground extends Polymer.Element {
 
-  _setBackgrounds: function(backgrounds) {
+  static get is() { return 'overwebs-background' }
+
+  static get properties() {
+    return {
+      backgrounds: {
+        type: Object,
+        observer: '_setBackgrounds'
+      },
+      lowBandwidth: {
+        type: Boolean,
+        value: false,
+      },
+      page: {
+        type: String,
+        observer: "_pageChanged",
+      }
+    }
+  }
+
+  _setBackgrounds(backgrounds) {
     // Remove existing backgroundElements
     if (this._backgroundElements) {
       for (let videoElement in this._backgroundElements) {
@@ -49,10 +53,10 @@ Polymer({
     }
 
     this._pageChanged(this.page);
-  },
+  }
 
-  _pageChanged: function (newPage, oldPage) {
-    if (!this.backgrounds) {
+  _pageChanged(newPage, oldPage) {
+    if (!this.backgrounds || !this._backgroundElements) {
       console.warn("Attempting to load page background, but background data is not loaded");
       return;
     }
@@ -78,7 +82,7 @@ Polymer({
         this._stop(this._currentlyShowing)
       }
     }
-  },
+  }
 
   // Stop and hide the given video element.
   // Also remove any pending transitions.
@@ -89,10 +93,10 @@ Polymer({
       element.pause();
     }
     element.currentTime = 0;
-  },
+  }
 
   // This is all good
-  _transition: function (target) {
+  _transition(target) {
     // If we are on low bandwith mode, skip transitions
     if (this.lowBandwidth && this.backgrounds[target.id].transition) {
       this._transition(this._backgroundElements[this.backgrounds[target.id].transition]);
@@ -162,4 +166,6 @@ Polymer({
       target.addEventListener("ended", this._endedListener);
     }
   }
-});
+}
+
+customElements.define(OverwebsBackground.is, OverwebsBackground);

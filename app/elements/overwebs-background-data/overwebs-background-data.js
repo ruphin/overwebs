@@ -126,32 +126,37 @@
     },
   }
 
-  Polymer({
-    is: 'overwebs-background-data',
-    properties: {
-      backgrounds: {
-        type: Object,
-        notify: true,
-        readOnly: true,
-      },
-      backgroundSelection: {
-        type: String,
-        notify: true,
-        readOnly: true,
-      },
-      select: {
-        type: String,
-        observer: '_selectChanged'
+  class OverwebsBackgroundData extends Polymer.Element {
+
+    static get is() { return 'overwebs-background-data' }
+
+    static get properties() {
+      return {
+        backgrounds: {
+          type: Object,
+          notify: true,
+          readOnly: true,
+        },
+        backgroundSelection: {
+          type: String,
+          notify: true,
+          readOnly: true,
+        },
+        select: {
+          type: String,
+          observer: '_selectBackgrounds'
+        }
       }
-    },
+    }
 
-    _selectChanged: function (value) {
-      this._selectBackgrounds();
-    },
+    constructor() {
+      super();
+    }
 
-    ready: function () {
+    connectedCallback () {
+      super.connectedCallback();
       this._selectBackgrounds();
-    },
+    }
 
     _selectBackgrounds() {
       // index all possible backgroundSets
@@ -196,9 +201,9 @@
       }
 
       this._setBackgrounds(backgroundData);
-    },
+    }
 
-    _index: function (tree) {
+    _index(tree) {
       let result = [];
       for (let property in tree) {
         if (tree[property].transition || tree[property].preload) {
@@ -208,5 +213,7 @@
       }
       return result;
     }
-  });
+  }
+
+  customElements.define(OverwebsBackgroundData.is, OverwebsBackgroundData);
 }

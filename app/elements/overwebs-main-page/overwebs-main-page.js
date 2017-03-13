@@ -1,22 +1,26 @@
-Polymer({
-  is: 'overwebs-main-page',
+class OverwebsMainPage extends Polymer.Element {
 
-  _hero: function (heroData, backgroundSelection) {
-    let hero = backgroundSelection.split('/').slice(0,-1).pop();
-    return this.heroData[hero] && this.heroData[hero].name || '';
-  },
+  static get is() { return 'overwebs-main-page' }
 
-  _unlocked: function (playerData, heroData, backgroundSelection) {
-    let hero = backgroundSelection.split('/').slice(0,-1).pop();
-    if (playerData.unlocks && heroData[hero]) {
-     return Math.min(playerData.unlocks[hero], heroData[hero].unlockable);
-    } else {
-     return 0;
-    }
-  },
-
-  _unlockable: function (heroData, backgroundSelection) {
-    let hero = backgroundSelection.split('/').slice(0,-1).pop();
-    return heroData[hero] && heroData[hero].unlockable || 0;
+  static get observers() {
+    return [
+      '_heroChanged(heroData, playerData, backgroundSelection)'
+    ]
   }
-});
+
+  _heroChanged(heroData, playerData, backgroundSelection) {
+    if (heroData === undefined || playerData === undefined || backgroundSelection === undefined) { return }
+    let hero = backgroundSelection.split('/').slice(0,-1).pop();
+    this.hero = this.heroData[hero] && this.heroData[hero].name || '';
+
+    if (playerData.unlocks && heroData[hero]) {
+     this.unlocked = Math.min(playerData.unlocks[hero], heroData[hero].unlockable);
+    } else {
+     this.unlocked = 0;
+    }
+
+    this.unlockable = heroData[hero] && heroData[hero].unlockable || 0;
+  }
+}
+
+customElements.define(OverwebsMainPage.is, OverwebsMainPage);

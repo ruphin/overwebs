@@ -1,17 +1,22 @@
-Polymer({
-  is: 'overwebs-login-page',
-  properties: {
-    login: {
-      type: String,
-      observer: '_loginChanged'
-    },
-  },
+class OverwebsLoginPage extends Polymer.Element {
 
-  ready: function () {
+  static get is() { return 'overwebs-login-page' }
+
+  static get properties() {
+    return {
+      login: {
+        type: String,
+        observer: '_loginChanged'
+      }
+    }
+  }
+
+  constructor() {
+    super()
     this.loginValid = false;
-  },
+  }
 
-  _login: function (e) {
+  _login(e) {
     e.preventDefault();
     if (!this.login) {
       this.dispatchEvent(new CustomEvent('login', {
@@ -23,11 +28,9 @@ Polymer({
         detail: { username: username, battleTag: battleTag }
       }));
     }
+  }
 
-
-  },
-
-  _loginChanged: function(username) {
+  _loginChanged(username) {
     this.debounce('loginChanged', _ => {
       if (username) {
         this.loginValid = "-1";
@@ -35,7 +38,7 @@ Polymer({
         this.loginValid = false;
       }
     }, 100);
-
   }
+}
 
-});
+customElements.define(OverwebsLoginPage.is, OverwebsLoginPage)

@@ -33,38 +33,48 @@
   let login = {};
   let elements = [];
 
-  Polymer({
-    is: 'overwebs-player-data',
-    properties: {
-      player: {
-        type: Object,
-        readOnly: true,
-        notify: true,
-        value: playerData,
-      },
-      login: {
-        type: Object,
-        value: login,
-        observer: '_loginChanged'
-      }
-    },
+  class OverwebsPlayerData extends Polymer.Element {
 
-    _notify: function() {
+    static get is() { return 'overwebs-player-data' }
+
+    static get properties() {
+      return {
+        player: {
+          type: Object,
+          readOnly: true,
+          notify: true,
+          value: playerData,
+        },
+        login: {
+          type: Object,
+          value: login,
+          observer: '_loginChanged'
+        }
+      }
+    }
+
+    _notify() {
       this._setPlayer({});
       this._setPlayer(playerData);
-    },
+    }
 
-    _loginChanged: function(newLogin) {
+    _loginChanged(newLogin) {
       if (newLogin && newLogin.userID) {
         playerData.userID = newLogin.userID
         playerData.name = newLogin.userID.split('-')[0];
         playerData.uid = newLogin.uid;
         elements.forEach((e) => { e._notify() })
       }
-    },
+    }
 
-    ready: function () {
-      elements.push(this);
+    connectedCallback() {
+      super.connectedCallback();
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      elements.splice(elements.indexOf(this), 1);
+    }
       // this.$.haxxUp.onclick = () => {
       //   playerData.level += 1;
       //   elements.forEach((e) => { e._notify() });
@@ -99,6 +109,6 @@
       //     elements.forEach((e) => { e._notify() });
       //   });
       // }
-    }
-  });
+  }
+  customElements.define(OverwebsPlayerData.is, OverwebsPlayerData);
 }

@@ -165,40 +165,36 @@
 
   let elements = [];
 
-  Polymer({
-    is: 'overwebs-hero-data',
-    properties: {
-      heroes: {
-        type: Object,
-        notify: true,
-        readOnly: true,
-        value: heroData
-      }
-    },
+  class OverwebsHeroData extends Polymer.Element {
 
-    _notify: function() {
+    static get is() { return 'overwebs-hero-data' }
+
+    static get properties() {
+      return {
+        heroes: {
+          type: Object,
+          notify: true,
+          readOnly: true,
+          value: heroData
+        }
+      }
+    }
+
+    _notify() {
       this._setHeroes({});
       this._setHeroes(heroData);
-    },
-
-    ready: function () {
-      elements.push(this);
-      // this.$.haxxOn.onclick = () => {
-      //   this.debounce('haxxOn', _ => {
-      //     for (hero in heroData) {
-      //       heroData[hero].background = true;
-      //     }
-      //     elements.forEach((e) => { e._notify() });
-      //   });
-      // }
-      // this.$.haxxOff.onclick = () => {
-      //   this.debounce('haxxOff', _ => {
-      //     for (hero in heroData) {
-      //       heroData[hero].background = false;
-      //     }
-      //     elements.forEach((e) => { e._notify() });
-      //   });
-      // }
     }
-  });
+
+    connectedCallback() {
+      super.connectedCallback();
+      elements.push(this);
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      elements.splice(elements.indexOf(this), 1);
+    }
+  }
+
+  customElements.define(OverwebsHeroData.is, OverwebsHeroData);
 }
