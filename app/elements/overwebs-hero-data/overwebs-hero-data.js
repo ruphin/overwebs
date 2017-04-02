@@ -70,6 +70,13 @@
       color: '#ECEABD',
       background: false,
     },
+    orisa: {
+      id: 'orisa',
+      name: 'Orisa',
+      unlockable: 55,
+      color: '#448A42',
+      background: false,
+    },
     pharah: {
       id: 'pharah',
       name: 'Pharah',

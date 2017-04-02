@@ -169,6 +169,10 @@
   background-image: url('images/roadhog.jpg')
 }
 
+:host([orisa]) {
+  background-image: url('images/orisa.jpg')
+}
+
 :host([soldier76]) {
   background-image: url('images/soldier76.jpg')
 }

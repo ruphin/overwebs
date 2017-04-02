@@ -118,7 +118,8 @@ a.hero {
 .hero-gallery {
   display: inline-flex;
   flex-wrap: wrap;
-  width: 92%;
+  margin-top: calc(160/26.4*1vw);
+  width: 90%;
   justify-content: center;
   align-items: center;
   margin-left: 4%;
