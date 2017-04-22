@@ -1,5 +1,5 @@
 <link rel="import" href="../../vendor/polymer/polymer.html">
-<link rel="import" href="../overwebs-main-menu/overwebs-main-menu.html">
+<link rel="import" href="../overwebs-main-menu-link/overwebs-main-menu-link.html">
 <link rel="import" href="../overwebs-player-data/overwebs-player-data.html">
 <link rel="import" href="../overwebs-hero-data/overwebs-hero-data.html">
 <link rel="import" href="../overwebs-player-widget/overwebs-player-widget.html">
@@ -25,17 +25,18 @@
     <overwebs-hero-data heroes="{{heroData}}"></overwebs-hero-data>
     <overwebs-player-data player="{{playerData}}"></overwebs-player-data>
     <overwebs-player-widget player="[[playerData]]"></overwebs-player-widget>
-    <overwebs-main-menu>
-      <a href="/play" content="Play" class="main">Play</a>
+    <div class="main-menu">
+      <overwebs-main-menu-link href="/play" text="Play"></overwebs-main-menu-link>
       <!-- <a href="" class="disabled" content="Searching" class="main">Searching</a> -->
-      <a href="/training" content="Training" class="main">Training</a>
-      <a href="/hero-gallery" content="Hero Gallery" class="main">Hero Gallery</a>
-      <a href="/loot" content="Loot Box" class="main">Loot Box</a>
-      <a href="/social" content="Social" class="sub">Social</a>
-      <a href="/career" content="Career Profile" class="sub">Career Profile</a>
-      <a href="/options" content="Options" class="sub">Options</a>
-      <a href="/exit" content="Exit Game" class="sub">Exit Game</a>
-    </overwebs-main-menu>
+      <overwebs-main-menu-link href="/training" text="Training"></overwebs-main-menu-link>
+      <overwebs-main-menu-link href="/hero-gallery" text="Hero Gallery"></overwebs-main-menu-link>
+      <overwebs-main-menu-link href="/loot" text="Loot Box"></overwebs-main-menu-link>
+    </div>
+    <div class="sub-menu">
+      <overwebs-main-menu-link href="/social" text="Social" sublink></overwebs-main-menu-link>
+      <overwebs-main-menu-link href="/career" text="Career Profile" sublink></overwebs-main-menu-link>
+      <overwebs-main-menu-link href="/options" text="Options" sublink></overwebs-main-menu-link>
+      <overwebs-main-menu-link href="/exit" text="Exit Game" sublink></overwebs-main-menu-link>
     <div class="hero">
       <div class="nameShadow">[[hero]]</div>
       <div class="nameShadow2">[[hero]]</div>

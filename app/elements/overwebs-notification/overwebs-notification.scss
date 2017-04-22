@@ -1,7 +1,14 @@
-:host {
-  &[hidden] {
-    display: none;
+:host([hidden]) {
+  display: none;
+}
+
+:host([spinner]) {
+  .spinner, .divider {
+    display: block;
   }
+}
+
+:host {
   position: absolute;
   z-index: 10;
   top: calc(42 / 25.6 * 1vw);
@@ -15,11 +22,7 @@
     flex-shrink: 0;
     margin-top: calc(4 / 25.6 * 1vw);
   }
-   &[spinner] {
-     .spinner, .divider {
-       display: block;
-     }
-   }
+
   .notification {
     min-height: calc(62 / 25.6 * 1vw);
     display: flex;

@@ -12,6 +12,21 @@
   width: calc(80 / 25.6 * 1vw);
 }
 
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15.85vw;
+  width: 30vw;
+}
+
+.sub-menu {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: -0.05vw;
+  width: 30vw;
+}
+
 .hero {
   opacity: 0.90;
   position: absolute;

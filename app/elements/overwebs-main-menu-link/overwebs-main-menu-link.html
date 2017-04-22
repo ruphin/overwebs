@@ -1,0 +1,23 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+<link rel="import" href="../overwebs-loading-spinner/overwebs-loading-spinner.html">
+<link rel="import" href="overwebs-main-menu-link-style.html">
+
+<style media="screen">
+  @font-face {
+    font-family: main-menu-link-noodle;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+
+  @font-face {
+    font-family: main-menu-link-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+</style>
+
+<dom-module id="overwebs-main-menu-link">
+  <template>
+    <style include="overwebs-main-menu-link-style"></style>
+    <a href="[[href]]" content$="[[text]]">[[text]]</a>
+  </template>
+  <script type="text/javascript" src="overwebs-main-menu-link.js"></script>
+</dom-module>

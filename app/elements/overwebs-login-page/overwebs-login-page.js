@@ -16,6 +16,12 @@ class OverwebsLoginPage extends Polymer.Element {
     this.loginValid = false;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.$.loginbutton.addEventListener('click', e => this._login(e));
+    this.$.anonymousbutton.addEventListener('click', e => this._login(e));
+  }
+
   _login(e) {
     e.preventDefault();
     if (!this.login) {
@@ -31,13 +37,17 @@ class OverwebsLoginPage extends Polymer.Element {
   }
 
   _loginChanged(username) {
-    this.debounce('loginChanged', _ => {
-      if (username) {
-        this.loginValid = "-1";
-      } else {
-        this.loginValid = false;
+    this._debouncer = Polymer.Debouncer.debounce(
+      this._debouncer,
+      Polymer.Async.animationFrame,
+      _ => {
+        if (username) {
+          this.loginValid = "-1";
+        } else {
+          this.loginValid = false;
+        }
       }
-    }, 100);
+    );
   }
 }
 

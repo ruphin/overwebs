@@ -55,7 +55,7 @@ class OverwebsApp extends Polymer.Element {
       window.dispatchEvent(new CustomEvent('location-changed'));
     }
 
-    this.addEventListener('login', (e) => this._login(e), true);
+    this.$.loginpage.addEventListener('login', (e) => this._login(e), true);
 
     this.addEventListener('notification', (e) => this._notification(e), true);
 
@@ -83,6 +83,7 @@ class OverwebsApp extends Polymer.Element {
   }
 
   _login(e) {
+    console.log("FIRED")
     e.preventDefault();
 
     let userID;
