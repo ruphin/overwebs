@@ -69,6 +69,7 @@
 
     connectedCallback() {
       super.connectedCallback();
+      elements.push(this);
     }
 
     disconnectedCallback() {

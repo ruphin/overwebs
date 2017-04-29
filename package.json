@@ -23,7 +23,7 @@
     "gulp-vulcanize": "^6.0.0",
     "map-stream": "0.0.6",
     "merge-stream": "^1.0.0",
-    "node-sass": "^3.8.0",
+    "node-sass": "^4.5.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
     "vulcanize": ">= 1.4.2"

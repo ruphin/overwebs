@@ -127,8 +127,9 @@
       outline: none;
     }
   }
+}
 
-  &.focus {
+:host(.focus) {
     .chatLog {
       min-height: calc(284 / 25.6 * 1vw);
     }
@@ -154,4 +155,3 @@
       box-shadow: none;
     }
   }
-}

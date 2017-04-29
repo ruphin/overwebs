@@ -21,20 +21,24 @@ let handleKeydown = (event) => {
 
 window.addEventListener("keydown", handleKeydown, true);
 
-Polymer({
-  is: 'overwebs-keybinding',
-  properties: {
-    key: {
-      type: String,
-      observer: '_register'
-    },
-    override: {
-      type: Boolean,
-      value: false
-    }
-  },
+class OverwebsKeybinding extends Polymer.Element {
 
-  _register: function (newKey, oldKey) {
+  static get is() { return 'overwebs-keybinding'; }
+
+  static get properties() {
+    return {
+      key: {
+        type: String,
+        observer: '_register'
+      },
+      override: {
+        type: Boolean,
+        value: false
+      }
+    }
+  }
+
+  _register(newKey, oldKey) {
     if (oldKey && registeredElements[oldKey]) {
       let i = registeredElements[oldKey].indexOf(this)
       if (i != -1) {
@@ -52,4 +56,6 @@ Polymer({
       }
     }
   }
-});
+}
+
+customElements.define(OverwebsKeybinding.is, OverwebsKeybinding);

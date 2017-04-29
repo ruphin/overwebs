@@ -1,37 +1,47 @@
 let nonPrintable = /^[\x00-\x20]*$/;
 
-Polymer({
-  is: 'overwebs-chat-widget',
-  properties: {
-    playerData: {
-      type: Object,
-    },
-    firebase: {
-      type: Object,
-    },
-    _history: {
-      type: Array,
-      value: [],
-    },
-  },
-  observers: [
-    '_firebaseConnected(firebase, playerData)'
-  ],
+class OverwebsChatWidget extends Polymer.Element {
+
+  static get is() { return 'overwebs-chat-widget' }
+
+  static get properties() {
+    return {
+      playerData: {
+        type: Object,
+      },
+      firebase: {
+        type: Object,
+      },
+      _history: {
+        type: Array,
+        value: [],
+      },
+    }
+  }
+  static get observers() {
+    return [
+      '_firebaseConnected(firebase, playerData)'
+    ]
+  }
 
 
-  ready: function () {
+  connectedCallback() {
+    super.connectedCallback();
     this._channel = 'General';
     this.$.chatBox.addEventListener('dom-change', () => { this._scrollToBottom() });
     this.addEventListener('focusout', () => {this._loseFocus() });
     this.addEventListener('focusin', () => {this._gainFocus() });
     this.onclick = (event) => {
-      if (event.target === this.$.escape) {
-        if (this.contains(document.activeElement)) {
+
+      if ((!event.path && event.target || event.path[0]) === this.$.escape) {
+        if (this.shadowRoot.contains(this.shadowRoot.activeElement) || this.contains(this.shadowRoot.activeElement)) {
           document.activeElement.blur();
         }
       } else {
-        if (this.$.input !== document.activeElement) {
-          this.$.input.focus();
+        if (this.$.input !== (this.shadowRoot.activeElement)) {
+          // Add a microtiming to prevent Firefox from submitting two keydown events
+          window.setTimeout(_ => {this.$.input.focus(); }, 0);
+
         } else {
           this._onSubmit();
         }
@@ -43,9 +53,9 @@ Polymer({
       let m = e.detail;
       this.postMessage(m.author, m.channel, m.message);
     });
-  },
+  }
 
-  postMessage: function(author, channel, message) {
+  postMessage(author, channel, message) {
     let chatBox = this.$.chatBox;
     this._shouldScroll = (chatBox.scrollTop === chatBox.scrollHeight - chatBox.offsetHeight);
     this.unshift('_history',
@@ -55,25 +65,21 @@ Polymer({
         channel: channel,
         timestamp: Date.now(),
       });
-  },
+  }
 
-  _gainFocus: function() {
-    if (this.contains(document.activeElement) || this === document.activeElement) {
+  _gainFocus() {
     this.$.escape.key = "Escape";
-      this.classList.add("focus");
-      this._scrollToBottom();
-    }
-  },
+    this.classList.add("focus");
+    this._scrollToBottom();
+  }
 
-  _loseFocus: function() {
-    if (!this.contains(document.activeElement) || this !== document.activeElement) {
-      this.$.escape.key = "";
-      this.classList.remove("focus");
-      this._scrollToBottom();
-    }
-  },
+  _loseFocus() {
+    this.$.escape.key = "";
+    this.classList.remove("focus");
+    this._scrollToBottom();
+  }
 
-  _onSubmit: function() {
+  _onSubmit() {
     let message = this.$.input.value;
     if (nonPrintable.test(message)) {
       document.activeElement.blur();
@@ -87,24 +93,25 @@ Polymer({
     if (this.chatData) {
       this.chatData.push(message);
     }
-  },
+  }
 
-  _scrollToBottom: function() {
+  _scrollToBottom() {
     let lastMessage = this.$.chatBox.querySelector(".message:first-of-type");
     if (lastMessage && this._shouldScroll) {
       lastMessage.scrollIntoView();
     }
-  },
+  }
 
   // TODO
-  _hideMessages: function() {
+  _hideMessages() {
     // Check if messages need to be hidden
     // This will be so annoying ..
-  },
+  }
 
-  _firebaseConnected: function(firebase, playerData) {
+  _firebaseConnected(firebase, playerData) {
     if (firebase && playerData && playerData.uid) {
       this.chatData = firebase.database().ref(`messages/${this.playerData.uid}`);
     }
   }
-});
+}
+customElements.define(OverwebsChatWidget.is, OverwebsChatWidget);
