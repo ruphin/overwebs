@@ -6,8 +6,9 @@ video {
   min-height: 100%;
   width: calc(16/9*100vh);
   height: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
-  &.hidden {
-    display: none;
-  }
+}
+video.hidden {
+  display: none;
 }

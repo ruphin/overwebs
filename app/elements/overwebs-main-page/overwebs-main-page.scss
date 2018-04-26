@@ -12,19 +12,21 @@
   width: calc(80 / 25.6 * 1vw);
 }
 
-.main-menu {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15.85vw;
-  width: 30vw;
+:root {
+  --overwebs-menu-size: calc(100 / 25.6 * 1vw);
 }
 
-.sub-menu {
-  display: flex;
-  flex-direction: column;
-
-  margin-top: -0.05vw;
+overwebs-main-menu {
   width: 30vw;
+  &.main {
+    margin-top: 12vw;
+  }
+}
+
+overwebs-player-widget {
+  position: absolute;
+  top: calc(40 / 25.6 * 1vw);
+  right: calc(68 / 25.6 * 1vw);
 }
 
 .hero {
@@ -34,7 +36,9 @@
   top: calc(905 / 25.6 * 1vw);
   text-align: right;
   z-index: 0;
-  .name, .nameShadow, .nameShadow2 {
+  .name,
+  .nameShadow,
+  .nameShadow2 {
     padding-right: 3vw;
     font-family: main-page-noodle;
     line-height: 1;
@@ -42,7 +46,7 @@
     color: transparent;
   }
   .name {
-    background: linear-gradient(white 0, white 50%, white 50%, #BDBFC0);
+    background: linear-gradient(white 0, white 50%, white 50%, #bdbfc0);
     -webkit-background-clip: text;
   }
   .nameShadow {
@@ -50,7 +54,7 @@
     position: absolute;
     right: 0;
     z-index: -1;
-    -webkit-text-stroke: 0.1275vw rgba(0,0,0,0.15);
+    -webkit-text-stroke: 0.1275vw rgba(0, 0, 0, 0.15);
     color: white;
   }
   .nameShadow2 {
@@ -58,30 +62,31 @@
     position: absolute;
     right: 0;
     z-index: -2;
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0) 10%, rgba(219,155,143,0.85) 16%, rgba(0,0,0,0.15));
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10%, rgba(219, 155, 143, 0.85) 16%, rgba(0, 0, 0, 0.15));
     -webkit-background-clip: text;
     -webkit-text-stroke: 0.15vw transparent;
     color: white;
   }
-  .unlocks, .unlocksShadow {
+  .unlocks,
+  .unlocksShadow {
     font-family: main-page-futura;
     font-size: calc(36 / 25.6 * 1vw);
     text-transform: uppercase;
     padding-right: calc(70 / 25.6 * 1vw);
   }
   .unlocks {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     margin-top: calc(2 / 25.6 * 1vw);
     .unlocked {
       color: white;
     }
   }
   .unlocksShadow {
-    color: rgba(0,0,0,0);
+    color: rgba(0, 0, 0, 0);
     position: absolute;
     right: 0;
     bottom: 0;
     z-index: -1;
-    -webkit-text-stroke: 0.1775vw rgba(0,0,0,.15);
+    -webkit-text-stroke: 0.1775vw rgba(0, 0, 0, .15);
   }
 }

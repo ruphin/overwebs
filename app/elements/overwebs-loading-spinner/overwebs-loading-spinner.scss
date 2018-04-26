@@ -1,4 +1,4 @@
-@keyframes animate {
+@keyframes overwebs-loading-spinner {
   0% {
     opacity: 1;
     transform: scale(1);
@@ -25,45 +25,55 @@
 
 :host {
   display: inline-block;
+}
 
-  &[white] {
-    #one, #two, #three, #four, #five, #six, #seven {
-      fill: #FFFFFF;
-    }
-  }
+:host([white]) #one,
+:host([white]) #two,
+:host([white]) #three,
+:host([white]) #four,
+:host([white]) #five,
+:host([white]) #six,
+:host([white]) #seven {
+  fill: #ffffff;
+}
 
-  #one, #two, #three, #four, #five, #six, #seven {
-    animation-duration: 2.1s;
-    animation-name: animate;
-    animation-iteration-count: infinite;
-    background: #FFFFFF;
-  }
+#one,
+#two,
+#three,
+#four,
+#five,
+#six,
+#seven {
+  animation-duration: 2.1s;
+  animation-name: overwebs-loading-spinner;
+  animation-iteration-count: infinite;
+  background: #ffffff;
+}
 
-  #one {
-    animation-delay: 0s;
-  }
+#one {
+  animation-delay: 0s;
+}
 
-  #two {
-    animation-delay: 0.15s;
-  }
+#two {
+  animation-delay: 0.15s;
+}
 
-  #three {
-    animation-delay: 0.3s;
-  }
+#three {
+  animation-delay: 0.3s;
+}
 
-  #four {
-    animation-delay: 0.45s;
-  }
+#four {
+  animation-delay: 0.45s;
+}
 
-  #five {
-    animation-delay: 0.6s;
-  }
+#five {
+  animation-delay: 0.6s;
+}
 
-  #six {
-    animation-delay: .75s;
-  }
+#six {
+  animation-delay: 0.75s;
+}
 
-  #seven {
-    animation-delay: .9s;
-  }
+#seven {
+  animation-delay: 0.9s;
 }

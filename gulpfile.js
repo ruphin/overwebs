@@ -17,17 +17,7 @@ var crypto = require('crypto');
 
 var gutil = require('gulp-util');
 
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
+var AUTOPREFIXER_BROWSERS = ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'];
 
 var BASEPATH = 'app';
 var basepath = function(...subpaths) {
@@ -45,37 +35,47 @@ var tmp = function(...subpaths) {
 };
 
 var scssTask = function(stylesPath, srcs) {
-  return gulp.src(srcs.map(function(src) {
-      return basepath(stylesPath, src);
-    }))
-    .pipe($.changed(tmp(stylesPath), {extension: '.css'}))
+  return gulp
+    .src(
+      srcs.map(function(src) {
+        return basepath(stylesPath, src);
+      })
+    )
+    .pipe($.changed(tmp(stylesPath), { extension: '.css' }))
     .pipe($.sass().on('error', $.sass.logError))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.cleanCss())
     .pipe(gulp.dest(tmp(stylesPath)))
-    .pipe($.size({title: 'Compile SCSS'}));
+    .pipe($.size({ title: 'Compile SCSS' }));
 };
 
 // Take the SCSS file from each element and generate a -style.html file
 var elementScssTask = function(elementsPath, srcs) {
-  return gulp.src(srcs.map(function(src) {
-      return basepath(elementsPath, src);
-    }))
-    .pipe($.changed(tmp(elementsPath), {extension: '-style.html'}))
-    .pipe($.sass({outputStyle: 'compressed',includePaths: [basepath('styles'), basepath('elements', '**')]}).on('error', $.sass.logError))
+  return gulp
+    .src(
+      srcs.map(function(src) {
+        return basepath(elementsPath, src);
+      })
+    )
+    .pipe($.changed(tmp(elementsPath), { extension: '-style.html' }))
+    .pipe($.sass({ outputStyle: 'compressed', includePaths: [basepath('styles'), basepath('elements', '**')] }).on('error', $.sass.logError))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.cleanCss())
-    .pipe(map(function (file, cb) {
-      var elementStart = Buffer.from('<dom-module id="' + path.basename(file.path).replace(/\.css$/i, '-style') + '"><template><style>', 'binary');
-      var elementEnd = Buffer.from('</style></template></dom-module>', 'binary');
-      file.contents = Buffer.concat([elementStart, file.contents, elementEnd]);
-      return cb(null, file);
-    }))
-    .pipe($.rename({
-      extname: "-style.html"
-    }))
+    .pipe(
+      map(function(file, cb) {
+        var elementStart = Buffer.from('<dom-module id="' + path.basename(file.path).replace(/\.css$/i, '-style') + '"><template><style>', 'binary');
+        var elementEnd = Buffer.from('</style></template></dom-module>', 'binary');
+        file.contents = Buffer.concat([elementStart, file.contents, elementEnd]);
+        return cb(null, file);
+      })
+    )
+    .pipe(
+      $.rename({
+        extname: '-style.html'
+      })
+    )
     .pipe(gulp.dest(tmp(elementsPath)))
-    .pipe($.size({title: 'Compile Element SCSS'}));
+    .pipe($.size({ title: 'Compile Element SCSS' }));
 };
 
 gulp.task('scss', function() {
@@ -87,77 +87,92 @@ gulp.task('elementScss', function() {
 });
 
 gulp.task('styles', ['scss'], function() {
-  return gulp.src(tmp('styles/**/*'))
+  return gulp
+    .src(tmp('styles/**/*'))
     .pipe($.changed(dist('styles')))
     .pipe(gulp.dest(dist('styles')))
-    .pipe($.size({title: 'Copy Styles'}));
+    .pipe($.size({ title: 'Copy Styles' }));
 });
 
 gulp.task('images', function() {
   // Remember to pre-optimize images with Kraken.io for better compression
-  return gulp.src(basepath('images/**/*'))
+  return gulp
+    .src(basepath('images/**/*'))
     .pipe($.changed(dist('images')))
     .pipe(gulp.dest(dist('images')))
-    .pipe($.size({title: 'Copy Images'}));
+    .pipe($.size({ title: 'Copy Images' }));
 });
 
 gulp.task('js', function() {
-  return gulp.src(basepath('scripts/**/*'))
+  return gulp
+    .src(basepath('scripts/**/*'))
     .pipe($.changed(dist('scripts')))
-    .pipe($.babel({presets: ['es2015']}))
-    .pipe(gulp.dest(dist('scripts')))
-})
+    .pipe($.babel({ presets: ['es2015'] }))
+    .pipe(gulp.dest(dist('scripts')));
+});
 
 // Copy all files at the root level (app)
 gulp.task('base', function() {
-  var app = gulp.src(basepath('*'), { dot: true  })
+  var app = gulp
+    .src(basepath('*'), { dot: true })
     .pipe($.useref())
     .pipe(gulp.dest(dist()));
 
   // Copy over only the bower_components we need
   // These are things which cannot be vulcanized
-  var bower = gulp.src('vendor/**')
+  var bower = gulp
+    .src('vendor/**')
     .pipe($.changed(dist('vendor')))
     .pipe(gulp.dest(dist('vendor')));
 
-  return merge(app, bower)//, tmp)
-    .pipe($.size({
-      title: 'Copy Base Files'
-    }));
+  return merge(app, bower) //, tmp)
+    .pipe(
+      $.size({
+        title: 'Copy Base Files'
+      })
+    );
 });
 
 // Copy web fonts to dist
 gulp.task('fonts', function() {
-  return gulp.src(basepath('fonts/**'))
+  return gulp
+    .src(basepath('fonts/**'))
     .pipe(gulp.dest(dist('fonts')))
-    .pipe($.size({
-      title: 'fonts'
-    }));
+    .pipe(
+      $.size({
+        title: 'fonts'
+      })
+    );
 });
 
 gulp.task('elements', ['elementScss'], function() {
-  return gulp.src([basepath('elements/**/*'), '!' + basepath('elements/**/*.scss'), tmp('elements/**/*-style.html')])
+  return gulp
+    .src([basepath('elements/**/*'), '!' + basepath('elements/**/*.scss'), tmp('elements/**/*-style.html')])
     .pipe($.changed(dist('elements')))
     .pipe(gulp.dest(dist('elements')))
-    .pipe($.size({title: 'Copy Elements'}));
+    .pipe($.size({ title: 'Copy Elements' }));
 });
 
 gulp.task('polymer', function() {
-  return gulp.src(basepath('bower_components/polymer/**/*'))
+  return gulp
+    .src(basepath('bower_components/polymer/**/*'))
     .pipe($.changed(tmp('bower_components/polymer')))
-    .pipe(gulp.dest(tmp('bower_components/polymer')))
+    .pipe(gulp.dest(tmp('bower_components/polymer')));
 });
 
 // Vulcanize granular configuration
 gulp.task('vulcanize', ['polymer', 'elements'], function() {
-  return gulp.src(dist('elements/elements.html'))
-    .pipe($.vulcanize({
-      stripComments: true,
-      inlineCss: true,
-      inlineScripts: true
-    }))
+  return gulp
+    .src(dist('elements/elements.html'))
+    .pipe(
+      $.vulcanize({
+        stripComments: true,
+        inlineCss: true,
+        inlineScripts: true
+      })
+    )
     .pipe(gulp.dest(dist('elements')))
-    .pipe($.size({title: 'Vulcanize Elements'}));
+    .pipe($.size({ title: 'Vulcanize Elements' }));
 });
 
 // Generate config data for the <sw-precache-cache> element.
@@ -174,12 +189,10 @@ gulp.task('cache-config', function(callback) {
     disabled: false
   };
 
-  glob([
-    'index.html',
-    './',
-    'bower_components/webcomponentsjs/webcomponents-lite.min.js',
-    '{elements,scripts,styles}/**/*.*'],
-    {cwd: dir}, function(error, files) {
+  glob(['index.html', './', 'bower_components/webcomponentsjs/webcomponents-lite.min.js', '{elements,scripts,styles}/**/*.*'], { cwd: dir }, function(
+    error,
+    files
+  ) {
     if (error) {
       callback(error);
     } else {
@@ -220,7 +233,7 @@ gulp.task('serve', ['scss', 'elementScss', 'js', 'fonts'], function() {
     //       will present a certificate warning in the browser.
     // https: true,
     server: {
-      baseDir: [tmp(), basepath(), ''],
+      baseDir: [tmp(), basepath(), '.'],
       middleware: [historyApiFallback()]
     }
   });
@@ -266,7 +279,8 @@ gulp.task('default', ['clean'], function(cb) {
   runSequence(
     ['base', 'fonts', 'images', 'elements'],
     // 'cache-config',
-    cb);
+    cb
+  );
 });
 
 // Load tasks for web-component-tester
