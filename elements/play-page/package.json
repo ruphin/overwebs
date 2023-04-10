@@ -1,0 +1,14 @@
+{
+  "name": "@overwebs/play-page",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "playPage.js",
+  "module": "playPage.js",
+  "author": "Goffert van Gool <ruphin@ruphin.net>",
+  "license": "MIT",
+  "dependencies": {
+    "@open-wc/scoped-elements": "^2.1.4",
+    "lit": "^2.6.1"
+  }
+}

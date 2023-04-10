@@ -1,0 +1,13 @@
+{
+  "name": "@overwebs/loading-spinner",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "loadingSpinner.js",
+  "module": "loadingSpinner.js",
+  "author": "Goffert van Gool <ruphin@ruphin.net>",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.6.1"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@overwebs/button",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "button.js",
+  "module": "button.js",
+  "author": "Goffert van Gool <ruphin@ruphin.net>",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.6.1"
+  }
+}

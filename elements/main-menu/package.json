@@ -1,0 +1,13 @@
+{
+  "name": "@overwebs/main-menu",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "mainMenu.js",
+  "module": "mainMenu.js",
+  "author": "Goffert van Gool <ruphin@ruphin.net>",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.6.1"
+  }
+}

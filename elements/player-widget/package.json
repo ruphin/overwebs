@@ -1,0 +1,13 @@
+{
+  "name": "@overwebs/player-widget",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "playerWidget.js",
+  "module": "playerWidget.js",
+  "author": "Goffert van Gool<ruphin@ruphin.net>",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.6.1"
+  }
+}

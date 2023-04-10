@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"
+/>
+
+<link rel="manifest" href="/manifest.json" />
+
+<script type="module">
+  import OverwebsApp from "@overwebs/app";
+  customElements.define("overwebs-app", OverwebsApp);
+</script>
+
+<title>OVERWEBS</title>
+
+<style>
+  @font-face {
+    font-family: big-noodle-too-oblique;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+  @font-face {
+    font-family: futura;
+    src: url("/fonts/Futura.ttf");
+  }
+  @font-face {
+    font-family: helvetica;
+    src: url("/fonts/Helvetica.ttf");
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: rgb(100, 100, 100);
+    cursor: url(/images/overwatch.cur), auto !important;
+  }
+
+  a,
+  a:link,
+  a:visited,
+  a:focus,
+  a:hover,
+  a:active {
+    cursor: url(/images/overwatch.cur), auto !important;
+  }
+
+  * {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+</style>
+
+<overwebs-app></overwebs-app>

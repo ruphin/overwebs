@@ -1,0 +1,10 @@
+{
+  "name": "@overwebs/background",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "background.js",
+  "module": "background.js",
+  "author": "Goffert van Gool <ruphin@ruphin.net>",
+  "license": "MIT"
+}

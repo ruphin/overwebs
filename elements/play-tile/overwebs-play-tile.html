@@ -1,0 +1,37 @@
+<link rel="import" href="../../vendor/polymer/polymer.html" />
+<link rel="import" href="overwebs-play-tile-style.html" />
+
+<style>
+  @font-face {
+    font-family: play-tile-noodle;
+    src: url("/fonts/BigNoodleTooOblique.ttf");
+  }
+
+  @font-face {
+    font-family: play-tile-futura;
+    src: url("/fonts/Futura.ttf");
+  }
+
+  @font-face {
+    font-family: play-tile-helvetica;
+    src: url("/fonts/Helvetica.ttf");
+  }
+</style>
+
+<dom-module id="overwebs-play-tile">
+  <template>
+    <style include="overwebs-play-tile-style"></style>
+    <div class="content">
+      <slot name="icon"><div class="icon"></div></slot>
+      <slot name="title"></slot>
+      <slot name="description"></slot>
+      <div class="hotkey">
+        <div class="rmb"></div>
+      </div>
+      <div class="info">
+        <div class="i">i</div>
+      </div>
+    </div>
+  </template>
+  <script type="text/javascript" src="overwebs-play-tile.js"></script>
+</dom-module>

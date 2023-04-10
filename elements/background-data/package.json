@@ -1,0 +1,10 @@
+{
+  "name": "@overwebs/background-data",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "backgroundData.js",
+  "module": "backgroundData.js",
+  "author": "Goffert van Gool <ruphin@ruphin.net>",
+  "license": "MIT"
+}
