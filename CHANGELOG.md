@@ -12,7 +12,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 
-- Rewritten from Polymer 1 to GluonJS 3 web components in TypeScript, built with Vite. The old implementation is kept under `legacy/` as a reference while the rewrite is in progress.
+- Rewritten from Polymer 1 to GluonJS 3 web components in TypeScript, built with Vite.
 
 ### Removed
 

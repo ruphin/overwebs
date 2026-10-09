@@ -40,7 +40,6 @@ npm run deploy     # deploy to production (ssh s.ruph.in ./overwebs.sh)
 │   ├── components/         Custom element classes. Pure: no define() here. Tests next to the code.
 │   └── elements/           Registering entrypoints, one per element (define + HTMLElementTagNameMap)
 ├── test/                   Tests that are not tied to one source file
-├── legacy/                 The previous Polymer implementation, kept as a reference during the rewrite
 └── PLAN.md                 The rewrite plan and component contract
 ```
 

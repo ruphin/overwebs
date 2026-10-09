@@ -2,8 +2,8 @@
 
 This document is the contract for the rewrite. Every component is listed with
 its public API (properties, events, slots), its behaviour, and what changed
-from the legacy implementation. The legacy code is in `legacy/app/elements/`
-and is the visual and behavioural reference; it is never imported.
+from the legacy implementation. The legacy Polymer code was removed after the
+rewrite; it is in the git history before this rewrite.
 
 ## Stack
 
@@ -26,7 +26,6 @@ src/
   elements/<name>.ts    Registering module: imports the class, define()s it, declares HTMLElementTagNameMap,
                         and imports the elements/ modules of every custom element used in its template.
 test/                   Cross-cutting tests
-legacy/                 The old implementation (reference only; delete when done)
 ```
 
 ### Rules for components
