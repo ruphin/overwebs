@@ -1,17 +1,31 @@
 {
   "name": "overwebs",
+  "version": "2.0.0",
+  "description": "Overwatch for the web: a recreation of the Overwatch menus as a web application",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
-    "postinstall": "bower install",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run typecheck && npm run format:check && npm test",
     "deploy": "ssh -t s.ruph.in ./overwebs.sh"
   },
+  "dependencies": {
+    "@gluon/gluon": "^3.0.0"
+  },
   "devDependencies": {
-    "bower": "^1.8.14",
-    "sass": "^1.105.1",
-    "vite": "^8.3.3"
+    "@typescript/typescript6": "^6.0.2",
+    "happy-dom": "^20.14.5",
+    "prettier": "^3.9.9",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3"
   }
 }

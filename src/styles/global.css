@@ -1,0 +1,59 @@
+/*
+ * Document-level styles. Everything here is inherited into the shadow roots
+ * of the components (custom properties and fonts cross shadow boundaries).
+ */
+
+@font-face {
+  font-family: "Big Noodle Too Oblique";
+  src: url("/fonts/BigNoodleTooOblique.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url("/fonts/Futura.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("/fonts/Helvetica.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  /*
+   * The interface is designed on a 2560px wide canvas and scales with the
+   * viewport width. One design pixel is `calc(1 * var(--u))`, so a size that
+   * was 80px in the design is written as `calc(80 * var(--u))`.
+   */
+  --u: calc(100vw / 2560);
+
+  --font-display: "Big Noodle Too Oblique", "Impact", sans-serif;
+  --font-ui: "Futura", "Helvetica", sans-serif;
+  --font-text: "Helvetica", "Arial", sans-serif;
+
+  --cursor: url("/images/overwatch.cur"), auto;
+
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+}
+
+* {
+  cursor: var(--cursor);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+overwebs-app {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
