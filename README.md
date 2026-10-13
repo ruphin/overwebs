@@ -1,7 +1,5 @@
 # Overwebs
 
-https://overwebs.ruph.in/main
-
 Overwatch for the web: a recreation of the Overwatch main menus as a web
 application, built from [GluonJS](https://github.com/ruphin/gluonjs) web
 components in TypeScript and served with Vite.
@@ -17,7 +15,6 @@ npm test           # run the tests once (test:watch for watch mode)
 npm run typecheck  # tsc --noEmit
 npm run format     # prettier --write (format:check to verify only)
 npm run check      # typecheck + format:check + test
-npm run deploy     # deploy to production (ssh s.ruph.in ./overwebs.sh)
 ```
 
 ## Layout
@@ -53,5 +50,6 @@ a registering module in `src/elements/`, data passed as properties, reactive
 
 ## Deployment
 
-The production build in `dist/` is served by nginx from the `ruphin/webserve`
-image (see `Dockerfile`).
+The app runs at https://overwatch.ruphin.net. The production build is packed
+into the ruphin.net webserver: see `./build.sh overwebs` in
+[ruphin.net](https://github.com/ruphin/ruphin.net).

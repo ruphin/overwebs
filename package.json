@@ -14,8 +14,7 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run typecheck && npm run format:check && npm test",
-    "deploy": "ssh -t s.ruph.in ./overwebs.sh"
+    "check": "npm run typecheck && npm run format:check && npm test"
   },
   "dependencies": {
     "@gluon/gluon": "^3.0.0"
