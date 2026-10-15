@@ -54,12 +54,12 @@ describe("overwebs-notification", () => {
     expect(element.shadowRoot!.querySelector("overwebs-loading-spinner")).toBeNull();
   });
 
-  it("renders a purple button labelled with the action", async () => {
+  it("renders an accent button labelled with the action", async () => {
     const element = await create((el) => {
       el.action = "Cancel Search";
     });
     const button = element.shadowRoot!.querySelector<OverwebsButton>("overwebs-button")!;
-    expect(button.variant).toBe("purple");
+    expect(button.variant).toBe("accent");
     expect(button.textContent).toBe("Cancel Search");
 
     element.action = "";
@@ -89,5 +89,19 @@ describe("overwebs-notification", () => {
       el.hidden = true;
     });
     expect(element.hasAttribute("hidden")).toBe(true);
+  });
+
+  it("passes the accent colour to the divider and the button as --accent", async () => {
+    const element = await create((el) => {
+      el.spinner = true;
+      el.action = "Cancel Search";
+    });
+    const accent = () => element.shadowRoot!.querySelector<HTMLElement>(".accent")!;
+    expect(accent().getAttribute("style")).toContain("--accent: #b200ff");
+    element.accent = "#0ea44c";
+    await element.updateComplete;
+    expect(accent().getAttribute("style")).toContain("--accent: #0ea44c");
+    expect(accent().querySelector(".divider")).not.toBeNull();
+    expect(accent().querySelector("overwebs-button")).not.toBeNull();
   });
 });

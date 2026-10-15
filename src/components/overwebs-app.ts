@@ -13,10 +13,9 @@ import { pages } from "../lib/pages.js";
 import { navigate, route, type Route } from "../lib/router.js";
 import { login, logout, restoreSession } from "../lib/session.js";
 import { settings } from "../lib/settings.js";
-// The `login` and `queue` events are declared by the login and play pages.
+// The `login` event is declared by the login page, `queue` by `lib/game-state`.
 import type {} from "./overwebs-login-page.js";
 import type { OverwebsMainPage } from "./overwebs-main-page.js";
-import type {} from "./overwebs-play-page.js";
 
 const MAIN_PAGE_TAG = "overwebs-main-page";
 
@@ -25,7 +24,9 @@ const MAIN_PAGE_TAG = "overwebs-main-page";
  * selection, the matchmaking notification and the chat.
  *
  * Pages are rendered by tag from `pages`; a page is loaded on its first visit.
- * Listens for `login` (from the login page) and `queue` (from the play pages).
+ * Listens for `login` (from the login page) and `queue` (from the play tiles
+ * and pages): a queue starts in the accent colour of its tile and drops back
+ * to the main page.
  */
 export class OverwebsApp extends GluonElement {
   static override styles = css`
@@ -88,7 +89,14 @@ export class OverwebsApp extends GluonElement {
       },
       { signal },
     );
-    this.addEventListener("queue", (event) => startQueue(event.detail.type), { signal });
+    this.addEventListener(
+      "queue",
+      (event) => {
+        startQueue(event.detail.type, event.detail.accent);
+        navigate("/main");
+      },
+      { signal },
+    );
 
     queueState.subscribe((queue) => this.#onQueue(queue), { signal });
     settings.subscribe(
@@ -189,7 +197,12 @@ export class OverwebsApp extends GluonElement {
       ${this.#renderPage()}
       ${
         this.queue.queued
-          ? html`<overwebs-notification spinner .action=${"Cancel Search"} @action=${stopQueue}>
+          ? html`<overwebs-notification
+              spinner
+              .accent=${this.queue.accent}
+              .action=${"Cancel Search"}
+              @action=${stopQueue}
+            >
               <span slot="title">Searching for game</span>
               <div slot="message">
                 <div>Estimated time: 1:42</div>

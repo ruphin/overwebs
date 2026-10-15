@@ -3,7 +3,7 @@ import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 import { modesPageStyles } from "./modes-page-styles.js";
 
-/** The training page: Tutorial, Practice Range and Practice vs. AI. */
+/** The training page: Tutorial and Practice Range queue; Practice vs. AI links to the vs-ai page. */
 export class OverwebsTrainingPage extends GluonElement {
   static override styles = [cursorStyles, modesPageStyles];
 
@@ -14,11 +14,13 @@ export class OverwebsTrainingPage extends GluonElement {
       <div class="modes">
         <overwebs-play-tile
           .mode=${"tutorial"}
+          .queue=${"Tutorial"}
           .heading=${"Tutorial"}
           .description=${"Learn the basics of Overwatch."}
         ></overwebs-play-tile>
         <overwebs-play-tile
           .mode=${"practice-range"}
+          .queue=${"Practice Range"}
           .heading=${"Practice Range"}
           .description=${"Practice using your weapons and abilities."}
         ></overwebs-play-tile>

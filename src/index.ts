@@ -43,7 +43,10 @@ export {
   queueState,
   startQueue,
   stopQueue,
+  queueEvent,
   formatElapsed,
+  DEFAULT_ACCENT,
+  type QueueRequest,
   type QueueState,
 } from "./lib/game-state.js";
 export { keybindings, bindKey, installKeybindings, type Keybinding } from "./lib/keybindings.js";
@@ -73,6 +76,8 @@ export {
   playTileImages,
   playTileImage,
   playTileIcon,
+  playTileAccents,
+  playTileAccent,
   type PlayMode,
 } from "./components/overwebs-play-tile.js";
 export {
@@ -80,6 +85,7 @@ export {
   arcadeTileImages,
   arcadeTileImage,
   MAX_POPULARITY,
+  ARCADE_ACCENT,
   type ArcadeMode,
 } from "./components/overwebs-arcade-tile.js";
 export { OverwebsGalleryHero } from "./components/overwebs-gallery-hero.js";
@@ -87,7 +93,7 @@ export { OverwebsBackground } from "./components/overwebs-background.js";
 export { OverwebsChatWidget } from "./components/overwebs-chat-widget.js";
 export { OverwebsLoginPage } from "./components/overwebs-login-page.js";
 export { OverwebsMainPage } from "./components/overwebs-main-page.js";
-export { OverwebsPlayPage, type QueueRequest } from "./components/overwebs-play-page.js";
+export { OverwebsPlayPage } from "./components/overwebs-play-page.js";
 export { OverwebsTrainingPage } from "./components/overwebs-training-page.js";
 export { OverwebsOptionsPage } from "./components/overwebs-options-page.js";
 export { OverwebsVsAiPage } from "./components/overwebs-vs-ai-page.js";

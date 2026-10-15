@@ -19,7 +19,7 @@ const tiles: readonly ArcadeTileData[] = [
   { mode: "no-limits", heading: "No Limits", size: "6v6", popularity: 2 },
 ];
 
-/** The arcade page: the title and the five arcade mode tiles. */
+/** The arcade page: the title and the five arcade mode tiles, each queueing for its mode. */
 export class OverwebsArcadePage extends GluonElement {
   static override styles = css`
     :host {
@@ -99,6 +99,7 @@ export class OverwebsArcadePage extends GluonElement {
               style=${`animation-delay: ${index * 50}ms`}
               ?big=${tile.big ?? false}
               .mode=${tile.mode}
+              .queue=${tile.heading}
               .size=${tile.size}
               .heading=${tile.heading}
               .popularity=${tile.popularity}

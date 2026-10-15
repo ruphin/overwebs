@@ -224,6 +224,32 @@ describe("overwebs-app", () => {
     expect(vi.getTimerCount()).toBeLessThanOrEqual(1); // Only the chat introduction timer may remain
   });
 
+  it("drops to the main page in the tile's accent when a queue starts", async () => {
+    await create();
+    await loginAs();
+    navigate("/play");
+    await settle(app);
+    expect(app.page).toBe("play");
+
+    app.dispatchEvent(
+      new CustomEvent("queue", {
+        detail: { type: "Custom Game", accent: "#d13a1c" },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+    await settle(app);
+    expect(app.page).toBe("main");
+    expect(location.pathname).toBe("/main");
+    expect(queueState.value).toMatchObject({
+      queued: true,
+      type: "Custom Game",
+      accent: "#d13a1c",
+    });
+    expect(notification()!.accent).toBe("#d13a1c");
+    stopQueue();
+  });
+
   it("stops the elapsed timer on disconnect", async () => {
     vi.useFakeTimers();
     await create();

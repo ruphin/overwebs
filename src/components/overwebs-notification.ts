@@ -3,7 +3,8 @@ import { GluonElement, css, html } from "@gluon/gluon";
 /**
  * The notification box at the top centre of the screen (used for the
  * matchmaking queue). Content goes in the `title` and `message` slots; the
- * optional button below the box dispatches `action`.
+ * optional button below the box dispatches `action`. The divider and the
+ * button take the `accent` colour.
  */
 export class OverwebsNotification extends GluonElement {
   static override styles = css`
@@ -59,11 +60,15 @@ export class OverwebsNotification extends GluonElement {
       margin-top: calc(4 * var(--u));
     }
 
+    .accent {
+      display: contents;
+    }
+
     .divider {
       flex-shrink: 0;
       width: calc(3 * var(--u));
       margin-block: calc(6 * var(--u)) calc(7 * var(--u));
-      background: #b200ff;
+      background: var(--accent);
     }
 
     .text {
@@ -91,38 +96,43 @@ export class OverwebsNotification extends GluonElement {
   static override properties = {
     spinner: { type: Boolean, attribute: true, reflect: true },
     action: {},
+    accent: {},
   };
 
   /** Show the loading spinner and the divider before the text. */
   spinner = false;
   /** Label of the button below the box; no button when empty. */
   action = "";
+  /** The colour of the divider and the button. */
+  accent = "#b200ff";
 
   override render() {
     return html`
-      <div class="notification">
+      <div class="accent" style=${`--accent: ${this.accent}`}>
+        <div class="notification">
+          ${
+            this.spinner
+              ? html`<overwebs-loading-spinner
+                    class="spinner"
+                    white
+                    .size=${50}
+                  ></overwebs-loading-spinner>
+                  <div class="divider"></div>`
+              : null
+          }
+          <div class="text">
+            <slot name="title"></slot>
+            <slot name="message"></slot>
+          </div>
+        </div>
         ${
-          this.spinner
-            ? html`<overwebs-loading-spinner
-                  class="spinner"
-                  white
-                  .size=${50}
-                ></overwebs-loading-spinner>
-                <div class="divider"></div>`
+          this.action
+            ? html`<overwebs-button variant="accent" @click=${this.handleAction}
+                >${this.action}</overwebs-button
+              >`
             : null
         }
-        <div class="text">
-          <slot name="title"></slot>
-          <slot name="message"></slot>
-        </div>
       </div>
-      ${
-        this.action
-          ? html`<overwebs-button variant="purple" @click=${this.handleAction}
-              >${this.action}</overwebs-button
-            >`
-          : null
-      }
     `;
   }
 

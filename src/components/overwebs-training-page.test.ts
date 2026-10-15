@@ -62,4 +62,16 @@ describe("overwebs-training-page", () => {
     element.shadowRoot!.querySelector<HTMLElement>("overwebs-global-button")!.click();
     expect(spy).toHaveBeenCalledOnce();
   });
+
+  it("queues for the tutorial and the practice range, but links to vs. AI", async () => {
+    const root = (await mount()).shadowRoot!;
+    const tiles = [...root.querySelectorAll<OverwebsPlayTile>("overwebs-play-tile")];
+    expect(tiles.map((tile) => tile.queue)).toEqual(["Tutorial", "Practice Range", ""]);
+    const listener = vi.fn<(event: CustomEvent<{ type: string }>) => void>();
+    document.addEventListener("queue", listener);
+    tiles[1]!.click();
+    document.removeEventListener("queue", listener);
+    expect(listener).toHaveBeenCalledOnce();
+    expect(listener.mock.calls[0]![0].detail.type).toBe("Practice Range");
+  });
 });

@@ -1,5 +1,6 @@
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import { OverwebsArcadeTile, arcadeTileImage } from "./overwebs-arcade-tile.js";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { ARCADE_ACCENT, OverwebsArcadeTile, arcadeTileImage } from "./overwebs-arcade-tile.js";
+import { playTileAccent } from "./overwebs-play-tile.js";
 
 beforeAll(() => {
   customElements.define("test-overwebs-arcade-tile", OverwebsArcadeTile);
@@ -79,5 +80,24 @@ describe("overwebs-arcade-tile", () => {
     tile.big = true;
     await tile.updateComplete;
     expect(tile.hasAttribute("big")).toBe(true);
+  });
+
+  it("dispatches a queue event in the arcade accent when clicked with a queue type", async () => {
+    expect(ARCADE_ACCENT).toBe(playTileAccent("arcade"));
+    const listener = vi.fn<(event: CustomEvent<{ type: string; accent: string }>) => void>();
+    document.addEventListener("queue", listener);
+    (await create()).click();
+    expect(listener).not.toHaveBeenCalled();
+    const tile = await create((tile) => {
+      tile.mode = "elimination";
+      tile.queue = "Elimination";
+    });
+    tile.click();
+    document.removeEventListener("queue", listener);
+    expect(listener).toHaveBeenCalledOnce();
+    expect(listener.mock.calls[0]![0].detail).toEqual({
+      type: "Elimination",
+      accent: ARCADE_ACCENT,
+    });
   });
 });

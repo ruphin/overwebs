@@ -1,6 +1,8 @@
 import { GluonElement, css, html, svg } from "@gluon/gluon";
 import { cursorStyles } from "./cursor-styles.js";
+import { queueEvent } from "../lib/game-state.js";
 import { back } from "../lib/router.js";
+import { playTileAccent } from "./overwebs-play-tile.js";
 
 /** The competitive play emblem (`/images/competitive.svg`), viewBox `0 0 313 273`. */
 const competitiveEmblem = svg`
@@ -46,7 +48,7 @@ const infoSections: readonly { readonly title: string; readonly items: readonly 
   },
 ];
 
-/** The competitive play page: season info, rules and the (inert) buttons. */
+/** The competitive play page: season info, rules, the info buttons and Play, which queues. */
 export class OverwebsCompetitivePage extends GluonElement {
   static override styles = [
     cursorStyles,
@@ -402,11 +404,17 @@ export class OverwebsCompetitivePage extends GluonElement {
             </div>
             <button type="button" class="blue">${infoIcon()}Tier Legend</button>
             <button type="button" class="blue">${infoIcon()}Leaderboard</button>
-            <button type="button" class="big yellow">Play</button>
+            <button type="button" class="big yellow" @click=${this.#play}>Play</button>
           </div>
         </div>
       </div>
       <overwebs-global-button action="back" @click=${back}></overwebs-global-button>
     `;
   }
+
+  #play = () => {
+    this.dispatchEvent(
+      queueEvent({ type: "Competitive Play", accent: playTileAccent("competitive-play") }),
+    );
+  };
 }

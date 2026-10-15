@@ -1,4 +1,6 @@
 import { GluonElement, css, html } from "@gluon/gluon";
+import { queueEvent } from "../lib/game-state.js";
+import { playTileAccent } from "./overwebs-play-tile.js";
 
 /** The arcade modes an arcade tile can show. */
 export type ArcadeMode =
@@ -21,7 +23,13 @@ export function arcadeTileImage(mode: ArcadeMode): string {
 /** The number of segments in the popularity bar, and the popularity that shows "Most Popular". */
 export const MAX_POPULARITY = 5;
 
-/** The wide arcade mode card on the arcade page. */
+/** The accent of the arcade queues: the colour of the arcade tile on the play page. */
+export const ARCADE_ACCENT = playTileAccent("arcade");
+
+/**
+ * The wide arcade mode card on the arcade page. With a `queue` type, a click
+ * dispatches `queue` for it, in the arcade accent.
+ */
 export class OverwebsArcadeTile extends GluonElement {
   static override styles = css`
     :host {
@@ -194,6 +202,7 @@ export class OverwebsArcadeTile extends GluonElement {
     size: {},
     heading: {},
     popularity: { type: Number },
+    queue: {},
   };
 
   mode: ArcadeMode = "mystery-duel";
@@ -202,6 +211,17 @@ export class OverwebsArcadeTile extends GluonElement {
   heading = "";
   /** 0 to 5. The bar fills one segment per point; 5 shows "Most Popular". */
   popularity = 0;
+  /** The queue type a click starts, for example "Mystery Duel"; no queue when empty. */
+  queue = "";
+
+  constructor() {
+    super();
+    this.addEventListener("click", () => {
+      if (this.queue) {
+        this.dispatchEvent(queueEvent({ type: this.queue, accent: ARCADE_ACCENT }));
+      }
+    });
+  }
 
   override render() {
     const popularity = Math.min(MAX_POPULARITY, Math.max(0, Math.round(this.popularity) || 0));

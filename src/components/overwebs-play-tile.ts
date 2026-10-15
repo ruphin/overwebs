@@ -1,4 +1,5 @@
 import { GluonElement, css, html } from "@gluon/gluon";
+import { queueEvent } from "../lib/game-state.js";
 
 /** The game modes a play tile can show. */
 export type PlayMode =
@@ -27,6 +28,25 @@ export const playTileImages: Readonly<Record<PlayMode, string>> = {
   "hard-ai": "hardAI",
 };
 
+/** The primary colour of each mode's artwork, used as the accent of its queue notification. */
+export const playTileAccents: Readonly<Record<PlayMode, string>> = {
+  "quick-play": "#2f7be8",
+  arcade: "#0ea44c",
+  "competitive-play": "#a040d6",
+  "play-vs-ai": "#e6b800",
+  "custom-game": "#d13a1c",
+  tutorial: "#3f6fd6",
+  "practice-range": "#7cab48",
+  "easy-ai": "#e6b800",
+  "medium-ai": "#e6b800",
+  "hard-ai": "#e6b800",
+};
+
+/** The accent colour of a mode. */
+export function playTileAccent(mode: PlayMode): string {
+  return playTileAccents[mode];
+}
+
 /** The AI difficulty modes have no icon. */
 const modesWithoutIcon: ReadonlySet<PlayMode> = new Set(["easy-ai", "medium-ai", "hard-ai"]);
 
@@ -40,7 +60,10 @@ export function playTileIcon(mode: PlayMode): string | undefined {
   return modesWithoutIcon.has(mode) ? undefined : `/tiles/icon-${playTileImages[mode]}.png`;
 }
 
-/** The tall mode card on the play, training and vs-ai pages. */
+/**
+ * The tall mode card on the play, training and vs-ai pages. With a `queue`
+ * type, a click dispatches `queue` for it, in the accent colour of the mode.
+ */
 export class OverwebsPlayTile extends GluonElement {
   static override styles = css`
     :host {
@@ -175,12 +198,24 @@ export class OverwebsPlayTile extends GluonElement {
     heading: {},
     description: {},
     info: { type: Boolean, attribute: true, reflect: true },
+    queue: {},
   };
 
   mode: PlayMode = "quick-play";
   heading = "";
   description = "";
   info = false;
+  /** The queue type a click starts, for example "Quick Play"; no queue when empty. */
+  queue = "";
+
+  constructor() {
+    super();
+    this.addEventListener("click", () => {
+      if (this.queue) {
+        this.dispatchEvent(queueEvent({ type: this.queue, accent: playTileAccent(this.mode) }));
+      }
+    });
+  }
 
   override render() {
     const icon = playTileIcon(this.mode);

@@ -1,6 +1,9 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { vi } from "vitest";
 import {
   OverwebsPlayTile,
+  playTileAccent,
+  playTileAccents,
   playTileIcon,
   playTileImage,
   playTileImages,
@@ -72,5 +75,31 @@ describe("overwebs-play-tile", () => {
 
     const fromAttribute = await create((tile) => tile.setAttribute("info", ""));
     expect(fromAttribute.info).toBe(true);
+  });
+
+  it("has an accent colour for every mode", () => {
+    for (const mode of Object.keys(playTileImages) as PlayMode[]) {
+      expect(playTileAccent(mode)).toMatch(/^#[0-9a-f]{6}$/);
+    }
+    expect(playTileAccents["easy-ai"]).toBe(playTileAccents["play-vs-ai"]);
+  });
+
+  it("dispatches a queue event in its accent when clicked with a queue type, else nothing", async () => {
+    const listener = vi.fn<(event: CustomEvent<{ type: string; accent: string }>) => void>();
+    document.addEventListener("queue", listener);
+    const silent = await create((tile) => (tile.mode = "arcade"));
+    silent.click();
+    expect(listener).not.toHaveBeenCalled();
+    const tile = await create((tile) => {
+      tile.mode = "tutorial";
+      tile.queue = "Tutorial";
+    });
+    tile.click();
+    document.removeEventListener("queue", listener);
+    expect(listener).toHaveBeenCalledOnce();
+    const event = listener.mock.calls[0]![0];
+    expect(event.detail).toEqual({ type: "Tutorial", accent: playTileAccent("tutorial") });
+    expect(event.bubbles).toBe(true);
+    expect(event.composed).toBe(true);
   });
 });

@@ -1,7 +1,8 @@
 import { GluonElement, css, html } from "@gluon/gluon";
 import { cursorStyles } from "./cursor-styles.js";
 
-export type ButtonVariant = "yellow" | "blue" | "purple";
+/** `accent` takes the colour of the enclosing `--accent` custom property. */
+export type ButtonVariant = "yellow" | "blue" | "purple" | "accent";
 
 /**
  * A styled button. The host wraps a real `<button>`, so focus, keyboard
@@ -72,7 +73,8 @@ export class OverwebsButton extends GluonElement {
       }
 
       :host([variant="blue"]) button,
-      :host([variant="purple"]) button {
+      :host([variant="purple"]) button,
+      :host([variant="accent"]) button {
         height: calc(48 * var(--u));
         padding: 0 calc(25 * var(--u));
         box-shadow:
@@ -120,6 +122,17 @@ export class OverwebsButton extends GluonElement {
         text-shadow:
           0 0 calc(8 * var(--u)) rgba(141, 166, 181, 0.4),
           0 0 calc(2 * var(--u)) rgba(141, 166, 181, 0.8);
+      }
+
+      /* The colour of the enclosing \`--accent\` custom property, purple without one. */
+      :host([variant="accent"]) button {
+        background: var(--accent, rgba(178, 0, 255, 0.9));
+
+        &:hover,
+        &:active,
+        &:focus-visible {
+          filter: brightness(1.12);
+        }
       }
 
       :host([block]) button {

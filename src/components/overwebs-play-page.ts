@@ -3,14 +3,9 @@ import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 import { modesPageStyles } from "./modes-page-styles.js";
 
-/** The detail of the `queue` event: the kind of game to queue for. */
-export interface QueueRequest {
-  type: string;
-}
-
 /**
- * The play page: Quick Play (queues), Arcade, Competitive Play, Play vs. AI
- * and Custom Game. Dispatches `queue` when Quick Play is clicked.
+ * The play page: Quick Play and Custom Game queue; Arcade, Competitive Play
+ * and Play vs. AI link to their pages.
  */
 export class OverwebsPlayPage extends GluonElement {
   static override styles = [
@@ -36,9 +31,9 @@ export class OverwebsPlayPage extends GluonElement {
       <div class="modes">
         <overwebs-play-tile
           .mode=${"quick-play"}
+          .queue=${"Quick Play"}
           .heading=${"Quick Play"}
           .description=${"Jump into a game against other players of your skill level."}
-          @click=${this.#quickPlay}
         ></overwebs-play-tile>
         <a href="/arcade">
           <overwebs-play-tile
@@ -64,27 +59,12 @@ export class OverwebsPlayPage extends GluonElement {
         </a>
         <overwebs-play-tile
           .mode=${"custom-game"}
+          .queue=${"Custom Game"}
           .heading=${"Custom Game"}
           .description=${"Change the rules and play a game with your friends or AI."}
         ></overwebs-play-tile>
       </div>
       <overwebs-global-button action="back" @click=${back}></overwebs-global-button>
     `;
-  }
-
-  #quickPlay = () => {
-    this.dispatchEvent(
-      new CustomEvent<QueueRequest>("queue", {
-        detail: { type: "Quick Play" },
-        bubbles: true,
-        composed: true,
-      }),
-    );
-  };
-}
-
-declare global {
-  interface GlobalEventHandlersEventMap {
-    queue: CustomEvent<QueueRequest>;
   }
 }

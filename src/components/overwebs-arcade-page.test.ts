@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import "../elements/overwebs-arcade-page.js";
 import type { OverwebsArcadePage } from "./overwebs-arcade-page.js";
-import type { OverwebsArcadeTile } from "./overwebs-arcade-tile.js";
+import { ARCADE_ACCENT, type OverwebsArcadeTile } from "./overwebs-arcade-tile.js";
 
 const create = async (): Promise<OverwebsArcadePage> => {
   const element = document.createElement("overwebs-arcade-page");
@@ -58,5 +58,26 @@ describe("overwebs-arcade-page", () => {
     expect(button.action).toBe("back");
     button.click();
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("queues for the mode of a clicked tile in the arcade accent", async () => {
+    const root = (await create()).shadowRoot!;
+    const tiles = [...root.querySelectorAll<OverwebsArcadeTile>("overwebs-arcade-tile")];
+    expect(tiles.map((tile) => tile.queue)).toEqual([
+      "Mystery Duel",
+      "Elimination",
+      "Mystery Heroes",
+      "All Brawls!",
+      "No Limits",
+    ]);
+    const listener = vi.fn<(event: CustomEvent<{ type: string; accent: string }>) => void>();
+    document.addEventListener("queue", listener);
+    tiles[3]!.click();
+    document.removeEventListener("queue", listener);
+    expect(listener).toHaveBeenCalledOnce();
+    expect(listener.mock.calls[0]![0].detail).toEqual({
+      type: "All Brawls!",
+      accent: ARCADE_ACCENT,
+    });
   });
 });

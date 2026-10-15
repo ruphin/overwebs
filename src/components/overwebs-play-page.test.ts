@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import "../elements/overwebs-play-page.js";
 import type { OverwebsPageTitle } from "./overwebs-page-title.js";
 import type { OverwebsPlayPage } from "./overwebs-play-page.js";
-import type { OverwebsPlayTile } from "./overwebs-play-tile.js";
+import { playTileAccent, type OverwebsPlayTile } from "./overwebs-play-tile.js";
 
 const mount = async (): Promise<OverwebsPlayPage> => {
   const element = document.createElement("overwebs-play-page");
@@ -56,19 +56,24 @@ describe("overwebs-play-page", () => {
 
     expect(listener).toHaveBeenCalledOnce();
     const event = listener.mock.calls[0]![0];
-    expect(event.detail).toEqual({ type: "Quick Play" });
+    expect(event.detail).toEqual({ type: "Quick Play", accent: playTileAccent("quick-play") });
     expect(event.bubbles).toBe(true);
     expect(event.composed).toBe(true);
   });
 
-  it("does not queue from the other tiles", async () => {
+  it("queues for a custom game in the tile's accent; the linked tiles navigate instead", async () => {
     const element = await mount();
-    const listener = vi.fn();
+    const listener = vi.fn<(event: CustomEvent<{ type: string; accent: string }>) => void>();
     document.addEventListener("queue", listener);
-    const all = element.shadowRoot!.querySelectorAll<OverwebsPlayTile>("overwebs-play-tile");
+    const all = [...element.shadowRoot!.querySelectorAll<OverwebsPlayTile>("overwebs-play-tile")];
+    expect(all.map((tile) => tile.queue)).toEqual(["Quick Play", "", "", "", "Custom Game"]);
     all[4]!.click();
     document.removeEventListener("queue", listener);
-    expect(listener).not.toHaveBeenCalled();
+    expect(listener).toHaveBeenCalledOnce();
+    expect(listener.mock.calls[0]![0].detail).toEqual({
+      type: "Custom Game",
+      accent: playTileAccent("custom-game"),
+    });
   });
 
   it("goes back when the back button is clicked", async () => {

@@ -3,7 +3,7 @@ import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 import { modesPageStyles } from "./modes-page-styles.js";
 
-/** The VS. AI page: Easy, Medium and Hard AI difficulty. */
+/** The VS. AI page: Easy, Medium and Hard AI difficulty, each queueing for a game. */
 export class OverwebsVsAiPage extends GluonElement {
   static override styles = [cursorStyles, modesPageStyles];
 
@@ -14,16 +14,19 @@ export class OverwebsVsAiPage extends GluonElement {
       <div class="modes">
         <overwebs-play-tile
           .mode=${"easy-ai"}
+          .queue=${"Easy AI"}
           .heading=${"Easy"}
           .description=${"Play against easy difficulty AI-controlled heroes."}
         ></overwebs-play-tile>
         <overwebs-play-tile
           .mode=${"medium-ai"}
+          .queue=${"Medium AI"}
           .heading=${"Medium"}
           .description=${"Play against medium difficulty AI-controlled heroes."}
         ></overwebs-play-tile>
         <overwebs-play-tile
           .mode=${"hard-ai"}
+          .queue=${"Hard AI"}
           .heading=${"Hard"}
           .description=${"Play against hard difficulty AI-controlled heroes."}
         ></overwebs-play-tile>
