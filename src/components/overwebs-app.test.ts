@@ -9,6 +9,8 @@ import { OverwebsApp } from "./overwebs-app.js";
 import type { OverwebsBackground } from "./overwebs-background.js";
 import type { OverwebsChatWidget } from "./overwebs-chat-widget.js";
 import type { OverwebsNotification } from "./overwebs-notification.js";
+import { LocalChatHandler } from "../lib/chat.js";
+import { updateSettings } from "../lib/settings.js";
 
 vi.mock("../lib/pages.js", () => {
   const page = (tag: string) => ({ tag, load: () => Promise.resolve() });
@@ -48,6 +50,8 @@ describe("overwebs-app", () => {
 
   const create = async (): Promise<OverwebsApp> => {
     app = document.createElement("test-overwebs-app") as OverwebsApp;
+    // Keep the chat off the network in tests
+    app.chat = new LocalChatHandler();
     document.body.append(app);
     await settle(app);
     return app;
@@ -132,6 +136,33 @@ describe("overwebs-app", () => {
     expect(root().querySelector("overwebs-main-page")).toBe(main);
   });
 
+  it("shows still backgrounds unless animated backgrounds are enabled", async () => {
+    await create();
+    const background = root().querySelector<OverwebsBackground>("overwebs-background")!;
+    updateSettings({ animatedBackgrounds: false });
+    await settle(app);
+    expect(app.lowBandwidth).toBe(true);
+    expect(background.lowBandwidth).toBe(true);
+    updateSettings({ animatedBackgrounds: true });
+    await settle(app);
+    expect(app.lowBandwidth).toBe(false);
+    expect(background.lowBandwidth).toBe(false);
+  });
+
+  it("gives the chat a local handler while the online chat is off", async () => {
+    updateSettings({ onlineChat: true });
+    await create();
+    const widget = () => root().querySelector<OverwebsChatWidget>("overwebs-chat-widget")!;
+    expect(widget().handler).toBe(app.chat);
+    updateSettings({ onlineChat: false });
+    await settle(app);
+    expect(widget().handler).not.toBe(app.chat);
+    expect(widget().handler).toBeInstanceOf(LocalChatHandler);
+    updateSettings({ onlineChat: true });
+    await settle(app);
+    expect(widget().handler).toBe(app.chat);
+  });
+
   it("selects the background set from ?background and replaces the route with /main", async () => {
     await create();
     await loginAs();
@@ -202,14 +233,21 @@ describe("overwebs-app", () => {
     expect(vi.getTimerCount()).toBe(0);
   });
 
-  it("renders a black link home on the exit page", async () => {
+  it("logs out and returns to the login page on exit", async () => {
     await create();
     await loginAs();
+    expect(session.value).not.toBeNull();
     navigate("/exit");
     await settle(app);
-    const exit = root().querySelector<HTMLAnchorElement>("a#exit")!;
-    expect(exit).not.toBeNull();
-    expect(exit.getAttribute("href")).toBe("/");
+    expect(session.value).toBeNull();
+    expect(localStorage.getItem("userID")).toBeNull();
+    expect(app.loggedIn).toBe(false);
+    expect(location.pathname).toBe("/login");
+    expect(app.page).toBe("login");
+    expect(root().querySelector("overwebs-login-page")).not.toBeNull();
     expect(root().querySelector("overwebs-main-page")).toBeNull();
+    navigate("/main");
+    await settle(app);
+    expect(location.pathname).toBe("/login");
   });
 });

@@ -112,6 +112,12 @@ export const buildBackgroundSet = (map: string, hero: string): BackgroundSet => 
     "to_hero-gallery": toHeroGallery,
     "hero-gallery": heroGallery,
     "hero-gallery_to_main": heroGalleryToMain,
+    // The options page looks like the hero gallery, and moving between the two changes nothing
+    to_options: toHeroGallery,
+    options: heroGallery,
+    options_to_main: heroGalleryToMain,
+    "hero-gallery_to_options": heroGallery,
+    "options_to_hero-gallery": heroGallery,
   };
 };
 

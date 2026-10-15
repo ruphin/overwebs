@@ -1,4 +1,5 @@
 import { GluonElement, css, html, svg } from "@gluon/gluon";
+import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 
 /** The competitive play emblem (`/images/competitive.svg`), viewBox `0 0 313 273`. */
@@ -47,324 +48,327 @@ const infoSections: readonly { readonly title: string; readonly items: readonly 
 
 /** The competitive play page: season info, rules and the (inert) buttons. */
 export class OverwebsCompetitivePage extends GluonElement {
-  static override styles = css`
-    :host {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      width: 100vw;
-      height: 100dvh;
-      background: rgba(0, 0, 0, 0.25);
-    }
-
-    .emblem {
-      position: absolute;
-      top: calc(-50 * var(--u));
-      left: calc(500 * var(--u));
-      width: calc(600 * var(--u));
-      height: calc(600 * var(--u));
-      fill: rgba(250, 250, 250, 0.2);
-    }
-
-    .container {
-      position: relative;
-      display: flex;
-      height: calc(800 * var(--u));
-      margin-top: calc(320 * var(--u));
-      margin-left: calc(320 * var(--u));
-    }
-
-    #return {
-      flex-shrink: 0;
-      width: calc(113 * var(--u));
-      background: rgba(255, 255, 255, 0.2);
-
-      &:hover,
-      &:active {
-        box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
-      }
-    }
-
-    .competitive {
-      margin-left: calc(35 * var(--u));
-      flex-grow: 1;
-      color: white;
-
-      .header {
+  static override styles = [
+    cursorStyles,
+    css`
+      :host {
+        display: block;
         position: relative;
-        font-family: var(--font-display);
-        font-size: calc(84 * var(--u));
-        margin-bottom: calc(36 * var(--u));
-
-        &::after {
-          content: "";
-          display: block;
-          position: absolute;
-          bottom: calc(-22 * var(--u));
-          left: 0;
-          width: calc(67 * var(--u));
-          height: calc(7 * var(--u));
-          background: #ffffff;
-        }
+        overflow: hidden;
+        width: 100vw;
+        height: 100dvh;
+        background: rgba(0, 0, 0, 0.25);
       }
 
-      .text {
-        max-width: calc(510 * var(--u));
-        font-family: var(--font-ui);
-        font-size: calc(21 * var(--u));
-        text-transform: uppercase;
-        color: rgba(210, 210, 210, 0.9);
-        line-height: 1.4;
-        margin-bottom: calc(54 * var(--u));
-      }
-
-      .title {
-        margin-top: calc(71 * var(--u));
-        font-family: var(--font-ui);
-        font-size: calc(42 * var(--u));
-        text-transform: uppercase;
-        margin-bottom: calc(37 * var(--u));
-      }
-
-      .subtitle {
-        font-family: var(--font-ui);
-        font-size: calc(30 * var(--u));
-        text-transform: uppercase;
-        margin-bottom: calc(4 * var(--u));
-      }
-    }
-
-    .info {
-      width: calc(655 * var(--u));
-      margin-right: calc(215 * var(--u));
-      display: flex;
-      flex-flow: column;
-
-      .header {
-        display: flex;
-        align-items: center;
-        font-family: var(--font-ui);
-        font-size: calc(52 * var(--u));
-        text-transform: uppercase;
-        margin-bottom: calc(30 * var(--u));
-        color: #ffffff;
-
-        .i {
-          height: calc(46 * var(--u));
-          width: calc(46 * var(--u));
-          display: inline-flex;
-          fill: #ffffff;
-          margin-right: calc(20 * var(--u));
-        }
-      }
-
-      .infobox {
-        flex-grow: 1;
-        min-height: 0;
-        margin-left: calc(22 * var(--u));
-        padding-left: calc(57 * var(--u));
-        box-shadow: inset calc(4 * var(--u)) 0 0 0 rgba(255, 255, 255, 0.25);
-        display: flex;
-        flex-flow: column;
-      }
-
-      .infotext {
-        position: relative;
-        flex-grow: 1;
-        color: #ffffff;
-        overflow-y: scroll;
-
-        &::-webkit-scrollbar {
-          width: calc(14 * var(--u));
-        }
-
-        &::-webkit-scrollbar-track-piece {
-          background-image: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0) 0,
-            rgba(0, 0, 0, 0) 35%,
-            rgba(0, 0, 0, 0.05) 35%,
-            rgba(0, 0, 0, 0.05) 65%,
-            rgba(0, 0, 0, 0) 65%,
-            rgba(0, 0, 0, 0)
-          );
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.5);
-          border-radius: calc(64 * var(--u));
-        }
-
-        .title {
-          margin-top: calc(20 * var(--u));
-          margin-bottom: calc(4 * var(--u));
-          font-family: var(--font-ui);
-          font-size: calc(30 * var(--u));
-          text-transform: uppercase;
-        }
-
-        ul {
-          font-family: var(--font-text);
-          list-style: none;
-          padding: 0;
-          margin: 0 0 calc(44 * var(--u));
-          font-size: calc(22 * var(--u));
-          color: rgba(255, 255, 255, 0.8);
-        }
-
-        li::before {
-          content: "- ";
-        }
-      }
-
-      button {
-        width: 100%;
-        flex-shrink: 0;
-        margin-top: calc(23 * var(--u));
-
-        &:first-of-type {
-          position: relative;
-          margin-top: calc(114 * var(--u));
-
-          &::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: calc(-46 * var(--u));
-            width: 100%;
-            height: calc(4 * var(--u));
-            background-color: rgba(255, 255, 255, 0.25);
-            pointer-events: none;
-          }
-        }
-      }
-    }
-
-    button {
-      width: calc(464 * var(--u));
-      height: calc(64 * var(--u));
-      padding: 0;
-      border: none;
-      border-radius: calc(3 * var(--u));
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: var(--font-ui);
-      font-size: calc(24 * var(--u));
-      text-transform: uppercase;
-      color: #ffffff;
-      cursor: inherit;
-
-      .i {
-        display: inline-block;
-        height: calc(28 * var(--u));
-        width: calc(28 * var(--u));
-        fill: #ffffff;
-        margin-right: calc(6 * var(--u));
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      &.blue {
-        background: #1c75bc;
-
-        &:hover,
-        &:active {
-          background: rgba(36, 93, 133, 0.95);
-          box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
-        }
-      }
-
-      &.yellow {
-        background: rgba(190, 123, 40, 0.95);
-
-        &:hover,
-        &:active {
-          background: rgba(116, 88, 46, 0.95);
-          box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
-        }
-      }
-
-      &.big {
-        height: calc(90 * var(--u));
-        font-size: calc(58 * var(--u));
-      }
-    }
-
-    /*
-     * Portrait: the two columns stack and scroll under the bottom bar. The
-     * side bar that doubles as a back button goes; the back button remains.
-     */
-    @media (orientation: portrait) {
       .emblem {
-        top: var(--top-bar);
-        left: auto;
-        right: var(--page-gutter);
-        width: calc(400 * var(--u));
-        height: calc(400 * var(--u));
+        position: absolute;
+        top: calc(-50 * var(--u));
+        left: calc(500 * var(--u));
+        width: calc(600 * var(--u));
+        height: calc(600 * var(--u));
+        fill: rgba(250, 250, 250, 0.2);
       }
 
       .container {
-        position: absolute;
-        inset: var(--top-bar) 0 var(--bottom-bar);
-        box-sizing: border-box;
-        flex-flow: column;
-        height: auto;
-        margin: 0;
-        padding: 0 var(--page-gutter) calc(20 * var(--u));
-        overflow-y: auto;
+        position: relative;
+        display: flex;
+        height: calc(800 * var(--u));
+        margin-top: calc(320 * var(--u));
+        margin-left: calc(320 * var(--u));
       }
 
       #return {
-        display: none;
+        flex-shrink: 0;
+        width: calc(113 * var(--u));
+        background: rgba(255, 255, 255, 0.2);
+
+        &:hover,
+        &:active {
+          box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
+        }
       }
 
       .competitive {
-        margin-left: 0;
-        flex-grow: 0;
+        margin-left: calc(35 * var(--u));
+        flex-grow: 1;
+        color: white;
+
+        .header {
+          position: relative;
+          font-family: var(--font-display);
+          font-size: calc(84 * var(--u));
+          margin-bottom: calc(36 * var(--u));
+
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: calc(-22 * var(--u));
+            left: 0;
+            width: calc(67 * var(--u));
+            height: calc(7 * var(--u));
+            background: #ffffff;
+          }
+        }
 
         .text {
-          max-width: none;
+          max-width: calc(510 * var(--u));
+          font-family: var(--font-ui);
+          font-size: calc(21 * var(--u));
+          text-transform: uppercase;
+          color: rgba(210, 210, 210, 0.9);
+          line-height: 1.4;
+          margin-bottom: calc(54 * var(--u));
+        }
+
+        .title {
+          margin-top: calc(71 * var(--u));
+          font-family: var(--font-ui);
+          font-size: calc(42 * var(--u));
+          text-transform: uppercase;
+          margin-bottom: calc(37 * var(--u));
+        }
+
+        .subtitle {
+          font-family: var(--font-ui);
+          font-size: calc(30 * var(--u));
+          text-transform: uppercase;
+          margin-bottom: calc(4 * var(--u));
         }
       }
 
       .info {
-        width: auto;
-        margin: calc(70 * var(--u)) 0 0;
+        width: calc(655 * var(--u));
+        margin-right: calc(215 * var(--u));
+        display: flex;
+        flex-flow: column;
+
+        .header {
+          display: flex;
+          align-items: center;
+          font-family: var(--font-ui);
+          font-size: calc(52 * var(--u));
+          text-transform: uppercase;
+          margin-bottom: calc(30 * var(--u));
+          color: #ffffff;
+
+          .i {
+            height: calc(46 * var(--u));
+            width: calc(46 * var(--u));
+            display: inline-flex;
+            fill: #ffffff;
+            margin-right: calc(20 * var(--u));
+          }
+        }
 
         .infobox {
-          margin-left: 0;
-          padding-left: calc(30 * var(--u));
+          flex-grow: 1;
+          min-height: 0;
+          margin-left: calc(22 * var(--u));
+          padding-left: calc(57 * var(--u));
+          box-shadow: inset calc(4 * var(--u)) 0 0 0 rgba(255, 255, 255, 0.25);
+          display: flex;
+          flex-flow: column;
         }
 
         .infotext {
-          flex-grow: 0;
-          overflow: visible;
+          position: relative;
+          flex-grow: 1;
+          color: #ffffff;
+          overflow-y: scroll;
+
+          &::-webkit-scrollbar {
+            width: calc(14 * var(--u));
+          }
+
+          &::-webkit-scrollbar-track-piece {
+            background-image: linear-gradient(
+              to right,
+              rgba(0, 0, 0, 0) 0,
+              rgba(0, 0, 0, 0) 35%,
+              rgba(0, 0, 0, 0.05) 35%,
+              rgba(0, 0, 0, 0.05) 65%,
+              rgba(0, 0, 0, 0) 65%,
+              rgba(0, 0, 0, 0)
+            );
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: calc(64 * var(--u));
+          }
+
+          .title {
+            margin-top: calc(20 * var(--u));
+            margin-bottom: calc(4 * var(--u));
+            font-family: var(--font-ui);
+            font-size: calc(30 * var(--u));
+            text-transform: uppercase;
+          }
+
+          ul {
+            font-family: var(--font-text);
+            list-style: none;
+            padding: 0;
+            margin: 0 0 calc(44 * var(--u));
+            font-size: calc(22 * var(--u));
+            color: rgba(255, 255, 255, 0.8);
+          }
+
+          li::before {
+            content: "- ";
+          }
         }
 
-        button:first-of-type {
-          margin-top: calc(60 * var(--u));
+        button {
+          width: 100%;
+          flex-shrink: 0;
+          margin-top: calc(23 * var(--u));
 
-          &::before {
-            top: calc(-30 * var(--u));
+          &:first-of-type {
+            position: relative;
+            margin-top: calc(114 * var(--u));
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: 0;
+              top: calc(-46 * var(--u));
+              width: 100%;
+              height: calc(4 * var(--u));
+              background-color: rgba(255, 255, 255, 0.25);
+              pointer-events: none;
+            }
           }
         }
       }
 
-      .competitive .text,
-      .info .infotext ul {
-        font-size: max(calc(22 * var(--u)), 13px);
+      button {
+        width: calc(464 * var(--u));
+        height: calc(64 * var(--u));
+        padding: 0;
+        border: none;
+        border-radius: calc(3 * var(--u));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-ui);
+        font-size: calc(24 * var(--u));
+        text-transform: uppercase;
+        color: #ffffff;
+        cursor: inherit;
+
+        .i {
+          display: inline-block;
+          height: calc(28 * var(--u));
+          width: calc(28 * var(--u));
+          fill: #ffffff;
+          margin-right: calc(6 * var(--u));
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &.blue {
+          background: #1c75bc;
+
+          &:hover,
+          &:active {
+            background: rgba(36, 93, 133, 0.95);
+            box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
+          }
+        }
+
+        &.yellow {
+          background: rgba(190, 123, 40, 0.95);
+
+          &:hover,
+          &:active {
+            background: rgba(116, 88, 46, 0.95);
+            box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
+          }
+        }
+
+        &.big {
+          height: calc(90 * var(--u));
+          font-size: calc(58 * var(--u));
+        }
       }
 
-      button {
-        width: 100%;
-        min-height: 44px;
-        font-size: max(calc(24 * var(--u)), 14px);
+      /*
+       * Portrait: the two columns stack and scroll under the bottom bar. The
+       * side bar that doubles as a back button goes; the back button remains.
+       */
+      @media (orientation: portrait) {
+        .emblem {
+          top: var(--top-bar);
+          left: auto;
+          right: var(--page-gutter);
+          width: calc(400 * var(--u));
+          height: calc(400 * var(--u));
+        }
+
+        .container {
+          position: absolute;
+          inset: var(--top-bar) 0 var(--bottom-bar);
+          box-sizing: border-box;
+          flex-flow: column;
+          height: auto;
+          margin: 0;
+          padding: 0 var(--page-gutter) calc(20 * var(--u));
+          overflow-y: auto;
+        }
+
+        #return {
+          display: none;
+        }
+
+        .competitive {
+          margin-left: 0;
+          flex-grow: 0;
+
+          .text {
+            max-width: none;
+          }
+        }
+
+        .info {
+          width: auto;
+          margin: calc(70 * var(--u)) 0 0;
+
+          .infobox {
+            margin-left: 0;
+            padding-left: calc(30 * var(--u));
+          }
+
+          .infotext {
+            flex-grow: 0;
+            overflow: visible;
+          }
+
+          button:first-of-type {
+            margin-top: calc(60 * var(--u));
+
+            &::before {
+              top: calc(-30 * var(--u));
+            }
+          }
+        }
+
+        .competitive .text,
+        .info .infotext ul {
+          font-size: max(calc(22 * var(--u)), 13px);
+        }
+
+        button {
+          width: 100%;
+          min-height: 44px;
+          font-size: max(calc(24 * var(--u)), 14px);
+        }
       }
-    }
-  `;
+    `,
+  ];
 
   override render() {
     return html`

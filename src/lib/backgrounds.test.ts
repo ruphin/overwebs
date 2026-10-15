@@ -16,6 +16,15 @@ describe("backgrounds", () => {
     expect(set["arcade_to_play"]).toBe(set["competitive_to_play"]);
   });
 
+  it("gives the options page the hero gallery backgrounds", () => {
+    const set = buildBackgroundSet("hollywood", "tracer");
+    expect(set["options"]).toBe(set["hero-gallery"]);
+    expect(set["to_options"]).toBe(set["to_hero-gallery"]);
+    expect(set["options_to_main"]).toBe(set["hero-gallery_to_main"]);
+    expect(transitionFor(set, "hero-gallery", "options")).toBe("hero-gallery_to_options");
+    expect(set["hero-gallery_to_options"]).toBe(set["hero-gallery"]);
+  });
+
   it("chains transitions", () => {
     expect(set["to_play"]?.transition).toBe("play");
     expect(set["play_to_main"]?.transition).toBe("main");

@@ -3,6 +3,21 @@
 // customElements.define(), so bundlers can tree-shake unused exports.
 // Registering entrypoints live in src/elements/.
 export { Store, type Listener } from "./lib/store.js";
+export {
+  settings,
+  updateSettings,
+  loadSettings,
+  prefersLowBandwidth,
+  type Settings,
+} from "./lib/settings.js";
+export {
+  ChatEmitter,
+  LocalChatHandler,
+  type ChatHandler,
+  type ChatListener,
+  type ChatMessage,
+} from "./lib/chat.js";
+export { ApiChatHandler, DEFAULT_CHAT_URL, type ApiChatOptions } from "./lib/chat-api.js";
 export { heroes, heroById, heroPortrait, type Hero } from "./lib/heroes.js";
 export {
   player,
@@ -69,11 +84,12 @@ export {
 } from "./components/overwebs-arcade-tile.js";
 export { OverwebsGalleryHero } from "./components/overwebs-gallery-hero.js";
 export { OverwebsBackground } from "./components/overwebs-background.js";
-export { OverwebsChatWidget, type ChatMessage } from "./components/overwebs-chat-widget.js";
+export { OverwebsChatWidget } from "./components/overwebs-chat-widget.js";
 export { OverwebsLoginPage } from "./components/overwebs-login-page.js";
 export { OverwebsMainPage } from "./components/overwebs-main-page.js";
 export { OverwebsPlayPage, type QueueRequest } from "./components/overwebs-play-page.js";
 export { OverwebsTrainingPage } from "./components/overwebs-training-page.js";
+export { OverwebsOptionsPage } from "./components/overwebs-options-page.js";
 export { OverwebsVsAiPage } from "./components/overwebs-vs-ai-page.js";
 export { OverwebsArcadePage } from "./components/overwebs-arcade-page.js";
 export { OverwebsCompetitivePage } from "./components/overwebs-competitive-page.js";

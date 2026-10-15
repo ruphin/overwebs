@@ -17,6 +17,18 @@ npm run format     # prettier --write (format:check to verify only)
 npm run check      # typecheck + format:check + test
 ```
 
+### The chat
+
+The chat widget renders messages and takes input; the logic behind it is a
+`ChatHandler` from `src/lib/chat.ts` passed as its `handler` property, chosen
+in `src/components/overwebs-app.ts`. `ApiChatHandler` shares messages through
+the chat server of [ruphin.net](https://github.com/ruphin/ruphin.net) at
+`/api/chat/messages`; `LocalChatHandler` keeps them on the player's own
+screen. In development, Vite proxies `/api` to `API_PROXY` (default
+`http://localhost:8080`) with the host the server routes overwebs by, so run
+that redbean locally with `sh ./redbean.com -p 8080`. Without it the chat
+retries quietly and reports sent messages as unreachable.
+
 ## Layout
 
 ```

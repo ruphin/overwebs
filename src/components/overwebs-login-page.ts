@@ -1,4 +1,5 @@
 import { GluonElement, css, html } from "@gluon/gluon";
+import { cursorStyles } from "./cursor-styles.js";
 import type { LoginRequest } from "../lib/session.js";
 
 /** A login name: letters, optionally followed by `#` and a numeric battle tag. */
@@ -10,91 +11,94 @@ const loginPattern = new RegExp(LOGIN_PATTERN);
  * Dispatches `login` with the request; the app shell performs the login.
  */
 export class OverwebsLoginPage extends GluonElement {
-  static override styles = css`
-    :host {
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: flex-end;
-      position: relative;
-      overflow: hidden;
-      width: 100vw;
-      height: 100dvh;
-      letter-spacing: calc(1 * var(--u));
-    }
-
-    form {
-      display: flex;
-      flex-flow: column;
-      width: calc(400 * var(--u));
-      margin-bottom: calc(88 * var(--u));
-    }
-
-    label {
-      margin-bottom: calc(14 * var(--u));
-      font-family: var(--font-ui);
-      font-size: calc(24 * var(--u));
-      color: #ffffff;
-      text-align: center;
-      text-transform: uppercase;
-      pointer-events: none;
-    }
-
-    input {
-      height: calc(66 * var(--u));
-      margin: 0 0 calc(47 * var(--u));
-      padding: 0;
-      background: #d1d1d4;
-      border-radius: calc(9 * var(--u));
-      border: none;
-      text-align: center;
-      font-family: var(--font-ui);
-      font-size: calc(28 * var(--u));
-      letter-spacing: inherit;
-      color: black;
-      transition: background-color linear 0.08s;
-      box-shadow: inset 0 0 calc(1 * var(--u)) calc(2 * var(--u)) #ffffff;
-      user-select: text;
-
-      &:hover {
-        background: #ffffff;
+  static override styles = [
+    cursorStyles,
+    css`
+      :host {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        overflow: hidden;
+        width: 100vw;
+        height: 100dvh;
+        letter-spacing: calc(1 * var(--u));
       }
 
-      &:focus {
-        outline: none;
-        box-shadow:
-          inset 0 0 calc(1 * var(--u)) calc(2 * var(--u)) #ffffff,
-          0 0 0 calc(1 * var(--u)) #ffffff;
-      }
-    }
-
-    overwebs-button {
-      margin-bottom: calc(47 * var(--u));
-    }
-
-    /* Portrait: a wider form, and text that stays legible. */
-    @media (orientation: portrait) {
       form {
-        width: calc(600 * var(--u));
-        margin-bottom: calc(150 * var(--u));
+        display: flex;
+        flex-flow: column;
+        width: calc(400 * var(--u));
+        margin-bottom: calc(88 * var(--u));
       }
 
       label {
-        font-size: max(calc(24 * var(--u)), 14px);
+        margin-bottom: calc(14 * var(--u));
+        font-family: var(--font-ui);
+        font-size: calc(24 * var(--u));
+        color: #ffffff;
+        text-align: center;
+        text-transform: uppercase;
+        pointer-events: none;
       }
 
       input {
-        min-height: 44px;
-      }
-    }
+        height: calc(66 * var(--u));
+        margin: 0 0 calc(47 * var(--u));
+        padding: 0;
+        background: #d1d1d4;
+        border-radius: calc(9 * var(--u));
+        border: none;
+        text-align: center;
+        font-family: var(--font-ui);
+        font-size: calc(28 * var(--u));
+        letter-spacing: inherit;
+        color: black;
+        transition: background-color linear 0.08s;
+        box-shadow: inset 0 0 calc(1 * var(--u)) calc(2 * var(--u)) #ffffff;
+        user-select: text;
 
-    /* Touch screens: the input is at least 16px so iOS does not zoom in on focus. */
-    @media (hover: none) {
-      input {
-        font-size: max(calc(28 * var(--u)), 16px);
+        &:hover {
+          background: #ffffff;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow:
+            inset 0 0 calc(1 * var(--u)) calc(2 * var(--u)) #ffffff,
+            0 0 0 calc(1 * var(--u)) #ffffff;
+        }
       }
-    }
-  `;
+
+      overwebs-button {
+        margin-bottom: calc(47 * var(--u));
+      }
+
+      /* Portrait: a wider form, and text that stays legible. */
+      @media (orientation: portrait) {
+        form {
+          width: calc(600 * var(--u));
+          margin-bottom: calc(150 * var(--u));
+        }
+
+        label {
+          font-size: max(calc(24 * var(--u)), 14px);
+        }
+
+        input {
+          min-height: 44px;
+        }
+      }
+
+      /* Touch screens: the input is at least 16px so iOS does not zoom in on focus. */
+      @media (hover: none) {
+        input {
+          font-size: max(calc(28 * var(--u)), 16px);
+        }
+      }
+    `,
+  ];
 
   static override properties = {
     value: {},

@@ -1,5 +1,7 @@
 import { GluonElement, css, html } from "@gluon/gluon";
 import { selectBackgrounds, type BackgroundSelection } from "../lib/backgrounds.js";
+import { ApiChatHandler } from "../lib/chat-api.js";
+import { LocalChatHandler, type ChatHandler } from "../lib/chat.js";
 import {
   formatElapsed,
   queueState,
@@ -9,24 +11,14 @@ import {
 } from "../lib/game-state.js";
 import { pages } from "../lib/pages.js";
 import { navigate, route, type Route } from "../lib/router.js";
-import { login, restoreSession } from "../lib/session.js";
+import { login, logout, restoreSession } from "../lib/session.js";
+import { settings } from "../lib/settings.js";
 // The `login` and `queue` events are declared by the login and play pages.
 import type {} from "./overwebs-login-page.js";
 import type { OverwebsMainPage } from "./overwebs-main-page.js";
 import type {} from "./overwebs-play-page.js";
 
 const MAIN_PAGE_TAG = "overwebs-main-page";
-
-/** Whether the device prefers saving data: data saver on, or a touch-only device. */
-const prefersLowBandwidth = (): boolean => {
-  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-  if (connection?.saveData === true) {
-    return true;
-  }
-  return (
-    typeof matchMedia === "function" && matchMedia("(hover: none) and (pointer: coarse)").matches
-  );
-};
 
 /**
  * The application shell. Owns routing, the login state, the background
@@ -44,13 +36,6 @@ export class OverwebsApp extends GluonElement {
       width: 100vw;
       height: 100dvh;
     }
-
-    #exit {
-      display: block;
-      width: 100vw;
-      height: 100dvh;
-      background: black;
-    }
   `;
 
   static override properties = {
@@ -60,9 +45,10 @@ export class OverwebsApp extends GluonElement {
     queue: { type: Object },
     elapsed: {},
     lowBandwidth: { type: Boolean },
+    onlineChat: { type: Boolean },
   };
 
-  /** The current page (route name), `"exit"` for the exit screen. */
+  /** The current page (route name). */
   page = "";
   loggedIn = false;
   selection: BackgroundSelection | undefined = undefined;
@@ -70,6 +56,16 @@ export class OverwebsApp extends GluonElement {
   /** The elapsed queue time as `m:ss`, ticking while queued. */
   elapsed = "0:00";
   lowBandwidth = false;
+  /** Whether the chat is shared through the chat server (the "Online Chat" setting). */
+  onlineChat = true;
+  /**
+   * The chat logic given to the chat widget while the online chat is on:
+   * `ApiChatHandler` shares messages through the chat server. Set before the
+   * element is connected. With the online chat off, the widget gets a
+   * `LocalChatHandler` (lib/chat.ts), which keeps messages on this screen.
+   */
+  chat: ChatHandler = new ApiChatHandler();
+  readonly #localChat = new LocalChatHandler();
 
   /** Pages whose element module has been loaded. */
   readonly #loaded = new Set<string>();
@@ -80,7 +76,6 @@ export class OverwebsApp extends GluonElement {
   override connectedCallback(): void {
     super.connectedCallback();
     const signal = this.disconnectSignal;
-    this.lowBandwidth = prefersLowBandwidth();
     this.selection ??= selectBackgrounds();
     this.loggedIn = restoreSession() !== null;
 
@@ -96,6 +91,13 @@ export class OverwebsApp extends GluonElement {
     this.addEventListener("queue", (event) => startQueue(event.detail.type), { signal });
 
     queueState.subscribe((queue) => this.#onQueue(queue), { signal });
+    settings.subscribe(
+      (value) => {
+        this.lowBandwidth = !value.animatedBackgrounds;
+        this.onlineChat = value.onlineChat;
+      },
+      { signal },
+    );
     route.subscribe((current) => void this.#onRoute(current), { signal });
   }
 
@@ -119,8 +121,11 @@ export class OverwebsApp extends GluonElement {
       navigate("/main", { replace: true });
       return;
     }
+    // "Exit Game" ends the session and returns to the login screen
     if (page === "exit") {
-      this.page = page;
+      logout();
+      this.loggedIn = false;
+      navigate("/login", { replace: true });
       return;
     }
     const entry = pages[page];
@@ -158,7 +163,7 @@ export class OverwebsApp extends GluonElement {
 
   /** The element of the current page; the same node while the page stays the same. */
   #renderPage(): unknown {
-    const entry = this.page === "exit" ? undefined : pages[this.page];
+    const entry = pages[this.page];
     if (!entry || !this.#loaded.has(this.page)) {
       this.#pageTag = undefined;
       this.#pageElement = undefined;
@@ -181,7 +186,7 @@ export class OverwebsApp extends GluonElement {
         .page=${this.page}
         .lowBandwidth=${this.lowBandwidth}
       ></overwebs-background>
-      ${this.#renderPage()} ${this.page === "exit" ? html`<a id="exit" href="/"></a>` : null}
+      ${this.#renderPage()}
       ${
         this.queue.queued
           ? html`<overwebs-notification spinner .action=${"Cancel Search"} @action=${stopQueue}>
@@ -193,7 +198,10 @@ export class OverwebsApp extends GluonElement {
             </overwebs-notification>`
           : null
       }
-      <overwebs-chat-widget ?hidden=${this.page === "login"}></overwebs-chat-widget>
+      <overwebs-chat-widget
+        .handler=${this.onlineChat ? this.chat : this.#localChat}
+        ?hidden=${this.page === "login"}
+      ></overwebs-chat-widget>
     `;
   }
 }

@@ -32,4 +32,8 @@ export const pages: Readonly<Record<string, Page>> = {
     load: () => import("../elements/overwebs-training-page.js"),
   },
   "vs-ai": { tag: "overwebs-vs-ai-page", load: () => import("../elements/overwebs-vs-ai-page.js") },
+  options: {
+    tag: "overwebs-options-page",
+    load: () => import("../elements/overwebs-options-page.js"),
+  },
 };

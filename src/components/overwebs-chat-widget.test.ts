@@ -1,5 +1,6 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { OverwebsChatWidget } from "./overwebs-chat-widget.js";
+import { LocalChatHandler } from "../lib/chat.js";
 import { player } from "../lib/player.js";
 
 const press = (key: string) =>
@@ -102,6 +103,52 @@ describe("overwebs-chat-widget", () => {
     expect(element.messages).toEqual([]);
   });
 
+  it("sends submitted text through the handler and shows what the handler emits", async () => {
+    const handler = new LocalChatHandler();
+    const send = vi.spyOn(handler, "send");
+    const element = new OverwebsChatWidget();
+    element.handler = handler;
+    document.body.append(element);
+    await element.updateComplete;
+    element.playerName = "Ana";
+    input(element).value = "hi";
+    element.submit();
+    await element.updateComplete;
+    expect(send).toHaveBeenCalledWith("Ana", "General", "hi");
+    expect(messageTexts(element)).toEqual(["[Ana]: hi"]);
+    handler.emit({ author: "Mei", channel: "General", message: "hello", timestamp: 2 });
+    await element.updateComplete;
+    expect(messageTexts(element)).toEqual(["[Ana]: hi", "[Mei]: hello"]);
+  });
+
+  it("starts the handler while connected and switches when it is replaced", async () => {
+    const first = new LocalChatHandler();
+    const second = new LocalChatHandler();
+    const connectFirst = vi.spyOn(first, "connect");
+    const connectSecond = vi.spyOn(second, "connect");
+    const element = new OverwebsChatWidget();
+    element.handler = first;
+    document.body.append(element);
+    await element.updateComplete;
+    expect(connectFirst).toHaveBeenCalledOnce();
+    const firstSignal = connectFirst.mock.calls[0]![0];
+    expect(firstSignal.aborted).toBe(false);
+
+    element.handler = second;
+    await element.updateComplete;
+    expect(firstSignal.aborted).toBe(true);
+    expect(connectSecond).toHaveBeenCalledOnce();
+    first.emit({ author: "Ana", channel: "General", message: "stale", timestamp: 1 });
+    second.emit({ author: "Mei", channel: "General", message: "fresh", timestamp: 2 });
+    await element.updateComplete;
+    expect(messageTexts(element)).toEqual(["[Mei]: fresh"]);
+
+    element.remove();
+    expect(connectSecond.mock.calls[0]![0].aborted).toBe(true);
+    second.emit({ author: "Mei", channel: "General", message: "gone", timestamp: 3 });
+    expect(element.messages).toHaveLength(1);
+  });
+
   it("toggles the focus class when focus enters and leaves", async () => {
     const element = await create();
     const outside = document.createElement("button");
@@ -171,12 +218,28 @@ describe("overwebs-chat-widget", () => {
     expect(element.messages[0]).toMatchObject({
       author: "Ruphin",
       channel: "General",
-      message: "Welcome to Overwebs! Enable fullscreen with F11 for the best experience",
+      message: "Welcome to Overwatch for web! Enable fullscreen with F11 for the best experience",
     });
     element.remove();
     document.body.append(element);
     vi.advanceTimersByTime(20_000);
     expect(element.messages).toHaveLength(1);
+  });
+
+  it("tells touch screens to come back on a desktop", async () => {
+    vi.useFakeTimers();
+    const matchMedia = vi.fn((query: string) => ({ matches: query.includes("hover: none") }));
+    vi.stubGlobal("matchMedia", matchMedia);
+    try {
+      const element = await create();
+      vi.advanceTimersByTime(10_000);
+      expect(matchMedia).toHaveBeenCalledWith("(hover: none) and (pointer: coarse)");
+      expect(element.messages[0]?.message).toBe(
+        "Welcome to Overwatch for web! View on desktop devices for the best experience",
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 
   it("clears the introduction timer on disconnect", async () => {

@@ -1,4 +1,5 @@
 import { GluonElement, css, html } from "@gluon/gluon";
+import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 import { modesPageStyles } from "./modes-page-styles.js";
 
@@ -13,6 +14,7 @@ export interface QueueRequest {
  */
 export class OverwebsPlayPage extends GluonElement {
   static override styles = [
+    cursorStyles,
     modesPageStyles,
     css`
       overwebs-page-title {

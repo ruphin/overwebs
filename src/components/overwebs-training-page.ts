@@ -1,10 +1,11 @@
 import { GluonElement, html } from "@gluon/gluon";
+import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 import { modesPageStyles } from "./modes-page-styles.js";
 
 /** The training page: Tutorial, Practice Range and Practice vs. AI. */
 export class OverwebsTrainingPage extends GluonElement {
-  static override styles = modesPageStyles;
+  static override styles = [cursorStyles, modesPageStyles];
 
   override render() {
     return html`

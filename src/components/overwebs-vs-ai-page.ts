@@ -1,10 +1,11 @@
 import { GluonElement, html } from "@gluon/gluon";
+import { cursorStyles } from "./cursor-styles.js";
 import { back } from "../lib/router.js";
 import { modesPageStyles } from "./modes-page-styles.js";
 
 /** The VS. AI page: Easy, Medium and Hard AI difficulty. */
 export class OverwebsVsAiPage extends GluonElement {
-  static override styles = modesPageStyles;
+  static override styles = [cursorStyles, modesPageStyles];
 
   override render() {
     return html`

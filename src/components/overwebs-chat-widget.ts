@@ -1,24 +1,31 @@
 import { GluonElement, css, html, repeat, type PropertyValues } from "@gluon/gluon";
+import { cursorStyles } from "./cursor-styles.js";
+import { type ChatHandler, type ChatMessage, LocalChatHandler } from "../lib/chat.js";
 import { bindKey } from "../lib/keybindings.js";
 import { player } from "../lib/player.js";
 
-/** A message in the chat log. */
-export interface ChatMessage {
-  author: string;
-  channel: string;
-  message: string;
-  /** `Date.now()` when the message was posted. */
-  timestamp: number;
-}
+export type { ChatMessage };
 
-/** The scripted welcome message, posted 10 seconds after the widget connects. */
+/**
+ * The scripted welcome message, posted 10 seconds after the widget connects.
+ * Touch screens are told to come back on a desktop, others to go fullscreen.
+ */
 const INTRODUCTION = {
   author: "Ruphin",
   channel: "General",
-  message: "Welcome to Overwebs! Enable fullscreen with F11 for the best experience",
+  greeting: "Welcome to Overwatch for web!",
+  desktopTip: "Enable fullscreen with F11 for the best experience",
+  mobileTip: "View on desktop devices for the best experience",
 } as const;
 
 const INTRODUCTION_DELAY = 10_000;
+
+const TOUCH_SCREEN = "(hover: none) and (pointer: coarse)";
+
+const introduction = (): string => {
+  const touch = typeof matchMedia === "function" && matchMedia(TOUCH_SCREEN).matches;
+  return `${INTRODUCTION.greeting} ${touch ? INTRODUCTION.mobileTip : INTRODUCTION.desktopTip}`;
+};
 
 /** Messages consisting only of control characters and spaces are not posted. */
 const NON_PRINTABLE = /^[\x00-\x20]*$/;
@@ -33,264 +40,268 @@ const NON_PRINTABLE = /^[\x00-\x20]*$/;
  * the input, or posts its text when it is focused; Escape leaves the chat.
  */
 export class OverwebsChatWidget extends GluonElement {
-  static override styles = css`
-    :host([hidden]) {
-      display: none;
-    }
-
-    :host {
-      /* The width of the log and the entry box; the log is a bit wider for its scrollbar. */
-      --chat-width: calc(534 * var(--u));
-      --chat-font: calc(25 * var(--u));
-      /* The entry box (and the collapsed button) height; the log sits a gap above it. */
-      --entry-height: calc(54 * var(--u));
-      --log-gap: calc(16 * var(--u));
-      /* The height of the log: a few lines collapsed, more while focused. */
-      --log-height: calc(120 * var(--u));
-      position: absolute;
-      z-index: 10;
-      bottom: calc(54 * var(--u));
-      left: calc(54 * var(--u));
-      font-family: var(--font-text);
-      font-size: var(--chat-font);
-      display: flex;
-      flex-flow: column;
-      align-items: flex-start;
-      outline: none;
-      /* Clicks go through to the page, except on the button and the entry box; the log takes them when open. */
-      pointer-events: none;
-    }
-
-    .button,
-    .entryBox {
-      pointer-events: auto;
-    }
-
-    .chatBox {
-      z-index: 1;
-      /* Puts the scrollbar on the left; the log switches back to ltr. */
-      direction: rtl;
-      box-sizing: border-box;
-      position: absolute;
-      bottom: calc(var(--entry-height) + var(--log-gap));
-      left: calc(-26 * var(--u));
-      padding-left: calc(26 * var(--u));
-      width: calc(var(--chat-width) + 16 * var(--u));
-      height: var(--log-height);
-      overflow-y: scroll;
-      color: #ffffff;
-      line-height: 1.4;
-      text-shadow: calc(0.6 * var(--u)) calc(0.8 * var(--u)) rgba(0, 0, 0, 0.65);
-
-      &::-webkit-scrollbar {
-        width: calc(14 * var(--u));
-      }
-      &::-webkit-scrollbar-track-piece {
-        background-image: none;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: none;
-        border-radius: calc(64 * var(--u));
-        width: calc(14 * var(--u));
-        height: calc(14 * var(--u));
-      }
-    }
-
-    .chatLog {
-      box-sizing: border-box;
-      direction: ltr;
-      min-height: var(--log-height);
-      border-radius: calc(5 * var(--u));
-      display: flex;
-      flex-direction: column;
-      /* Newest message last, at the bottom; short logs sit at the bottom too. */
-      justify-content: flex-end;
-      gap: calc(8 * var(--u));
-    }
-
-    .message {
-      line-height: calc(30 * var(--u));
-      user-select: text;
-    }
-
-    .chatShadow {
-      position: absolute;
-      left: 0;
-      width: var(--chat-width);
-      height: var(--log-height);
-      bottom: calc(var(--entry-height) + var(--log-gap) / 2);
-      border-radius: calc(5 * var(--u));
-      background: rgba(0, 0, 0, 0);
-      transition:
-        background 0.2s,
-        height 0.2s;
-    }
-
-    .button {
-      height: var(--entry-height);
-      line-height: var(--entry-height);
-      font-family: var(--font-ui);
-      text-transform: uppercase;
-      font-size: calc(22 * var(--u));
-      display: inline-block;
-      box-shadow: 0 0 0 calc(2.6 * var(--u)) rgba(220, 220, 220, 0.8);
-      border-radius: calc(5 * var(--u));
-      color: rgba(255, 255, 255, 0.95);
-      background: rgba(80, 80, 80, 0.5);
-      padding-inline: calc(14 * var(--u));
-      overflow: hidden;
-      opacity: 0.5;
-
-      &:hover,
-      &:active {
-        opacity: 0.9;
-      }
-
-      .short {
+  static override styles = [
+    cursorStyles,
+    css`
+      :host([hidden]) {
         display: none;
       }
-    }
 
-    .entryBox {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.65);
-      border-radius: calc(5 * var(--u));
-      padding-inline: calc(14 * var(--u));
-      width: var(--chat-width);
-      height: 0;
-      overflow: hidden;
-      color: #ffffff;
-      line-height: 1.4;
-      text-shadow: calc(0.5 * var(--u)) calc(0.5 * var(--u)) 0 rgba(0, 0, 0, 0.65);
-    }
-
-    .input {
-      appearance: none;
-      background: none;
-      padding: 0;
-      border: none;
-      font-family: var(--font-text);
-      font-size: var(--chat-font);
-      color: #ffffff;
-      text-shadow: calc(0.5 * var(--u)) calc(0.5 * var(--u)) 0 #000;
-      line-height: 1.4;
-      flex-grow: 1;
-      margin-left: calc(6 * var(--u));
-      user-select: text;
-
-      &:focus {
+      :host {
+        /* The width of the log and the entry box; the log is a bit wider for its scrollbar. */
+        --chat-width: calc(640 * var(--u));
+        --chat-font: calc(25 * var(--u));
+        /* The entry box (and the collapsed button) height; the log sits a gap above it. */
+        --entry-height: calc(54 * var(--u));
+        --log-gap: calc(16 * var(--u));
+        /* The height of the log: a few lines collapsed, more while focused. */
+        --log-height: calc(120 * var(--u));
+        position: absolute;
+        z-index: 10;
+        bottom: calc(54 * var(--u));
+        left: calc(54 * var(--u));
+        font-family: var(--font-text);
+        font-size: var(--chat-font);
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
         outline: none;
+        /* Clicks go through to the page, except on the button and the entry box; the log takes them when open. */
+        pointer-events: none;
       }
-    }
 
-    /* The Escape key target: rendered (so it counts as visible) but not clickable. */
-    .escape {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    :host(.focus) {
-      --log-height: calc(284 * var(--u));
-
-      .chatBox,
-      .chatShadow {
+      .button,
+      .entryBox {
         pointer-events: auto;
       }
 
       .chatBox {
+        z-index: 1;
+        /* Puts the scrollbar on the left; the log switches back to ltr. */
+        direction: rtl;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: calc(var(--entry-height) + var(--log-gap));
+        left: calc(-26 * var(--u));
+        padding-left: calc(26 * var(--u));
+        width: calc(var(--chat-width) + 16 * var(--u));
+        height: var(--log-height);
+        overflow-y: scroll;
+        color: #ffffff;
+        line-height: 1.4;
+        text-shadow: calc(0.6 * var(--u)) calc(0.8 * var(--u)) rgba(0, 0, 0, 0.65);
+
+        &::-webkit-scrollbar {
+          width: calc(14 * var(--u));
+        }
         &::-webkit-scrollbar-track-piece {
-          background-image: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0) 0,
-            rgba(0, 0, 0, 0) 35%,
-            rgba(0, 0, 0, 0.05) 35%,
-            rgba(0, 0, 0, 0.05) 65%,
-            rgba(0, 0, 0, 0) 65%,
-            rgba(0, 0, 0, 0)
-          );
+          background-image: none;
         }
         &::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.8);
+          background: none;
+          border-radius: calc(64 * var(--u));
+          width: calc(14 * var(--u));
+          height: calc(14 * var(--u));
         }
       }
-      .chatShadow {
-        height: calc(var(--log-height) + var(--log-gap) + 6 * var(--u));
-        background: rgba(0, 0, 0, 0.65);
-      }
-      .entryBox {
-        height: var(--entry-height);
-      }
-      .button {
-        height: 0;
-        min-height: 0;
-        padding: 0;
-        box-shadow: none;
-      }
-    }
 
-    /*
-     * Touch screens: a tap opens the chat, so the button says so. The input
-     * is at least 16px so iOS does not zoom in on it, and the entry box grows
-     * with it.
-     */
-    @media (hover: none) {
-      :host {
-        --entry-height: max(calc(54 * var(--u)), 2.2em);
-      }
-
-      .button .long {
-        display: none;
-      }
-
-      .button .short {
-        display: inline;
-      }
-
-      .input {
-        font-size: max(var(--chat-font), 16px);
-      }
-    }
-
-    /*
-     * Portrait: in the bottom bar, the button is a finger's size and the text
-     * has a floor. Open, the chat is a panel: the log fills the screen from
-     * the top bar down to the entry box.
-     */
-    @media (orientation: portrait) {
-      :host {
-        /* Leaves room for the back button on the right. */
-        --chat-width: calc(100vw - 3 * var(--page-gutter) - 180 * var(--u));
-        --chat-font: max(calc(25 * var(--u)), 16px);
-        --entry-height: max(calc(60 * var(--u)), 44px);
-        bottom: var(--page-gutter);
-        left: var(--page-gutter);
-      }
-
-      :host(.focus) {
-        --log-height: calc(
-          100dvh - var(--top-bar) - var(--page-gutter) - var(--entry-height) - var(--log-gap)
-        );
-      }
-
-      .button {
-        font-size: max(calc(22 * var(--u)), 16px);
+      .chatLog {
+        box-sizing: border-box;
+        direction: ltr;
+        min-height: var(--log-height);
+        border-radius: calc(5 * var(--u));
+        display: flex;
+        flex-direction: column;
+        /* Newest message last, at the bottom; short logs sit at the bottom too. */
+        justify-content: flex-end;
+        gap: calc(8 * var(--u));
       }
 
       .message {
-        line-height: 1.3;
+        line-height: calc(30 * var(--u));
+        user-select: text;
       }
-    }
-  `;
+
+      .chatShadow {
+        position: absolute;
+        left: 0;
+        width: var(--chat-width);
+        height: var(--log-height);
+        bottom: calc(var(--entry-height) + var(--log-gap) / 2);
+        border-radius: calc(5 * var(--u));
+        background: rgba(0, 0, 0, 0);
+        transition:
+          background 0.2s,
+          height 0.2s;
+      }
+
+      .button {
+        height: var(--entry-height);
+        line-height: var(--entry-height);
+        font-family: var(--font-ui);
+        text-transform: uppercase;
+        font-size: calc(22 * var(--u));
+        display: inline-block;
+        box-shadow: 0 0 0 calc(2.6 * var(--u)) rgba(220, 220, 220, 0.8);
+        border-radius: calc(5 * var(--u));
+        color: rgba(255, 255, 255, 0.95);
+        background: rgba(80, 80, 80, 0.5);
+        padding-inline: calc(14 * var(--u));
+        overflow: hidden;
+        opacity: 0.5;
+
+        &:hover,
+        &:active {
+          opacity: 0.9;
+        }
+
+        .short {
+          display: none;
+        }
+      }
+
+      .entryBox {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.65);
+        border-radius: calc(5 * var(--u));
+        padding-inline: calc(14 * var(--u));
+        width: var(--chat-width);
+        height: 0;
+        overflow: hidden;
+        color: #ffffff;
+        line-height: 1.4;
+        text-shadow: calc(0.5 * var(--u)) calc(0.5 * var(--u)) 0 rgba(0, 0, 0, 0.65);
+      }
+
+      .input {
+        appearance: none;
+        background: none;
+        padding: 0;
+        border: none;
+        font-family: var(--font-text);
+        font-size: var(--chat-font);
+        color: #ffffff;
+        text-shadow: calc(0.5 * var(--u)) calc(0.5 * var(--u)) 0 #000;
+        line-height: 1.4;
+        flex-grow: 1;
+        margin-left: calc(6 * var(--u));
+        user-select: text;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      /* The Escape key target: rendered (so it counts as visible) but not clickable. */
+      .escape {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      :host(.focus) {
+        --log-height: calc(284 * var(--u));
+
+        .chatBox,
+        .chatShadow {
+          pointer-events: auto;
+        }
+
+        .chatBox {
+          &::-webkit-scrollbar-track-piece {
+            background-image: linear-gradient(
+              to right,
+              rgba(0, 0, 0, 0) 0,
+              rgba(0, 0, 0, 0) 35%,
+              rgba(0, 0, 0, 0.05) 35%,
+              rgba(0, 0, 0, 0.05) 65%,
+              rgba(0, 0, 0, 0) 65%,
+              rgba(0, 0, 0, 0)
+            );
+          }
+          &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.8);
+          }
+        }
+        .chatShadow {
+          height: calc(var(--log-height) + var(--log-gap) + 6 * var(--u));
+          background: rgba(0, 0, 0, 0.65);
+        }
+        .entryBox {
+          height: var(--entry-height);
+        }
+        .button {
+          height: 0;
+          min-height: 0;
+          padding: 0;
+          box-shadow: none;
+        }
+      }
+
+      /*
+       * Touch screens: a tap opens the chat, so the button says so. The input
+       * is at least 16px so iOS does not zoom in on it, and the entry box grows
+       * with it.
+       */
+      @media (hover: none) {
+        :host {
+          --entry-height: max(calc(54 * var(--u)), 2.2em);
+        }
+
+        .button .long {
+          display: none;
+        }
+
+        .button .short {
+          display: inline;
+        }
+
+        .input {
+          font-size: max(var(--chat-font), 16px);
+        }
+      }
+
+      /*
+       * Portrait: in the bottom bar, the button is a finger's size and the text
+       * has a floor. Open, the chat is a panel: the log fills the screen from
+       * the top bar down to the entry box.
+       */
+      @media (orientation: portrait) {
+        :host {
+          /* Leaves room for the back button on the right. */
+          --chat-width: calc(100vw - 3 * var(--page-gutter) - 180 * var(--u));
+          --chat-font: max(calc(25 * var(--u)), 16px);
+          --entry-height: max(calc(60 * var(--u)), 44px);
+          bottom: var(--page-gutter);
+          left: var(--page-gutter);
+        }
+
+        :host(.focus) {
+          --log-height: calc(
+            100dvh - var(--top-bar) - var(--page-gutter) - var(--entry-height) - var(--log-gap)
+          );
+        }
+
+        .button {
+          font-size: max(calc(22 * var(--u)), 16px);
+        }
+
+        .message {
+          line-height: 1.3;
+        }
+      }
+    `,
+  ];
 
   static override properties = {
     playerName: {},
     messages: { type: Array },
     channel: {},
+    handler: { type: Object },
   };
 
   /** The name messages from the input are posted as. Follows the `player` store. */
@@ -299,12 +310,20 @@ export class OverwebsChatWidget extends GluonElement {
   messages: ChatMessage[] = [];
   /** The channel messages from the input are posted to. */
   channel = "General";
+  /**
+   * Where sent messages go and where shown messages come from, see `lib/chat.ts`.
+   * The default keeps messages local to this player.
+   */
+  handler: ChatHandler = new LocalChatHandler();
 
   /** Whether the log was scrolled to the bottom before the last change. */
   #shouldScroll = true;
   #introduced = false;
   /** Aborts the Escape binding; set while focus is inside the widget. */
   #escapeBinding: AbortController | undefined;
+  /** The handler in use and the controller that detaches it. */
+  #attachedHandler: ChatHandler | undefined;
+  #handlerConnection: AbortController | undefined;
 
   constructor() {
     super();
@@ -321,10 +340,11 @@ export class OverwebsChatWidget extends GluonElement {
     }
     player.subscribe((value) => (this.playerName = value.name), { signal });
     bindKey("Enter", this, { signal });
+    this.#attachHandler();
     if (!this.#introduced) {
       const timer = setTimeout(() => {
         this.#introduced = true;
-        this.postMessage(INTRODUCTION.author, INTRODUCTION.channel, INTRODUCTION.message);
+        this.postMessage(INTRODUCTION.author, INTRODUCTION.channel, introduction());
       }, INTRODUCTION_DELAY);
       signal.addEventListener("abort", () => clearTimeout(timer), { once: true });
     }
@@ -332,6 +352,7 @@ export class OverwebsChatWidget extends GluonElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    this.#detachHandler();
     this.#unbindEscape();
     this.classList.remove("focus");
   }
@@ -366,17 +387,26 @@ export class OverwebsChatWidget extends GluonElement {
     if (changed.has("messages")) {
       this.#scrollToBottom();
     }
+    if (changed.has("handler") && this.isConnected && this.#attachedHandler !== this.handler) {
+      this.#detachHandler();
+      this.#attachHandler();
+    }
   }
 
   /** Appends a message to the log. */
-  postMessage(author: string, channel: string, message: string): void {
+  showMessage(message: ChatMessage): void {
     this.#shouldScroll = this.#isScrolledToBottom();
-    this.messages = [...this.messages, { author, channel, message, timestamp: Date.now() }];
+    this.messages = [...this.messages, message];
+  }
+
+  /** Appends a message to the log, as posted now. */
+  postMessage(author: string, channel: string, message: string): void {
+    this.showMessage({ author, channel, message, timestamp: Date.now() });
   }
 
   /**
-   * Posts the text of the input as the player and clears the input.
-   * Blank text is not posted; it leaves the chat instead, as Enter on an empty line does.
+   * Sends the text of the input through the handler as the player and clears the input.
+   * Blank text is not sent; it leaves the chat instead, as Enter on an empty line does.
    */
   submit(): void {
     const input = this.#input;
@@ -388,8 +418,23 @@ export class OverwebsChatWidget extends GluonElement {
       this.#blur();
       return;
     }
-    this.postMessage(this.playerName, this.channel, message);
+    void this.handler.send(this.playerName, this.channel, message);
     input.value = "";
+  }
+
+  /** Shows what the handler emits and starts it, until it is detached. */
+  #attachHandler(): void {
+    const controller = new AbortController();
+    this.#handlerConnection = controller;
+    this.#attachedHandler = this.handler;
+    this.handler.subscribe((message) => this.showMessage(message), { signal: controller.signal });
+    this.handler.connect(controller.signal);
+  }
+
+  #detachHandler(): void {
+    this.#handlerConnection?.abort();
+    this.#handlerConnection = undefined;
+    this.#attachedHandler = undefined;
   }
 
   /** Moves focus to the message input. */
