@@ -29,15 +29,12 @@ describe("overwebs-main-page", () => {
       ["Play", "/play", true],
       ["Training", "/training", true],
       ["Hero Gallery", "/hero-gallery", true],
-      ["Loot Box", "/loot", true],
-      ["Social", "/social", false],
-      ["Career Profile", "/career", false],
       ["Options", "/options", false],
       ["Exit Game", "/exit", false],
     ]);
     await menu.updateComplete;
-    expect(menu.shadowRoot!.querySelectorAll(".main-menu a")).toHaveLength(4);
-    expect(menu.shadowRoot!.querySelectorAll(".sub-menu a")).toHaveLength(4);
+    expect(menu.shadowRoot!.querySelectorAll(".main-menu a")).toHaveLength(3);
+    expect(menu.shadowRoot!.querySelectorAll(".sub-menu a")).toHaveLength(2);
   });
 
   it("shows the hero name and unlocks of the selection", async () => {

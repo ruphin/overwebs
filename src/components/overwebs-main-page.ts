@@ -8,9 +8,6 @@ const menuItems: readonly MenuItem[] = [
   { label: "Play", href: "/play", primary: true },
   { label: "Training", href: "/training", primary: true },
   { label: "Hero Gallery", href: "/hero-gallery", primary: true },
-  { label: "Loot Box", href: "/loot", primary: true },
-  { label: "Social", href: "/social" },
-  { label: "Career Profile", href: "/career" },
   { label: "Options", href: "/options" },
   { label: "Exit Game", href: "/exit" },
 ];

@@ -71,8 +71,18 @@ export class OverwebsLoginPage extends GluonElement {
         }
       }
 
+      /*
+       * The buttons are as wide as the form. "Anonymous" with the button's
+       * usual side padding is wider than that, so the padding is reduced
+       * and the buttons cannot grow past the form.
+       */
       overwebs-button {
         margin-bottom: calc(47 * var(--u));
+        min-width: 0;
+
+        &::part(button) {
+          padding-inline: calc(40 * var(--u));
+        }
       }
 
       /* Portrait: a wider form, and text that stays legible. */

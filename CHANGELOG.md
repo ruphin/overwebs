@@ -19,6 +19,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- The "Anonymous" button on the login page is as wide as the username field and the "Login" button; its label made it wider.
 - The Overwatch cursor stays over links, buttons and inputs, which showed the browser's pointer, arrow or I-beam cursor.
 
 ### Changed
@@ -35,5 +36,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Removed
 
+- The Loot Box, Social and Career Profile entries of the main menu, which led nowhere.
 - Firebase authentication, the Firebase chat message store, Google Analytics and autotrack. Login is now local (stored in `localStorage`) and chat is local only.
 - bower, moment.js, the Polymer and webcomponents polyfills.

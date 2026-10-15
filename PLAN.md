@@ -191,7 +191,7 @@ Every page: `<overwebs-player-widget>` top right (except login), `<overwebs-glob
 #### `overwebs-main-page`
 
 - Properties: `selection: BackgroundSelection | undefined` (which hero is on screen). Subscribes to `player`.
-- Renders `<overwebs-player-widget>`, `<overwebs-main-menu .items=${...}>` with: Play `/play`, Training `/training`, Hero Gallery `/hero-gallery`, Loot Box `/loot` (primary); Social `/social`, Career Profile `/career`, Options `/options`, Exit Game `/exit`. Bottom right: hero name (triple-layer text effect from legacy) and "`<unlocked>/<unlockable>` UNLOCKS" for `selection.hero`.
+- Renders `<overwebs-player-widget>`, `<overwebs-main-menu .items=${...}>` with: Play `/play`, Training `/training`, Hero Gallery `/hero-gallery` (primary); Options `/options`, Exit Game `/exit`. (Loot Box, Social and Career Profile were dropped: they led nowhere.) Bottom right: hero name (triple-layer text effect from legacy) and "`<unlocked>/<unlockable>` UNLOCKS" for `selection.hero`.
 
 #### `overwebs-play-page`, `overwebs-training-page`, `overwebs-vs-ai-page`
 
