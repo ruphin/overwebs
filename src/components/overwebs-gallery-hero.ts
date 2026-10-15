@@ -85,13 +85,28 @@ export class OverwebsGalleryHero extends GluonElement {
       transition: transform 0.15s ease-in-out;
     }
 
-    :host(:hover) {
-      border-color: #ffffff;
-      transform: skewX(-15deg) scale(1.2);
-      transition: transform 0.08s ease-out;
+    @media (hover: hover) {
+      :host(:hover) {
+        border-color: #ffffff;
+        transform: skewX(-15deg) scale(1.2);
+        transition: transform 0.08s ease-out;
 
-      .glow {
-        animation-name: hoverglow;
+        .glow {
+          animation-name: hoverglow;
+        }
+      }
+    }
+
+    /* Touch screens: the same while the card is pressed; the link follows on release. */
+    @media (hover: none) {
+      :host(:active) {
+        border-color: #ffffff;
+        transform: skewX(-15deg) scale(1.2);
+        transition: transform 0.08s ease-out;
+
+        .glow {
+          animation-name: hoverglow;
+        }
       }
     }
 

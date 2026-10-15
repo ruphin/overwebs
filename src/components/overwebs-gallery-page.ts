@@ -12,10 +12,23 @@ export class OverwebsGalleryPage extends GluonElement {
     :host {
       display: block;
       position: relative;
-      overflow: auto;
+      overflow: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       background: rgba(0, 0, 0, 0.25);
+    }
+
+    /* The gallery scrolls below the title; the widgets around it stay put. */
+    .content {
+      position: absolute;
+      inset: calc(312 * var(--u)) 0 0;
+      overflow: auto;
+    }
+
+    /* Above the cards, which are flex items with a z-index of their own. */
+    overwebs-player-widget,
+    overwebs-global-button {
+      z-index: 3;
     }
 
     /*
@@ -49,7 +62,8 @@ export class OverwebsGalleryPage extends GluonElement {
       animation: fadein 0.2s linear both;
       transition: z-index 0.05s step-end;
 
-      &:hover {
+      &:hover,
+      &:active {
         z-index: 2;
         transition: none;
       }
@@ -61,6 +75,33 @@ export class OverwebsGalleryPage extends GluonElement {
       }
       to {
         opacity: 1;
+      }
+    }
+
+    /*
+     * Portrait: the title sits under the top bar and the cards fill the width
+     * in as many rows as they need, scrolling between the title and the bottom bar.
+     */
+    @media (orientation: portrait) {
+      overwebs-page-title {
+        position: absolute;
+        top: var(--top-bar);
+        left: var(--page-gutter);
+        height: calc(150 * var(--u));
+        margin: 0;
+      }
+
+      /* Clips at the title and the bottom bar, with room for a pressed card (10% a side plus its glow). */
+      .content {
+        inset: calc(var(--top-bar) + 150 * var(--u)) 0 var(--bottom-bar);
+      }
+
+      .hero-gallery {
+        display: flex;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding: calc(36 * var(--u)) var(--page-gutter);
       }
     }
   `;
@@ -78,14 +119,16 @@ export class OverwebsGalleryPage extends GluonElement {
   override render() {
     return html`
       <overwebs-page-title text="HERO GALLERY"></overwebs-page-title>
-      <overwebs-player-widget></overwebs-player-widget>
-      <div class="hero-gallery">
-        ${repeat(
-          heroes,
-          (hero) => hero.id,
-          (hero, index) => this.renderHero(hero, index),
-        )}
+      <div class="content">
+        <div class="hero-gallery">
+          ${repeat(
+            heroes,
+            (hero) => hero.id,
+            (hero, index) => this.renderHero(hero, index),
+          )}
+        </div>
       </div>
+      <overwebs-player-widget></overwebs-player-widget>
       <overwebs-global-button action="back" @click=${back}></overwebs-global-button>
     `;
   }

@@ -27,6 +27,18 @@ export class OverwebsPageTitle extends GluonElement {
       stroke-linejoin: round;
     }
 
+    /* Portrait: the title spans the screen under the top bar, in a smaller size. */
+    @media (orientation: portrait) {
+      :host {
+        width: calc(100% - 2 * var(--page-gutter));
+        height: calc(150 * var(--u));
+      }
+
+      text {
+        font-size: calc(160 * var(--u));
+      }
+    }
+
     @keyframes headermove {
       from {
         opacity: 0;

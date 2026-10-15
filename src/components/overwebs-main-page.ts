@@ -26,7 +26,12 @@ export class OverwebsMainPage extends GluonElement {
       position: relative;
       overflow: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
+    }
+
+    /* Landscape: the menu and the hero name are laid out against the page itself. */
+    .content {
+      display: contents;
     }
 
     .hero {
@@ -103,6 +108,33 @@ export class OverwebsMainPage extends GluonElement {
       z-index: -1;
       -webkit-text-stroke: calc(4.544 * var(--u)) rgba(0, 0, 0, 0.15);
     }
+
+    /*
+     * Portrait: the content region between the top and bottom bars holds the
+     * menu, centred in the free space, and the hero name at its bottom right.
+     */
+    @media (orientation: portrait) {
+      .content {
+        position: absolute;
+        inset: var(--top-bar) 0 var(--bottom-bar);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      overwebs-main-menu {
+        margin: auto 0;
+      }
+
+      .hero {
+        position: relative;
+        top: auto;
+        right: auto;
+        align-self: flex-end;
+        flex-shrink: 0;
+        margin: 0 var(--page-gutter) calc(10 * var(--u)) 0;
+      }
+    }
   `;
 
   static override properties = {
@@ -128,13 +160,15 @@ export class OverwebsMainPage extends GluonElement {
     const unlocks = html`<span class="unlocked">${unlocked}</span>/${unlockable} unlocks`;
     return html`
       <overwebs-player-widget></overwebs-player-widget>
-      <overwebs-main-menu .items=${menuItems}></overwebs-main-menu>
-      <div class="hero">
-        <div class="nameShadow" aria-hidden="true">${name}</div>
-        <div class="nameShadow2" aria-hidden="true">${name}</div>
-        <div class="name">${name}</div>
-        <div class="unlocks">${unlocks}</div>
-        <div class="unlocksShadow" aria-hidden="true">${unlocks}</div>
+      <div class="content">
+        <overwebs-main-menu .items=${menuItems}></overwebs-main-menu>
+        <div class="hero">
+          <div class="nameShadow" aria-hidden="true">${name}</div>
+          <div class="nameShadow2" aria-hidden="true">${name}</div>
+          <div class="name">${name}</div>
+          <div class="unlocks">${unlocks}</div>
+          <div class="unlocksShadow" aria-hidden="true">${unlocks}</div>
+        </div>
       </div>
     `;
   }

@@ -44,6 +44,15 @@ The interface is designed on a 2560px wide canvas and scales with the viewport
 width: one design pixel is `var(--u)`, so a size that is 80px in the design is
 written as `calc(80 * var(--u))`.
 
+Portrait screens use a narrower canvas (1280px on tablets, 900px on phones), so
+the same design pixel is two to three times larger on them. Components carry a
+`@media (orientation: portrait)` block with their portrait layout: the player
+widget in the top bar, the chat and the back button in the bottom bar, and the
+page content between them in a scrolling region clipped at both bars
+(`--top-bar`, `--bottom-bar` and `--page-gutter` in `global.css`). Touch screens
+(`hover: none`) show the hover effects while an element is pressed (`:active`)
+and no keyboard hints.
+
 Components follow the rules in `PLAN.md`: a pure class in `src/components/`,
 a registering module in `src/elements/`, data passed as properties, reactive
 `static properties`, styles in `static styles`.

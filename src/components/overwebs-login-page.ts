@@ -19,7 +19,7 @@ export class OverwebsLoginPage extends GluonElement {
       position: relative;
       overflow: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       letter-spacing: calc(1 * var(--u));
     }
 
@@ -70,6 +70,29 @@ export class OverwebsLoginPage extends GluonElement {
 
     overwebs-button {
       margin-bottom: calc(47 * var(--u));
+    }
+
+    /* Portrait: a wider form, and text that stays legible. */
+    @media (orientation: portrait) {
+      form {
+        width: calc(600 * var(--u));
+        margin-bottom: calc(150 * var(--u));
+      }
+
+      label {
+        font-size: max(calc(24 * var(--u)), 14px);
+      }
+
+      input {
+        min-height: 44px;
+      }
+    }
+
+    /* Touch screens: the input is at least 16px so iOS does not zoom in on focus. */
+    @media (hover: none) {
+      input {
+        font-size: max(calc(28 * var(--u)), 16px);
+      }
     }
   `;
 

@@ -103,6 +103,41 @@ export class OverwebsPlayerWidget extends GluonElement {
         margin-left: calc(-2 * var(--u));
       }
     }
+
+    /* Portrait: in the top bar, shrunk to the name and level. */
+    @media (orientation: portrait) {
+      :host {
+        top: var(--page-gutter);
+        right: var(--page-gutter);
+      }
+
+      .player {
+        width: auto;
+        padding-right: calc(16 * var(--u));
+      }
+    }
+
+    /* Touch screens: keep the text legible whatever the scale. */
+    @media (hover: none) {
+      .name {
+        font-size: max(calc(24 * var(--u)), 12px);
+      }
+
+      .level-box {
+        height: auto;
+        min-height: calc(24 * var(--u));
+      }
+
+      .level {
+        font-size: max(calc(19 * var(--u)), 11px);
+        line-height: 1.3;
+      }
+
+      .prestige {
+        font-size: max(calc(24 * var(--u)), 12px);
+        line-height: 1;
+      }
+    }
   `;
 
   static override properties = { player: { type: Object } };

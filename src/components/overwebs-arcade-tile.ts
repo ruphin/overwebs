@@ -37,10 +37,40 @@ export class OverwebsArcadeTile extends GluonElement {
       height: calc(771 * var(--u));
     }
 
-    :host(:hover) {
-      box-shadow: 0 0 0 calc(8.5 / 1.1 * var(--u)) #ffffff;
-      transform: scale(1.1);
-      z-index: 2;
+    @media (hover: hover) {
+      :host(:hover) {
+        box-shadow: 0 0 0 calc(8.5 / 1.1 * var(--u)) #ffffff;
+        transform: scale(1.1);
+        z-index: 2;
+      }
+    }
+
+    /* Touch screens: the same while the tile is pressed; it activates on release. */
+    @media (hover: none) {
+      :host(:active) {
+        box-shadow: 0 0 0 calc(8.5 / 1.1 * var(--u)) #ffffff;
+        transform: scale(1.1);
+        z-index: 2;
+      }
+    }
+
+    /*
+     * Portrait: one column of equal tiles, narrow enough to grow when pressed.
+     * The artwork strips (640x176) scale with the width and fill the space
+     * above the content; the big tile's artwork (830x577) is cropped to its
+     * middle band, where the figures are.
+     */
+    @media (orientation: portrait) {
+      :host,
+      :host([big]) {
+        width: calc(780 * var(--u));
+        height: calc(410 * var(--u));
+      }
+
+      :host([big]) .tile {
+        background-size: 100% auto;
+        background-position: center calc(-150 * var(--u));
+      }
     }
 
     .tile {

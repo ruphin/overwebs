@@ -23,6 +23,26 @@ export class OverwebsNotification extends GluonElement {
       display: none;
     }
 
+    /* Portrait: below the top bar, no wider than the screen. */
+    @media (orientation: portrait) {
+      :host {
+        top: var(--top-bar);
+        width: max-content;
+        max-width: calc(100vw - 2 * var(--page-gutter));
+      }
+    }
+
+    @media (hover: none) {
+      ::slotted([slot="title"]) {
+        font-size: max(calc(30 * var(--u)), 15px);
+      }
+
+      ::slotted([slot="message"]) {
+        font-size: max(calc(24 * var(--u)), 13px);
+        line-height: 1.2;
+      }
+    }
+
     .notification {
       min-height: calc(62 * var(--u));
       display: flex;

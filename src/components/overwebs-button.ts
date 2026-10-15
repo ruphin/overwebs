@@ -44,6 +44,12 @@ export class OverwebsButton extends GluonElement {
       cursor: var(--cursor);
     }
 
+    @media (orientation: portrait) {
+      :host([variant="yellow"]) button {
+        min-height: 44px;
+      }
+    }
+
     :host([variant="yellow"]) button {
       height: calc(76 * var(--u));
       padding: 0 calc(66 * var(--u));
@@ -55,6 +61,7 @@ export class OverwebsButton extends GluonElement {
       font-size: calc(46 * var(--u));
 
       &:hover,
+      &:active,
       &:focus-visible {
         box-shadow: 0 0 0 calc(3 / 1.1 * var(--u)) #ffffff;
         background: rgba(255, 194, 70, 0.9);
@@ -73,6 +80,7 @@ export class OverwebsButton extends GluonElement {
       font-size: calc(28 * var(--u));
 
       &:hover,
+      &:active,
       &:focus-visible {
         box-shadow: 0 0 0 calc(3 / 1.1 * var(--u)) #ffffff;
       }
@@ -82,6 +90,7 @@ export class OverwebsButton extends GluonElement {
       background: rgba(41, 139, 206, 0.9);
 
       &:hover,
+      &:active,
       &:focus-visible {
         background: rgba(45, 153, 226, 0.9);
       }
@@ -91,12 +100,13 @@ export class OverwebsButton extends GluonElement {
       background: rgba(178, 0, 255, 0.9);
 
       &:hover,
+      &:active,
       &:focus-visible {
         background: rgba(196, 5, 255, 0.9);
       }
     }
 
-    :host([disabled]) button:is(*, :hover, :focus-visible) {
+    :host([disabled]) button:is(*, :hover, :active, :focus-visible) {
       background: transparent;
       box-shadow:
         inset 0 0 calc(8 * var(--u)) rgba(151, 172, 181, 0.4),

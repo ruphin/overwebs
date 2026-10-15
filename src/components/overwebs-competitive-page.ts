@@ -53,7 +53,7 @@ export class OverwebsCompetitivePage extends GluonElement {
       position: relative;
       overflow: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       background: rgba(0, 0, 0, 0.25);
     }
 
@@ -79,7 +79,8 @@ export class OverwebsCompetitivePage extends GluonElement {
       width: calc(113 * var(--u));
       background: rgba(255, 255, 255, 0.2);
 
-      &:hover {
+      &:hover,
+      &:active {
         box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
       }
     }
@@ -269,7 +270,8 @@ export class OverwebsCompetitivePage extends GluonElement {
       &.blue {
         background: #1c75bc;
 
-        &:hover {
+        &:hover,
+        &:active {
           background: rgba(36, 93, 133, 0.95);
           box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
         }
@@ -278,7 +280,8 @@ export class OverwebsCompetitivePage extends GluonElement {
       &.yellow {
         background: rgba(190, 123, 40, 0.95);
 
-        &:hover {
+        &:hover,
+        &:active {
           background: rgba(116, 88, 46, 0.95);
           box-shadow: inset 0 0 0 calc(3 * var(--u)) #ffffff;
         }
@@ -287,6 +290,78 @@ export class OverwebsCompetitivePage extends GluonElement {
       &.big {
         height: calc(90 * var(--u));
         font-size: calc(58 * var(--u));
+      }
+    }
+
+    /*
+     * Portrait: the two columns stack and scroll under the bottom bar. The
+     * side bar that doubles as a back button goes; the back button remains.
+     */
+    @media (orientation: portrait) {
+      .emblem {
+        top: var(--top-bar);
+        left: auto;
+        right: var(--page-gutter);
+        width: calc(400 * var(--u));
+        height: calc(400 * var(--u));
+      }
+
+      .container {
+        position: absolute;
+        inset: var(--top-bar) 0 var(--bottom-bar);
+        box-sizing: border-box;
+        flex-flow: column;
+        height: auto;
+        margin: 0;
+        padding: 0 var(--page-gutter) calc(20 * var(--u));
+        overflow-y: auto;
+      }
+
+      #return {
+        display: none;
+      }
+
+      .competitive {
+        margin-left: 0;
+        flex-grow: 0;
+
+        .text {
+          max-width: none;
+        }
+      }
+
+      .info {
+        width: auto;
+        margin: calc(70 * var(--u)) 0 0;
+
+        .infobox {
+          margin-left: 0;
+          padding-left: calc(30 * var(--u));
+        }
+
+        .infotext {
+          flex-grow: 0;
+          overflow: visible;
+        }
+
+        button:first-of-type {
+          margin-top: calc(60 * var(--u));
+
+          &::before {
+            top: calc(-30 * var(--u));
+          }
+        }
+      }
+
+      .competitive .text,
+      .info .infotext ul {
+        font-size: max(calc(22 * var(--u)), 13px);
+      }
+
+      button {
+        width: 100%;
+        min-height: 44px;
+        font-size: max(calc(24 * var(--u)), 14px);
       }
     }
   `;

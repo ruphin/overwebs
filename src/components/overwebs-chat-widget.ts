@@ -26,10 +26,11 @@ const NON_PRINTABLE = /^[\x00-\x20]*$/;
 /**
  * The chat in the bottom left corner. Messages stay local.
  *
- * Collapsed, it shows the last messages and a "Press Enter to chat" button.
- * While focus is inside the widget it has the `focus` class: the log expands
- * and the entry box is shown. Enter focuses the input, or posts its text when
- * it is focused; Escape leaves the chat.
+ * Collapsed, it shows the last messages and a "Press Enter to chat" button,
+ * and only the button takes clicks: the rest of the widget lets them through
+ * to the page. While focus is inside the widget it has the `focus` class: the
+ * log expands (and can be scrolled) and the entry box is shown. Enter focuses
+ * the input, or posts its text when it is focused; Escape leaves the chat.
  */
 export class OverwebsChatWidget extends GluonElement {
   static override styles = css`
@@ -38,16 +39,31 @@ export class OverwebsChatWidget extends GluonElement {
     }
 
     :host {
+      /* The width of the log and the entry box; the log is a bit wider for its scrollbar. */
+      --chat-width: calc(534 * var(--u));
+      --chat-font: calc(25 * var(--u));
+      /* The entry box (and the collapsed button) height; the log sits a gap above it. */
+      --entry-height: calc(54 * var(--u));
+      --log-gap: calc(16 * var(--u));
+      /* The height of the log: a few lines collapsed, more while focused. */
+      --log-height: calc(120 * var(--u));
       position: absolute;
       z-index: 10;
       bottom: calc(54 * var(--u));
       left: calc(54 * var(--u));
       font-family: var(--font-text);
-      font-size: calc(25 * var(--u));
+      font-size: var(--chat-font);
       display: flex;
       flex-flow: column;
       align-items: flex-start;
       outline: none;
+      /* Clicks go through to the page, except on the button and the entry box; the log takes them when open. */
+      pointer-events: none;
+    }
+
+    .button,
+    .entryBox {
+      pointer-events: auto;
     }
 
     .chatBox {
@@ -56,11 +72,11 @@ export class OverwebsChatWidget extends GluonElement {
       direction: rtl;
       box-sizing: border-box;
       position: absolute;
-      bottom: calc(70 * var(--u));
+      bottom: calc(var(--entry-height) + var(--log-gap));
       left: calc(-26 * var(--u));
       padding-left: calc(26 * var(--u));
-      width: calc(550 * var(--u));
-      height: calc(120 * var(--u));
+      width: calc(var(--chat-width) + 16 * var(--u));
+      height: var(--log-height);
       overflow-y: scroll;
       color: #ffffff;
       line-height: 1.4;
@@ -83,7 +99,7 @@ export class OverwebsChatWidget extends GluonElement {
     .chatLog {
       box-sizing: border-box;
       direction: ltr;
-      min-height: calc(120 * var(--u));
+      min-height: var(--log-height);
       border-radius: calc(5 * var(--u));
       display: flex;
       flex-direction: column;
@@ -100,9 +116,9 @@ export class OverwebsChatWidget extends GluonElement {
     .chatShadow {
       position: absolute;
       left: 0;
-      width: calc(534 * var(--u));
-      height: calc(120 * var(--u));
-      bottom: calc(62 * var(--u));
+      width: var(--chat-width);
+      height: var(--log-height);
+      bottom: calc(var(--entry-height) + var(--log-gap) / 2);
       border-radius: calc(5 * var(--u));
       background: rgba(0, 0, 0, 0);
       transition:
@@ -111,8 +127,8 @@ export class OverwebsChatWidget extends GluonElement {
     }
 
     .button {
-      height: calc(54 * var(--u));
-      line-height: calc(54 * var(--u));
+      height: var(--entry-height);
+      line-height: var(--entry-height);
       font-family: var(--font-ui);
       text-transform: uppercase;
       font-size: calc(22 * var(--u));
@@ -125,8 +141,13 @@ export class OverwebsChatWidget extends GluonElement {
       overflow: hidden;
       opacity: 0.5;
 
-      &:hover {
+      &:hover,
+      &:active {
         opacity: 0.9;
+      }
+
+      .short {
+        display: none;
       }
     }
 
@@ -137,7 +158,7 @@ export class OverwebsChatWidget extends GluonElement {
       background: rgba(0, 0, 0, 0.65);
       border-radius: calc(5 * var(--u));
       padding-inline: calc(14 * var(--u));
-      width: calc(534 * var(--u));
+      width: var(--chat-width);
       height: 0;
       overflow: hidden;
       color: #ffffff;
@@ -151,7 +172,7 @@ export class OverwebsChatWidget extends GluonElement {
       padding: 0;
       border: none;
       font-family: var(--font-text);
-      font-size: calc(25 * var(--u));
+      font-size: var(--chat-font);
       color: #ffffff;
       text-shadow: calc(0.5 * var(--u)) calc(0.5 * var(--u)) 0 #000;
       line-height: 1.4;
@@ -174,12 +195,14 @@ export class OverwebsChatWidget extends GluonElement {
     }
 
     :host(.focus) {
-      .chatLog {
-        min-height: calc(284 * var(--u));
-      }
-      .chatBox {
-        height: calc(284 * var(--u));
+      --log-height: calc(284 * var(--u));
 
+      .chatBox,
+      .chatShadow {
+        pointer-events: auto;
+      }
+
+      .chatBox {
         &::-webkit-scrollbar-track-piece {
           background-image: linear-gradient(
             to right,
@@ -196,16 +219,70 @@ export class OverwebsChatWidget extends GluonElement {
         }
       }
       .chatShadow {
-        height: calc(306 * var(--u));
+        height: calc(var(--log-height) + var(--log-gap) + 6 * var(--u));
         background: rgba(0, 0, 0, 0.65);
       }
       .entryBox {
-        height: calc(54 * var(--u));
+        height: var(--entry-height);
       }
       .button {
         height: 0;
+        min-height: 0;
         padding: 0;
         box-shadow: none;
+      }
+    }
+
+    /*
+     * Touch screens: a tap opens the chat, so the button says so. The input
+     * is at least 16px so iOS does not zoom in on it, and the entry box grows
+     * with it.
+     */
+    @media (hover: none) {
+      :host {
+        --entry-height: max(calc(54 * var(--u)), 2.2em);
+      }
+
+      .button .long {
+        display: none;
+      }
+
+      .button .short {
+        display: inline;
+      }
+
+      .input {
+        font-size: max(var(--chat-font), 16px);
+      }
+    }
+
+    /*
+     * Portrait: in the bottom bar, the button is a finger's size and the text
+     * has a floor. Open, the chat is a panel: the log fills the screen from
+     * the top bar down to the entry box.
+     */
+    @media (orientation: portrait) {
+      :host {
+        /* Leaves room for the back button on the right. */
+        --chat-width: calc(100vw - 3 * var(--page-gutter) - 180 * var(--u));
+        --chat-font: max(calc(25 * var(--u)), 16px);
+        --entry-height: max(calc(60 * var(--u)), 44px);
+        bottom: var(--page-gutter);
+        left: var(--page-gutter);
+      }
+
+      :host(.focus) {
+        --log-height: calc(
+          100dvh - var(--top-bar) - var(--page-gutter) - var(--entry-height) - var(--log-gap)
+        );
+      }
+
+      .button {
+        font-size: max(calc(22 * var(--u)), 16px);
+      }
+
+      .message {
+        line-height: 1.3;
       }
     }
   `;
@@ -275,7 +352,9 @@ export class OverwebsChatWidget extends GluonElement {
           )}
         </div>
       </div>
-      <div class="button">Press Enter to chat</div>
+      <div class="button">
+        <span class="long">Press Enter to chat</span><span class="short">Chat</span>
+      </div>
       <div class="entryBox">
         <span class="channel">[${this.channel}]: </span
         ><input class="input" type="text" name="message" autocomplete="off" />
@@ -369,13 +448,29 @@ export class OverwebsChatWidget extends GluonElement {
 
   #onClick = (event: MouseEvent): void => {
     event.stopPropagation();
-    event.preventDefault();
-    if (this.renderRoot instanceof ShadowRoot && this.renderRoot.activeElement === this.#input) {
-      this.submit();
-    } else {
+    const target = event.composedPath()[0];
+    if (target === this) {
+      // The Enter key binding clicks the element itself: post, or open the chat.
+      if (this.renderRoot instanceof ShadowRoot && this.renderRoot.activeElement === this.#input) {
+        this.submit();
+      } else {
+        this.focusInput();
+      }
+      return;
+    }
+    if (this.#within(target, ".button") || this.#within(target, ".entryBox")) {
+      event.preventDefault();
       this.focusInput();
     }
+    // Clicks on the log only scroll it or select text.
   };
+
+  /** Whether `target` is the element matching `selector` or inside it. */
+  #within(target: unknown, selector: string): boolean {
+    return (
+      target instanceof Node && (this.renderRoot.querySelector(selector)?.contains(target) ?? false)
+    );
+  }
 
   #onEscape(event: MouseEvent): void {
     event.stopPropagation();

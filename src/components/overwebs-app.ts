@@ -42,13 +42,13 @@ export class OverwebsApp extends GluonElement {
       position: relative;
       background: black;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
     }
 
     #exit {
       display: block;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       background: black;
     }
   `;

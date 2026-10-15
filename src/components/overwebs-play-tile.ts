@@ -52,10 +52,27 @@ export class OverwebsPlayTile extends GluonElement {
       transition: transform 0.1s linear;
     }
 
-    :host(:hover) {
-      box-shadow: 0 0 0 calc(8.5 / 1.1 * var(--u)) #ffffff;
-      transform: scale(1.1);
-      z-index: 2;
+    @media (hover: hover) {
+      :host(:hover) {
+        box-shadow: 0 0 0 calc(8.5 / 1.1 * var(--u)) #ffffff;
+        transform: scale(1.1);
+        z-index: 2;
+      }
+    }
+
+    /* Touch screens: the same while the tile is pressed; it activates on release. */
+    @media (hover: none) {
+      :host(:active) {
+        box-shadow: 0 0 0 calc(8.5 / 1.1 * var(--u)) #ffffff;
+        transform: scale(1.1);
+        z-index: 2;
+      }
+    }
+
+    @media (orientation: portrait) {
+      .description {
+        font-size: max(calc(20 * var(--u)), 11px);
+      }
     }
 
     .tile {

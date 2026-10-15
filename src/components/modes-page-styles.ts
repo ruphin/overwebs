@@ -11,7 +11,7 @@ export const modesPageStyles = css`
     position: relative;
     overflow: hidden;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.25);
   }
 
@@ -60,6 +60,35 @@ export const modesPageStyles = css`
     }
     to {
       opacity: 1;
+    }
+  }
+
+  /*
+   * Portrait: the title under the top bar, the tiles in a grid of as many
+   * columns as fit (two on phones and tablets), scrolling under the bottom bar.
+   */
+  @media (orientation: portrait) {
+    overwebs-page-title {
+      top: var(--top-bar);
+      left: var(--page-gutter);
+    }
+
+    /*
+     * The region clips at the title and the bottom bar; its padding leaves
+     * room for a pressed tile, which grows by 5% a side plus its shadow.
+     */
+    .modes {
+      position: absolute;
+      inset: calc(var(--top-bar) + 150 * var(--u)) 0 var(--bottom-bar);
+      box-sizing: border-box;
+      margin: 0;
+      padding: calc(48 * var(--u)) var(--page-gutter);
+      column-gap: calc(8 * var(--u));
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, calc(417 * var(--u)));
+      justify-content: center;
+      align-content: start;
     }
   }
 `;

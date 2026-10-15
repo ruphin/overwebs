@@ -127,10 +127,17 @@ describe("overwebs-chat-widget", () => {
     expect(focused(element)).toBe(input(element));
   });
 
-  it("focuses the input when clicked", async () => {
+  it("focuses the input when the button is clicked", async () => {
+    const element = await create();
+    element.shadowRoot!.querySelector<HTMLElement>(".button")!.click();
+    expect(focused(element)).toBe(input(element));
+  });
+
+  it("ignores clicks on the log", async () => {
     const element = await create();
     element.shadowRoot!.querySelector<HTMLElement>(".chatBox")!.click();
-    expect(focused(element)).toBe(input(element));
+    expect(focused(element)).toBeNull();
+    expect(element.classList.contains("focus")).toBe(false);
   });
 
   it("blurs on Escape while focused, and only then", async () => {

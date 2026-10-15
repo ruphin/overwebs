@@ -27,7 +27,7 @@ export class OverwebsArcadePage extends GluonElement {
       position: relative;
       overflow: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       background: rgba(0, 0, 0, 0.25);
     }
 
@@ -60,6 +60,30 @@ export class OverwebsArcadePage extends GluonElement {
       }
       to {
         opacity: 1;
+      }
+    }
+
+    /* Portrait: the title under the top bar, the tiles in a column that scrolls. */
+    @media (orientation: portrait) {
+      overwebs-page-title {
+        top: var(--top-bar);
+        left: var(--page-gutter);
+      }
+
+      /* Clips at the title and the bottom bar, with room for a pressed tile (5% a side plus its shadow). */
+      .modes {
+        position: absolute;
+        inset: calc(var(--top-bar) + 150 * var(--u)) 0 var(--bottom-bar);
+        box-sizing: border-box;
+        height: auto;
+        margin: 0;
+        padding: calc(48 * var(--u)) var(--page-gutter);
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, calc(780 * var(--u)));
+        justify-content: center;
+        align-content: start;
+        gap: calc(16 * var(--u));
       }
     }
   `;

@@ -38,17 +38,58 @@ export class OverwebsGlobalButton extends GluonElement {
       color: rgb(220 220 220 / 0.8);
     }
 
-    :host(:hover) {
-      box-shadow: 0 0 0 calc(2.6 * var(--u)) rgb(220 220 220 / 0.8);
+    @media (hover: hover) {
+      :host(:hover) {
+        box-shadow: 0 0 0 calc(2.6 * var(--u)) rgb(220 220 220 / 0.8);
 
-      .key {
-        background: #eaecf4;
-        box-shadow: 0 0 0 calc(2.6 * var(--u)) white;
-        color: #313743;
+        .key {
+          background: #eaecf4;
+          box-shadow: 0 0 0 calc(2.6 * var(--u)) white;
+          color: #313743;
+        }
+
+        .label {
+          color: white;
+        }
+      }
+    }
+
+    /* Portrait: in the bottom bar, at least a finger's size. */
+    @media (orientation: portrait) {
+      :host {
+        bottom: var(--page-gutter);
+        right: var(--page-gutter);
+        min-height: 44px;
       }
 
       .label {
-        color: white;
+        font-size: max(calc(27.36 * var(--u)), 16px);
+      }
+    }
+
+    /* Touch screens: there is no key to press, so the key cap goes and the hint becomes a button. */
+    @media (hover: none) {
+      :host {
+        padding: calc(7 * var(--u)) calc(21 * var(--u));
+        box-shadow: 0 0 0 calc(2.6 * var(--u)) rgb(220 220 220 / 0.8);
+        background: rgb(80 80 80 / 0.5);
+      }
+
+      .key {
+        display: none;
+      }
+
+      .label {
+        color: rgb(255 255 255 / 0.95);
+      }
+
+      :host(:active) {
+        background: #eaecf4;
+        box-shadow: 0 0 0 calc(2.6 * var(--u)) white;
+
+        .label {
+          color: #313743;
+        }
       }
     }
   `;

@@ -18,6 +18,12 @@ export class OverwebsPlayPage extends GluonElement {
       overwebs-page-title {
         top: calc(154 * var(--u));
       }
+
+      @media (orientation: portrait) {
+        overwebs-page-title {
+          top: var(--top-bar);
+        }
+      }
     `,
   ];
 

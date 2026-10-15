@@ -26,8 +26,12 @@
    * The interface is designed on a 2560px wide canvas and scales with the
    * viewport width. One design pixel is `calc(1 * var(--u))`, so a size that
    * was 80px in the design is written as `calc(80 * var(--u))`.
+   *
+   * Portrait screens use a narrower canvas (see below), so the same design
+   * pixel is larger on them and the pages lay their content out differently.
    */
-  --u: calc(100vw / 2560);
+  --canvas: 2560;
+  --u: calc(100vw / var(--canvas));
 
   --font-display: "Big Noodle Too Oblique", "Impact", sans-serif;
   --font-ui: "Futura", "Helvetica", sans-serif;
@@ -38,10 +42,35 @@
   color-scheme: dark;
 }
 
+/*
+ * Portrait layout. The canvas is 1280 design px wide on tablets and 900 on
+ * phones, so everything is drawn 2 to 2.8 times larger than it would be on
+ * the landscape canvas. Pages position their widgets with these tokens:
+ * the player widget sits in the top bar, the chat and the back button in the
+ * bottom bar, and the content is a scrolling region between them, clipped at
+ * both bars so it never runs under the buttons.
+ */
+@media (orientation: portrait) {
+  :root {
+    --canvas: 1280;
+    --page-gutter: calc(24 * var(--u));
+    /* The player widget (80px) under the gutter, with a gap below it. */
+    --top-bar: calc(120 * var(--u));
+    /* The chat and back buttons (60px, at least a finger's size) between two gutters. */
+    --bottom-bar: calc(max(60 * var(--u), 44px) + 2 * var(--page-gutter));
+  }
+}
+
+@media (orientation: portrait) and (max-width: 600px) {
+  :root {
+    --canvas: 900;
+  }
+}
+
 html,
 body {
   margin: 0;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: black;
 }
@@ -55,5 +84,5 @@ body {
 overwebs-app {
   display: block;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
 }
